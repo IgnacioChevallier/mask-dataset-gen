@@ -1,0 +1,227 @@
+{
+  "comparison_to_parent": {
+    "candidate_local_hectares": 1358.7436,
+    "parent_reported_hectares": 1346.4041,
+    "removed_hectares": 291.7371,
+    "retained_candidate_pct": 78.5289,
+    "target_hectares": 1067.0065
+  },
+  "completed_at": "2026-09-21T07:01:42+00:00",
+  "configuration": {
+    "algorithm_version": "event-filter-v1-1",
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 20,
+    "event_description": "Incendio Gabriel Rodales / Población Rosales II, iniciado el 4 de febrero de 2023 en el Parque Nacional Los Alerces y jurisdicción provincial de Chubut.",
+    "event_filter": {
+      "closing_radius_m": 80,
+      "component_hotspot_max_distance_m": 1500,
+      "component_link_max_distance_m": 1000,
+      "ignition_point": {
+        "latitude": -42.8825,
+        "longitude": -71.576667,
+        "note": "Ubicación reportada en los partes oficiales incluidos en reference.sources."
+      },
+      "seed_max_distance_m": 2000,
+      "thermal": {
+        "band": "FireMask",
+        "collection": "NASA/VIIRS/002/VNP14A1",
+        "end_inclusive": "2023-03-31",
+        "reducer_version": "masked-sum-v1",
+        "sampling_mode": "aggregate",
+        "scale_m": 1000,
+        "source_note": "VIIRS VNP14A1 histórico de 1 km; FireMask 7–9. El producto NRT de 375 m de Earth Engine comienza después de este incendio.",
+        "start": "2023-02-04",
+        "threshold": 7
+      },
+      "thermal_cluster_radius_m": 2000
+    },
+    "event_id": "los-alerces-2023",
+    "event_name": "Incendio Población Rosales, Los Alerces 2023",
+    "fire_start_date": "2023-02-04",
+    "grid": {
+      "scale_m": 20,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "dilation_pixels": 1,
+      "dnbr_threshold": 0.3,
+      "min_connected_pixels": 150,
+      "ndsi_snow_max": 0.25,
+      "post_nbr_max": 0.4,
+      "pre_nbr_min": 0.15,
+      "pre_ndwi_water_max": 0.05
+    },
+    "max_workers": 4,
+    "origin": "derived",
+    "parent_run": "baseline-001",
+    "purpose": "Segunda derivación de Población Rosales; corrige la reducción temporal enmascarada de VNP14A1.",
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "reference": {
+      "alternate_burned_area_ha": 1390,
+      "area_note": "El informe mensual del SNMF registra 1.160 ha; un parte diario posterior informó 1.390 ha.",
+      "burned_area_ha": 1160,
+      "reported_location": {
+        "latitude": -42.8825,
+        "longitude": -71.576667
+      },
+      "sources": [
+        "https://www.argentina.gob.ar/sites/default/files/2022/08/informe_ocurrencia_mes_febrero_2023.pdf",
+        "https://www.argentina.gob.ar/sites/default/files/2022/08/reporte_diario_01-03-2023.pdf"
+      ]
+    },
+    "rois": [
+      {
+        "bbox": [
+          -71.72,
+          -43.0,
+          -71.43,
+          -42.76
+        ],
+        "id": "poblacion-rosales",
+        "name": "Población Rosales y Laguna Larga"
+      }
+    ],
+    "run_id": "event-filter-002",
+    "source": {
+      "collection": "COPERNICUS/S2_SR_HARMONIZED",
+      "project": "ee-nachochevallier"
+    },
+    "windows": {
+      "post": {
+        "end_inclusive": "2023-03-31",
+        "start": "2023-02-20"
+      },
+      "pre": {
+        "end_inclusive": "2023-02-03",
+        "start": "2022-11-01"
+      }
+    }
+  },
+  "configuration_hash": "5f69943c4e94cd36b2ac6033bce137c0609481b7518b2af4c11385f375674ae4",
+  "counts": {
+    "error": 0,
+    "expected": 42,
+    "ok": 39,
+    "warning": 3
+  },
+  "created_at": "2026-09-21T06:54:21+00:00",
+  "environment": {
+    "dependencies": {
+      "earthengine-api": "1.7.41",
+      "geedim": "2.0.0",
+      "geemap": "0.38.4",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.2",
+      "rasterio": "1.5.1"
+    },
+    "git_commit": "921e48619ad260078c044813946c69aef266483f",
+    "python": "3.14.7"
+  },
+  "errors": [],
+  "event_id": "los-alerces-2023",
+  "metrics": {
+    "burned_hectares": 1067.0065,
+    "burned_valid_pct": 1.7113,
+    "candidate_hectares": 1358.7436,
+    "other_fire_hectares": 0.0,
+    "unconfirmed_hectares": 291.7371
+  },
+  "origin": "derived",
+  "parent_configuration_hash": "d5bae914905613315cbb4ce4cbd59a8445a39190d0ae7bab55dc6bcd416011d3",
+  "parent_run": "baseline-001",
+  "run_id": "event-filter-002",
+  "schema_version": 1,
+  "status": "completed",
+  "thermal_evidence": {
+    "cluster_count": 1,
+    "clusters": [
+      {
+        "dates": [
+          "2023-02-05",
+          "2023-02-06",
+          "2023-02-07",
+          "2023-02-08"
+        ],
+        "detection_count": 25,
+        "id": "thermal-001",
+        "latitude": -42.894734,
+        "longitude": -71.559616
+      }
+    ],
+    "collection": "NASA/VIIRS/002/VNP14A1",
+    "detection_count": 37,
+    "image_count": 56,
+    "images": [
+      "2023_02_04",
+      "2023_02_05",
+      "2023_02_06",
+      "2023_02_07",
+      "2023_02_08",
+      "2023_02_09",
+      "2023_02_10",
+      "2023_02_11",
+      "2023_02_12",
+      "2023_02_13",
+      "2023_02_14",
+      "2023_02_15",
+      "2023_02_16",
+      "2023_02_17",
+      "2023_02_18",
+      "2023_02_19",
+      "2023_02_20",
+      "2023_02_21",
+      "2023_02_22",
+      "2023_02_23",
+      "2023_02_24",
+      "2023_02_25",
+      "2023_02_26",
+      "2023_02_27",
+      "2023_02_28",
+      "2023_03_01",
+      "2023_03_02",
+      "2023_03_03",
+      "2023_03_04",
+      "2023_03_05",
+      "2023_03_06",
+      "2023_03_07",
+      "2023_03_08",
+      "2023_03_09",
+      "2023_03_10",
+      "2023_03_11",
+      "2023_03_12",
+      "2023_03_13",
+      "2023_03_14",
+      "2023_03_15",
+      "2023_03_16",
+      "2023_03_17",
+      "2023_03_18",
+      "2023_03_19",
+      "2023_03_20",
+      "2023_03_21",
+      "2023_03_22",
+      "2023_03_23",
+      "2023_03_24",
+      "2023_03_25",
+      "2023_03_26",
+      "2023_03_27",
+      "2023_03_28",
+      "2023_03_29",
+      "2023_03_30",
+      "2023_03_31"
+    ],
+    "target_cluster_id": "thermal-001",
+    "unique_pixel_count": 25
+  },
+  "validation_errors": []
+}

@@ -225,6 +225,70 @@ etiquetas validado para entrenamiento.
 - permita aplicar la misma metodología a Los Alerces y otros incendios;
 - pueda compararse reproduciblemente con `baseline-001`.
 
+## Implementación y evaluación — 2026-09-21
+
+Se implementó la primera iteración auditable en `filtrar_evento.py`. El proceso:
+
+1. parte de un `baseline-001` completo e inmutable;
+2. forma componentes sobre el mosaico global, no tile por tile;
+3. aplica un cierre morfológico parametrizado de 80 m sólo para asociar objetos;
+4. consulta detecciones térmicas y las agrupa espacialmente;
+5. selecciona como objetivo el clúster más próximo a la semilla del evento;
+6. clasifica cada componente por semilla, hotspot o continuidad con el objetivo;
+7. conserva capas separadas y metadatos con el motivo de cada decisión.
+
+Las salidas propuestas se materializan como directorios de tiles, para respetar
+la estructura multi-incendio:
+
+```text
+candidatos_cambio/
+mascaras/                       # incendio objetivo
+otro_incendio_probable/
+cambio_no_confirmado/
+confianza_incendio/
+componentes.csv
+hotspots.csv
+```
+
+### Resultados
+
+| Evento y run recomendado | Baseline informado | Incendio objetivo | Otro fuego | No confirmado | Evaluación visual |
+| --- | ---: | ---: | ---: | ---: | --- |
+| `epuyen-2025/event-filter-001` | 3.228,79 ha | 2.995,03 ha | 38,71 ha | 212,57 ha | Conserva la cicatriz central y elimina las manchas laterales observadas. |
+| `los-alerces-2023/event-filter-002` | 1.346,40 ha | 1.067,01 ha | 0,00 ha | 291,74 ha | Conserva el componente con 37 observaciones térmicas y elimina los grupos aislados del norte y sur. |
+
+La superficie candidata recalculada localmente difiere levemente del área del
+manifiesto baseline porque se integra sobre los GeoTIFF exportados en EPSG:4326,
+mientras que el baseline usa `pixelArea` de Earth Engine. La clasificación y
+las comparaciones internas del filtro usan siempre el mismo cálculo local.
+
+En Epuyén, la concordancia con las 3.530 ha oficiales empeora al retirar ruido,
+lo cual respalda la advertencia original: la cercanía del baseline a la cifra
+oficial estaba parcialmente compensada por falsos positivos. En Los Alerces,
+la diferencia respecto de la referencia primaria de 1.160 ha baja de +186,40 ha
+a -92,99 ha, aunque empeora respecto de la referencia alternativa de 1.390 ha.
+La superficie oficial no se utilizó para decidir ningún componente.
+
+La conclusión es que el filtro **mejora la pureza espacial y la atribución al
+evento** en ambos casos, pero todavía no permite medir precisión o recall sin
+un perímetro de verdad terreno. Las capas rechazadas se conservan justamente
+para esa revisión.
+
+`los-alerces-2023/event-filter-001` se conserva por la política de runs
+inmutables, pero no debe usarse: una reducción temporal incorrecta de VNP14A1
+produjo cero hotspots. `event-filter-002` usa una suma enmascarada, recupera 37
+observaciones en 25 píxeles y es el resultado válido.
+
+### Alcance pendiente
+
+Esta iteración cubre los pasos 1–5 y 8 del orden recomendado. Siguen pendientes:
+
+- persistencia temporal Sentinel-2 por observación;
+- MIRBI, NBR2, BAIS2 y bandas red-edge por componente;
+- evaluación contra perímetros revisados o polígonos de verdad terreno;
+- eventual calibración de confianza con etiquetas, sin usar el área oficial
+  como objetivo.
+
 ## Referencias técnicas
 
 - Google Earth Engine, análisis de objetos y componentes conectados:

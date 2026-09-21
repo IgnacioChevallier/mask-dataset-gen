@@ -532,6 +532,11 @@ def run_generation(
     import ee
 
     config = effective_config(event_id, run_id)
+    if config["algorithm_version"].startswith("event-filter-"):
+        raise RuntimeError(
+            "Los runs derivados event-filter se generan con filtrar_evento.py, "
+            "no con generar_dataset.py."
+        )
     if project:
         config["source"]["project"] = project
     paths = get_run_paths(event_id, run_id)

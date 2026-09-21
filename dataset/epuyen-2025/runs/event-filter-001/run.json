@@ -1,0 +1,234 @@
+{
+  "comparison_to_parent": {
+    "candidate_local_hectares": 3246.3115,
+    "parent_reported_hectares": 3228.7869,
+    "removed_hectares": 251.283,
+    "retained_candidate_pct": 92.2594,
+    "target_hectares": 2995.0285
+  },
+  "completed_at": "2026-09-21T04:01:44+00:00",
+  "configuration": {
+    "algorithm_version": "event-filter-v1",
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 20,
+    "event_description": "Incendio iniciado en La Rinconada, Epuyén, el 15 de enero de 2025.",
+    "event_filter": {
+      "closing_radius_m": 80,
+      "component_hotspot_max_distance_m": 1000,
+      "component_link_max_distance_m": 800,
+      "ignition_point": {
+        "latitude": -42.2921,
+        "longitude": -71.4447,
+        "note": "Semilla aproximada en La Rinconada, entre la Escuela 9 y el lago; se usa para seleccionar el clúster térmico, no como perímetro."
+      },
+      "seed_max_distance_m": 1500,
+      "thermal": {
+        "band": "confidence",
+        "collection": "NASA/LANCE/SNPP_VIIRS/C2",
+        "end_inclusive": "2025-03-08",
+        "scale_m": 375,
+        "source_note": "VIIRS S-NPP 375 m; se excluyen detecciones de confianza baja.",
+        "start": "2025-01-15",
+        "threshold": 1
+      },
+      "thermal_cluster_radius_m": 1500
+    },
+    "event_id": "epuyen-2025",
+    "event_name": "Incendio de Epuyén 2025",
+    "fire_start_date": "2025-01-15",
+    "grid": {
+      "scale_m": 20,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "dilation_pixels": 1,
+      "dnbr_threshold": 0.3,
+      "min_connected_pixels": 150,
+      "ndsi_snow_max": 0.25,
+      "post_nbr_max": 0.4,
+      "pre_nbr_min": 0.15,
+      "pre_ndwi_water_max": 0.05
+    },
+    "max_workers": 4,
+    "origin": "derived",
+    "parent_run": "baseline-001",
+    "purpose": "Atribuir los componentes de cambio al incendio de Epuyén mediante continuidad espacial y detecciones térmicas.",
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "reference": {
+      "area_note": "Superficie informada por el Servicio Nacional de Manejo del Fuego.",
+      "burned_area_ha": 3530,
+      "sources": [
+        "https://www.argentina.gob.ar/sites/default/files/2024/09/reporte_diario_26_03_2025_0.pdf",
+        "https://www.argentina.gob.ar/noticias/en-chubut-vialidad-nacional-colabora-en-la-lucha-contra-el-incendio-de-bosques-en-epuyen"
+      ]
+    },
+    "rois": [
+      {
+        "bbox": [
+          -71.578,
+          -42.416,
+          -71.201,
+          -42.079
+        ],
+        "id": "epuyen",
+        "name": "Epuyén y entorno"
+      }
+    ],
+    "run_id": "event-filter-001",
+    "source": {
+      "collection": "COPERNICUS/S2_SR_HARMONIZED",
+      "project": "ee-nachochevallier"
+    },
+    "windows": {
+      "post": {
+        "end_inclusive": "2025-03-08",
+        "start": "2025-02-01"
+      },
+      "pre": {
+        "end_inclusive": "2025-01-14",
+        "start": "2024-11-01"
+      }
+    }
+  },
+  "configuration_hash": "0c1954a0279cbc128c05ad68e0d856136c217cd461de2648a4e8173a8b600c20",
+  "counts": {
+    "error": 0,
+    "expected": 72,
+    "ok": 71,
+    "warning": 1
+  },
+  "created_at": "2026-09-21T04:00:31+00:00",
+  "environment": {
+    "dependencies": {
+      "earthengine-api": "1.7.41",
+      "geedim": "2.0.0",
+      "geemap": "0.38.4",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.2",
+      "rasterio": "1.5.1"
+    },
+    "git_commit": "921e48619ad260078c044813946c69aef266483f",
+    "python": "3.14.7"
+  },
+  "errors": [],
+  "event_id": "epuyen-2025",
+  "metrics": {
+    "burned_hectares": 2995.0285,
+    "burned_valid_pct": 2.5767,
+    "candidate_hectares": 3246.3115,
+    "other_fire_hectares": 38.714,
+    "unconfirmed_hectares": 212.569
+  },
+  "origin": "derived",
+  "parent_configuration_hash": "4ed569aba93d612feb104e74276c95699dcb26cf838b443a8c4c9d9c5832386c",
+  "parent_run": "baseline-001",
+  "run_id": "event-filter-001",
+  "schema_version": 1,
+  "status": "completed",
+  "thermal_evidence": {
+    "cluster_count": 2,
+    "clusters": [
+      {
+        "dates": [
+          "2025-01-15",
+          "2025-01-16",
+          "2025-01-17",
+          "2025-01-18",
+          "2025-01-19",
+          "2025-01-21",
+          "2025-01-22",
+          "2025-01-25",
+          "2025-01-26",
+          "2025-01-27",
+          "2025-01-29",
+          "2025-01-30"
+        ],
+        "detection_count": 725,
+        "id": "thermal-001",
+        "latitude": -42.257698,
+        "longitude": -71.418787
+      },
+      {
+        "dates": [
+          "2025-02-06",
+          "2025-02-07"
+        ],
+        "detection_count": 20,
+        "id": "thermal-002",
+        "latitude": -42.134533,
+        "longitude": -71.395967
+      }
+    ],
+    "collection": "NASA/LANCE/SNPP_VIIRS/C2",
+    "detection_count": 745,
+    "image_count": 53,
+    "images": [
+      "2025015",
+      "2025016",
+      "2025017",
+      "2025018",
+      "2025019",
+      "2025020",
+      "2025021",
+      "2025022",
+      "2025023",
+      "2025024",
+      "2025025",
+      "2025026",
+      "2025027",
+      "2025028",
+      "2025029",
+      "2025030",
+      "2025031",
+      "2025032",
+      "2025033",
+      "2025034",
+      "2025035",
+      "2025036",
+      "2025037",
+      "2025038",
+      "2025039",
+      "2025040",
+      "2025041",
+      "2025042",
+      "2025043",
+      "2025044",
+      "2025045",
+      "2025046",
+      "2025047",
+      "2025048",
+      "2025049",
+      "2025050",
+      "2025051",
+      "2025052",
+      "2025053",
+      "2025054",
+      "2025055",
+      "2025056",
+      "2025057",
+      "2025058",
+      "2025059",
+      "2025060",
+      "2025061",
+      "2025062",
+      "2025063",
+      "2025064",
+      "2025065",
+      "2025066",
+      "2025067"
+    ],
+    "target_cluster_id": "thermal-001"
+  },
+  "validation_errors": []
+}

@@ -15,5 +15,9 @@ skills-lock.json
 dataset/*/runs/*/imagenes_pre/
 dataset/*/runs/*/imagenes_post/
 dataset/*/runs/*/mascaras/
+dataset/*/runs/*/candidatos_cambio/
+dataset/*/runs/*/otro_incendio_probable/
+dataset/*/runs/*/cambio_no_confirmado/
+dataset/*/runs/*/confianza_incendio/
 dataset/*/runs/*/calidad/
 dataset/*/runs/*/visualizaciones/

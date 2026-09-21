@@ -205,6 +205,31 @@ def validate_config(config: dict[str, Any]) -> None:
     if not isinstance(warning, (int, float)) or not 0 <= warning <= 100:
         raise ConfigError("quality.valid_coverage_warning_pct debe estar entre 0 y 100.")
 
+    if config["algorithm_version"].startswith("event-filter-"):
+        parent_run = config.get("parent_run")
+        if not isinstance(parent_run, str):
+            raise ConfigError("Un event-filter debe declarar parent_run.")
+        validate_id(parent_run, "parent_run")
+        event_filter = config.get("event_filter")
+        if not isinstance(event_filter, dict):
+            raise ConfigError("Un event-filter debe declarar event_filter.")
+        point = event_filter.get("ignition_point", {})
+        if not all(isinstance(point.get(key), (int, float)) for key in ("longitude", "latitude")):
+            raise ConfigError("event_filter.ignition_point debe declarar longitude y latitude.")
+        thermal = event_filter.get("thermal", {})
+        for field in ("collection", "band", "scale_m", "threshold"):
+            if field not in thermal:
+                raise ConfigError(f"Falta event_filter.thermal.{field}.")
+        for field in (
+            "closing_radius_m",
+            "thermal_cluster_radius_m",
+            "component_hotspot_max_distance_m",
+            "component_link_max_distance_m",
+            "seed_max_distance_m",
+        ):
+            if not isinstance(event_filter.get(field), (int, float)) or event_filter[field] < 0:
+                raise ConfigError(f"event_filter.{field} debe ser un número no negativo.")
+
 
 def get_run_paths(event_id: str, run_id: str) -> RunPaths:
     validate_id(event_id, "event_id")

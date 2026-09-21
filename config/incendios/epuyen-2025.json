@@ -59,6 +59,43 @@
           "end_inclusive": "2025-03-08"
         }
       }
+    },
+    "event-filter-001": {
+      "purpose": "Atribuir los componentes de cambio al incendio de Epuyén mediante continuidad espacial y detecciones térmicas.",
+      "origin": "derived",
+      "parent_run": "baseline-001",
+      "algorithm_version": "event-filter-v1",
+      "windows": {
+        "pre": {
+          "start": "2024-11-01",
+          "end_inclusive": "2025-01-14"
+        },
+        "post": {
+          "start": "2025-02-01",
+          "end_inclusive": "2025-03-08"
+        }
+      },
+      "event_filter": {
+        "ignition_point": {
+          "longitude": -71.4447,
+          "latitude": -42.2921,
+          "note": "Semilla aproximada en La Rinconada, entre la Escuela 9 y el lago; se usa para seleccionar el clúster térmico, no como perímetro."
+        },
+        "closing_radius_m": 80,
+        "thermal_cluster_radius_m": 1500,
+        "component_hotspot_max_distance_m": 1000,
+        "component_link_max_distance_m": 800,
+        "seed_max_distance_m": 1500,
+        "thermal": {
+          "collection": "NASA/LANCE/SNPP_VIIRS/C2",
+          "band": "confidence",
+          "threshold": 1,
+          "scale_m": 375,
+          "start": "2025-01-15",
+          "end_inclusive": "2025-03-08",
+          "source_note": "VIIRS S-NPP 375 m; se excluyen detecciones de confianza baja."
+        }
+      }
     }
   }
 }
