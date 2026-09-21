@@ -14,6 +14,8 @@ so their local NBR differs from GEE (which uses cloud-masked medians). Their
 scores are marked with (*) and treated as indicative only.
 """
 
+import argparse
+
 import numpy as np
 import rasterio
 import matplotlib.pyplot as plt
@@ -21,13 +23,13 @@ import matplotlib.patches as mpatches
 from pathlib import Path
 from itertools import product
 from scipy.ndimage import label, binary_dilation
+from dataset_runs import DEFAULT_EVENT, DEFAULT_RUN, get_run_paths
 
-DATASET_DIR = Path("dataset")
-PRE_DIR     = DATASET_DIR / "imagenes_pre"
-POST_DIR    = DATASET_DIR / "imagenes"
-MASK_DIR    = DATASET_DIR / "mascaras"
-OUT_DIR     = Path("remask_comparisons")
-OUT_DIR.mkdir(exist_ok=True)
+_DEFAULT_PATHS = get_run_paths(DEFAULT_EVENT, DEFAULT_RUN)
+PRE_DIR  = _DEFAULT_PATHS.pre
+POST_DIR = _DEFAULT_PATHS.post
+MASK_DIR = _DEFAULT_PATHS.masks
+OUT_DIR  = _DEFAULT_PATHS.diagnostics
 
 # Known false-positive tiles
 FP_TILES  = ["tile_003", "tile_006", "tile_007", "tile_014",  # mountain / snow
@@ -210,6 +212,7 @@ def save_dnbr_diagnostic(tile, pre, post):
 
 
 def evaluate_candidates():
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
     all_tiles  = FP_TILES + CLOUD_TILES + REF_TILES
     tile_data  = {}
     for t in all_tiles:
@@ -299,5 +302,20 @@ def evaluate_candidates():
     return scored
 
 
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Evalúa candidatos de remasking sobre un evento y run descargado."
+    )
+    parser.add_argument("--event", default=DEFAULT_EVENT)
+    parser.add_argument("--run", dest="run_id", default=DEFAULT_RUN)
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
+    args = parse_args()
+    selected_paths = get_run_paths(args.event, args.run_id)
+    PRE_DIR = selected_paths.pre
+    POST_DIR = selected_paths.post
+    MASK_DIR = selected_paths.masks
+    OUT_DIR = selected_paths.diagnostics
     evaluate_candidates()

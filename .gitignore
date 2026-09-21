@@ -4,3 +4,22 @@ __pycache__/
 venv/
 .DS_Store
 dataset.zip
+
+# Artefactos pesados de runs nuevos. legacy-v1 permanece versionado.
+dataset/*/runs/*/imagenes_pre/
+dataset/*/runs/*/imagenes_post/
+dataset/*/runs/*/mascaras/
+dataset/*/runs/*/calidad/
+dataset/*/runs/*/visualizaciones/
+
+!dataset/puerto-patriada-2026/runs/legacy-v1/imagenes_pre/
+!dataset/puerto-patriada-2026/runs/legacy-v1/imagenes_pre/*.tif
+!dataset/puerto-patriada-2026/runs/legacy-v1/imagenes_post/
+!dataset/puerto-patriada-2026/runs/legacy-v1/imagenes_post/*.tif
+!dataset/puerto-patriada-2026/runs/legacy-v1/mascaras/
+!dataset/puerto-patriada-2026/runs/legacy-v1/mascaras/*.tif
+!dataset/puerto-patriada-2026/runs/legacy-v1/visualizaciones/
+!dataset/puerto-patriada-2026/runs/legacy-v1/visualizaciones/tiles/
+!dataset/puerto-patriada-2026/runs/legacy-v1/visualizaciones/tiles/*.png
+!dataset/puerto-patriada-2026/runs/legacy-v1/visualizaciones/diagnosticos/
+!dataset/puerto-patriada-2026/runs/legacy-v1/visualizaciones/diagnosticos/*.png

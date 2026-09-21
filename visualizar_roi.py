@@ -1,3 +1,7 @@
+"""Genera mosaicos de un run completo, con compatibilidad legacy."""
+
+from __future__ import annotations
+
 import argparse
 import sys
 from pathlib import Path
@@ -7,165 +11,175 @@ import numpy as np
 import rasterio
 from rasterio.merge import merge
 
+from dataset_runs import DEFAULT_EVENT, DEFAULT_RUN, effective_config, get_run_paths
 
-# ── Configuración ─────────────────────────────────────────────────────────────
-BASE_DIR = Path(__file__).resolve().parent
-DATASET_DIR = BASE_DIR / "dataset"
-POST_IMG_DIR = DATASET_DIR / "imagenes"
-PRE_IMG_DIR  = DATASET_DIR / "imagenes_pre"
-MASK_DIR = DATASET_DIR / "mascaras"
-SAVED_DIR = BASE_DIR / "saved"
 
-# Orden guardado: B2, B3, B4, B8, B11, B12
-BANDA_R = 2  # B4 - Red
-BANDA_G = 1  # B3 - Green
-BANDA_B = 0  # B2 - Blue
+BANDA_R = 2
+BANDA_G = 1
+BANDA_B = 0
 GAMMA = 0.8
 
 
-def buscar_pares_tiles(img_dir):
-    etiqueta = "PRE" if img_dir == PRE_IMG_DIR else "POST"
-    tiles_img  = {path.stem: path for path in img_dir.glob("*.tif")}
-    tiles_mask = {path.stem: path for path in MASK_DIR.glob("*.tif")}
-
-    if not tiles_img:
-        print(f"Error: no se encontraron tiles {etiqueta} en {img_dir}")
-        sys.exit(1)
-
-    if not tiles_mask:
-        print(f"Error: no se encontraron máscaras en {MASK_DIR}")
-        sys.exit(1)
-
-    nombres_comunes = sorted(tiles_img.keys() & tiles_mask.keys())
-    if not nombres_comunes:
-        print(f"Error: no hay tiles {etiqueta} con máscara correspondiente.")
-        sys.exit(1)
-
-    faltan_mascaras = sorted(tiles_img.keys() - tiles_mask.keys())
-    faltan_img      = sorted(tiles_mask.keys() - tiles_img.keys())
-
-    if faltan_mascaras:
-        print(f"Advertencia: se omiten tiles {etiqueta} sin máscara:")
-        print("  " + ", ".join(faltan_mascaras))
-
-    if faltan_img:
-        print(f"Advertencia: se omiten máscaras sin tile {etiqueta}:")
-        print("  " + ", ".join(faltan_img))
-
-    return [(tiles_img[nombre], tiles_mask[nombre]) for nombre in nombres_comunes]
+def _common_tile_names(paths) -> list[str]:
+    sets = [
+        {path.stem for path in paths.pre.glob("*.tif")},
+        {path.stem for path in paths.post.glob("*.tif")},
+        {path.stem for path in paths.masks.glob("*.tif")},
+    ]
+    common = sorted(set.intersection(*sets)) if all(sets) else []
+    if not common:
+        raise FileNotFoundError(f"No hay tripletas PRE/POST/máscara en {paths.root}.")
+    return common
 
 
-def mergear_rasters(paths):
-    datasets = [rasterio.open(path) for path in paths]
+def _merge_rasters(files: list[Path]) -> np.ndarray:
+    datasets = [rasterio.open(path) for path in files]
     try:
-        mosaico, transform = merge(datasets)
+        mosaic, _ = merge(datasets)
+        return mosaic
     finally:
         for dataset in datasets:
             dataset.close()
 
-    return mosaico, transform
 
-
-def normalizar_rgb(mosaico_post):
+def _normalize_rgb(mosaic: np.ndarray) -> np.ndarray:
     rgb = np.stack(
-        [
-            mosaico_post[BANDA_R],
-            mosaico_post[BANDA_G],
-            mosaico_post[BANDA_B],
-        ],
-        axis=-1,
-    ).astype(float)
-
-    nodata_mask = np.all(rgb == 0, axis=-1)
-
-    valores_validos = rgb[np.isfinite(rgb) & (rgb > 0)]
-    if valores_validos.size == 0:
-        raise ValueError("El mosaico POST no contiene valores positivos válidos para RGB.")
-
-    p2, p98 = np.percentile(valores_validos, (2, 98))
-    if p98 <= p2:
+        [mosaic[BANDA_R], mosaic[BANDA_G], mosaic[BANDA_B]], axis=-1
+    ).astype(np.float32)
+    nodata = np.all(rgb == 0, axis=-1)
+    values = rgb[np.isfinite(rgb) & (rgb > 0)]
+    if values.size == 0:
+        raise ValueError("El mosaico no contiene valores RGB positivos.")
+    low, high = np.percentile(values, (2, 98))
+    if high <= low:
         raise ValueError("No se pudo normalizar RGB: percentiles inválidos.")
-
-    rgb = np.clip((rgb - p2) / (p98 - p2), 0, 1)
+    rgb = np.clip((rgb - low) / (high - low), 0, 1)
     rgb = np.power(rgb, GAMMA)
-    rgb[nodata_mask] = 1.0  # nodata → blanco
+    rgb[nodata] = 1.0
     return rgb
 
 
-def superponer_mascara(rgb, mosaico_mascara):
-    mascara = np.squeeze(mosaico_mascara)
-    if mascara.shape != rgb.shape[:2]:
-        raise ValueError(
-            "La máscara mergeada no coincide en tamaño con el mosaico POST "
-            f"({mascara.shape} != {rgb.shape[:2]})."
-        )
-
-    overlay = rgb.copy()
-    quemado = mascara == 1
-    overlay[quemado, 0] = 1.0
-    overlay[quemado, 1] *= 0.3
-    overlay[quemado, 2] *= 0.3
-    return overlay, quemado
-
-
-def crear_ruta_guardado(epoca, con_mascara):
-    SAVED_DIR.mkdir(exist_ok=True)
-    contador = 1
-    sufijo = "_mascara" if con_mascara else ""
-    prefijo = f"roi_{epoca}{sufijo}"
-
-    while True:
-        salida = SAVED_DIR / f"{prefijo}_{contador:02d}.png"
-        if not salida.exists():
-            return salida
-        contador += 1
-
-
-def guardar_visualizacion(imagen, salida, epoca, quemado=None):
-    label = "PRE" if epoca == "pre" else "POST"
-    if quemado is not None:
-        pct_quemado = round(quemado.sum() / quemado.size * 100, 2)
-        titulo = f"ROI completo - {label} con máscara quemada ({pct_quemado}% quemado)"
-    else:
-        titulo = f"ROI completo - {label}"
-
-    fig, ax = plt.subplots(figsize=(12, 10))
-    ax.imshow(imagen)
-    ax.set_title(titulo)
-    ax.axis("off")
-
-    fig.savefig(salida, dpi=180, bbox_inches="tight")
+def _save_rgb(image: np.ndarray, output: Path, title: str) -> None:
+    fig, axis = plt.subplots(figsize=(12, 10))
+    axis.imshow(image)
+    axis.set_title(title)
+    axis.axis("off")
+    fig.savefig(output, dpi=180, bbox_inches="tight")
     plt.close(fig)
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Visualiza el ROI PRE o POST con o sin máscara.")
-    parser.add_argument("--prev",   action="store_true", help="Usar imágenes PRE-incendio en lugar de POST.")
-    parser.add_argument("--nomask", action="store_true", help="No superponer la máscara quemada.")
-    args = parser.parse_args()
+def _save_mask(mask: np.ndarray, valid: np.ndarray, output: Path, title: str) -> None:
+    display = np.zeros((*mask.shape, 3), dtype=np.float32)
+    display[mask == 0] = (1.0, 1.0, 1.0)
+    display[mask == 1] = (0.0, 0.0, 0.0)
+    display[valid == 0] = (0.65, 0.65, 0.65)
+    fig, axis = plt.subplots(figsize=(12, 10))
+    axis.imshow(display)
+    axis.set_title(title + " — gris: sin observación válida")
+    axis.axis("off")
+    fig.savefig(output, dpi=180, bbox_inches="tight")
+    plt.close(fig)
 
-    img_dir = PRE_IMG_DIR if args.prev else POST_IMG_DIR
-    epoca   = "pre" if args.prev else "post"
 
-    pares = buscar_pares_tiles(img_dir)
-    paths_img = [img for img, _ in pares]
+def _overlay(rgb: np.ndarray, mask: np.ndarray, valid: np.ndarray) -> np.ndarray:
+    result = rgb.copy()
+    burned = (mask == 1) & (valid == 1)
+    result[burned, 0] = 1.0
+    result[burned, 1] *= 0.3
+    result[burned, 2] *= 0.3
+    result[valid == 0] = result[valid == 0] * 0.25 + np.array([0.55, 0.55, 0.55]) * 0.75
+    return result
 
-    print(f"Mergeando {len(pares)} tiles ({epoca.upper()})...")
-    mosaico, _ = mergear_rasters(paths_img)
-    rgb = normalizar_rgb(mosaico)
 
-    if args.nomask:
-        salida = crear_ruta_guardado(epoca, con_mascara=False)
-        guardar_visualizacion(rgb, salida, epoca)
+def generar_resumen_run(paths, config: dict) -> list[Path]:
+    """Genera PRE, POST, máscara y overlay; se usa también desde el generador."""
+    names = _common_tile_names(paths)
+    pre_mosaic = _merge_rasters([paths.pre / f"{name}.tif" for name in names])
+    post_mosaic = _merge_rasters([paths.post / f"{name}.tif" for name in names])
+    mask = np.squeeze(_merge_rasters([paths.masks / f"{name}.tif" for name in names]))
+
+    valid_files = [paths.valid / f"{name}.tif" for name in names]
+    if all(path.is_file() for path in valid_files):
+        valid = np.squeeze(_merge_rasters(valid_files))
     else:
-        paths_mask = [mask for _, mask in pares]
-        mosaico_mascara, _ = mergear_rasters(paths_mask)
-        overlay, quemado = superponer_mascara(rgb, mosaico_mascara)
-        salida = crear_ruta_guardado(epoca, con_mascara=True)
-        guardar_visualizacion(overlay, salida, epoca, quemado=quemado)
+        valid = np.ones(mask.shape, dtype=np.uint8)
 
-    print(f"Guardado: {salida}")
+    if pre_mosaic.shape[1:] != mask.shape or post_mosaic.shape[1:] != mask.shape:
+        raise ValueError("Los mosaicos PRE, POST y máscara no tienen las mismas dimensiones.")
+    if valid.shape != mask.shape:
+        raise ValueError("El mosaico de observación válida no coincide con la máscara.")
+
+    pre_rgb = _normalize_rgb(pre_mosaic)
+    post_rgb = _normalize_rgb(post_mosaic)
+    overlay = _overlay(post_rgb, mask, valid)
+    title = f"{config['event_name']} — {config['run_id']}"
+    paths.roi_summaries.mkdir(parents=True, exist_ok=True)
+    outputs = [
+        paths.roi_summaries / "01_pre.png",
+        paths.roi_summaries / "02_post.png",
+        paths.roi_summaries / "03_mascara.png",
+        paths.roi_summaries / "04_superposicion.png",
+    ]
+    _save_rgb(pre_rgb, outputs[0], f"{title} — PRE")
+    _save_rgb(post_rgb, outputs[1], f"{title} — POST")
+    _save_mask(mask, valid, outputs[2], f"{title} — máscara binaria")
+    burned_valid = (mask == 1) & (valid == 1)
+    pct = burned_valid.sum() / max((valid == 1).sum(), 1) * 100
+    _save_rgb(overlay, outputs[3], f"{title} — superposición ({pct:.2f}% del área válida)")
+    for output in outputs:
+        print(f"Guardado: {output}")
+    return outputs
+
+
+def _save_compat_view(paths, config: dict, use_pre: bool, no_mask: bool) -> Path:
+    names = _common_tile_names(paths)
+    source_dir = paths.pre if use_pre else paths.post
+    mosaic = _merge_rasters([source_dir / f"{name}.tif" for name in names])
+    rgb = _normalize_rgb(mosaic)
+    epoch = "pre" if use_pre else "post"
+    if not no_mask:
+        mask = np.squeeze(_merge_rasters([paths.masks / f"{name}.tif" for name in names]))
+        valid_files = [paths.valid / f"{name}.tif" for name in names]
+        valid = (
+            np.squeeze(_merge_rasters(valid_files))
+            if all(path.is_file() for path in valid_files)
+            else np.ones(mask.shape, dtype=np.uint8)
+        )
+        rgb = _overlay(rgb, mask, valid)
+    paths.roi_summaries.mkdir(parents=True, exist_ok=True)
+    suffix = "" if no_mask else "_mascara"
+    output = paths.roi_summaries / f"roi_{epoch}{suffix}.png"
+    _save_rgb(rgb, output, f"{config['event_name']} — {config['run_id']} — {epoch.upper()}")
+    print(f"Guardado: {output}")
+    return output
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Visualiza el ROI de un evento y run.")
+    parser.add_argument("--event", default=DEFAULT_EVENT)
+    parser.add_argument("--run", dest="run_id", default=DEFAULT_RUN)
+    parser.add_argument("--prev", action="store_true", help="Usar PRE en lugar de POST.")
+    parser.add_argument("--nomask", action="store_true", help="No superponer la máscara.")
+    parser.add_argument(
+        "--all", action="store_true", help="Generar PRE, POST, máscara y superposición."
+    )
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+    paths = get_run_paths(args.event, args.run_id)
+    config = effective_config(args.event, args.run_id)
+    try:
+        if args.all:
+            generar_resumen_run(paths, config)
+        else:
+            _save_compat_view(paths, config, args.prev, args.nomask)
+    except (FileNotFoundError, ValueError) as exc:
+        print(f"Error: {exc}")
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
