@@ -127,10 +127,12 @@ dataset/
         └── baseline-002/
 ```
 
-Los GeoTIFFs y PNGs de runs nuevos serán artefactos locales ignorados por Git.
-Se versionarán el código, las configuraciones, la documentación y los
-manifiestos livianos. Si luego fuera necesario distribuir datasets completos
-mediante Git, se evaluará Git LFS.
+Los GeoTIFFs de todos los runs, incluido `legacy-v1`, serán artefactos locales
+ignorados por Git. Se versionarán el código, las configuraciones, la
+documentación, los metadatos y los manifiestos livianos. Las visualizaciones
+históricas livianas de `legacy-v1` podrán permanecer versionadas. Si luego fuera
+necesario distribuir datasets completos mediante Git, se evaluará Git LFS o
+almacenamiento de objetos.
 
 ## 5. Compatibilidad con el dataset existente
 
@@ -406,7 +408,8 @@ Este run no se ejecutará hasta revisar `epuyen-2025/baseline-001`.
 3. Crear el manifiesto importado.
 4. Crear enlaces simbólicos de compatibilidad.
 5. Adaptar generador, visualizadores y remasking a rutas seleccionables.
-6. Actualizar `.gitignore` sin desversionar accidentalmente `legacy-v1`.
+6. Actualizar `.gitignore` para conservar localmente, pero no versionar, los
+   GeoTIFFs de `legacy-v1`.
 
 ### Fase C: calidad y visualización
 

@@ -154,8 +154,10 @@ con observación válida simultánea en PRE y POST.
 métricas. `metadata.csv` agrega posición de grilla, cobertura válida, área
 quemada y estado por tile.
 
-Los GeoTIFFs y PNGs de runs nuevos se ignoran en Git. El dataset `legacy-v1`
-permanece versionado porque ya formaba parte del repositorio.
+Los GeoTIFFs de todos los runs, incluido `legacy-v1`, se conservan localmente
+pero se ignoran en Git. Se versionan las configuraciones, los manifiestos, los
+metadatos y la documentación. Las visualizaciones históricas livianas de
+`legacy-v1` permanecen versionadas.
 
 El plan y las decisiones de diseño están documentados en
 [`PLAN_MULTI_INCENDIOS.md`](PLAN_MULTI_INCENDIOS.md).
