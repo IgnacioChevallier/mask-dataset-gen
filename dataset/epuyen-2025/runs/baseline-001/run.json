@@ -1,0 +1,151 @@
+{
+  "completed_at": "2026-09-21T00:22:21+00:00",
+  "configuration": {
+    "algorithm_version": "dnbr-s2-v1",
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 20,
+    "event_description": "Incendio iniciado en La Rinconada, Epuyén, el 15 de enero de 2025.",
+    "event_id": "epuyen-2025",
+    "event_name": "Incendio de Epuyén 2025",
+    "fire_start_date": "2025-01-15",
+    "grid": {
+      "scale_m": 20,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "dilation_pixels": 1,
+      "dnbr_threshold": 0.3,
+      "min_connected_pixels": 150,
+      "ndsi_snow_max": 0.25,
+      "post_nbr_max": 0.4,
+      "pre_nbr_min": 0.15,
+      "pre_ndwi_water_max": 0.05
+    },
+    "max_workers": 4,
+    "purpose": "Primer resultado exploratorio con los parámetros heredados de 2026.",
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "reference": {
+      "area_note": "Superficie informada por el Servicio Nacional de Manejo del Fuego.",
+      "burned_area_ha": 3530,
+      "sources": [
+        "https://www.argentina.gob.ar/sites/default/files/2024/09/reporte_diario_26_03_2025_0.pdf",
+        "https://www.argentina.gob.ar/noticias/en-chubut-vialidad-nacional-colabora-en-la-lucha-contra-el-incendio-de-bosques-en-epuyen"
+      ]
+    },
+    "rois": [
+      {
+        "bbox": [
+          -71.578,
+          -42.416,
+          -71.201,
+          -42.079
+        ],
+        "id": "epuyen",
+        "name": "Epuyén y entorno"
+      }
+    ],
+    "run_id": "baseline-001",
+    "source": {
+      "collection": "COPERNICUS/S2_SR_HARMONIZED",
+      "project": "ee-nachochevallier"
+    },
+    "windows": {
+      "post": {
+        "end_inclusive": "2025-03-08",
+        "start": "2025-02-01"
+      },
+      "pre": {
+        "end_inclusive": "2025-01-14",
+        "start": "2024-11-01"
+      }
+    }
+  },
+  "configuration_hash": "4ed569aba93d612feb104e74276c95699dcb26cf838b443a8c4c9d9c5832386c",
+  "counts": {
+    "error": 0,
+    "expected": 72,
+    "ok": 71,
+    "warning": 1
+  },
+  "created_at": "2026-09-21T00:09:47+00:00",
+  "environment": {
+    "dependencies": {
+      "earthengine-api": "1.7.41",
+      "geedim": "2.0.0",
+      "geemap": "0.38.4",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.2",
+      "rasterio": "1.5.1"
+    },
+    "git_commit": "13a6a7cd970fb81f51b126d1282365e2e19fe4ab",
+    "python": "3.14.7"
+  },
+  "errors": [],
+  "event_id": "epuyen-2025",
+  "last_started_at": "2026-09-21T00:09:47+00:00",
+  "metrics": {
+    "by_roi": [
+      {
+        "burned_hectares": 3228.7869,
+        "burned_valid_pct": 2.7986,
+        "id": "epuyen",
+        "valid_coverage_pct": 99.0688
+      }
+    ],
+    "total": {
+      "burned_hectares": 3228.7869,
+      "burned_valid_pct": 2.7986,
+      "id": "total",
+      "valid_coverage_pct": 99.0688
+    }
+  },
+  "origin": "generated",
+  "run_id": "baseline-001",
+  "scenes": {
+    "post": [
+      "20250208T142719_20250208T143601_T18GYU",
+      "20250208T142719_20250208T143601_T19GBP",
+      "20250208T142719_20250208T143601_T19GCP",
+      "20250213T142821_20250213T144416_T18GYT",
+      "20250213T142821_20250213T144416_T18GYU",
+      "20250213T142821_20250213T144416_T19GBP",
+      "20250213T142821_20250213T144416_T19GCP"
+    ],
+    "pre": [
+      "20241130T142719_20241130T143632_T18GYT",
+      "20241130T142719_20241130T143632_T19GCP",
+      "20241215T142711_20241215T143736_T18GYT",
+      "20241215T142711_20241215T143736_T18GYU",
+      "20241215T142711_20241215T143736_T19GBP",
+      "20241215T142711_20241215T143736_T19GCP",
+      "20241215T142821_20241215T144258_T18GYT",
+      "20241215T142821_20241215T144258_T18GYU",
+      "20241215T142821_20241215T144258_T19GBP",
+      "20241215T142821_20241215T144258_T19GCP",
+      "20241225T142711_20241225T143755_T18GYT",
+      "20241225T142711_20241225T143755_T18GYU",
+      "20241225T142711_20241225T143755_T19GBP",
+      "20241225T142711_20241225T143755_T19GCP",
+      "20241230T142719_20241230T144244_T19GCP",
+      "20250104T142711_20250104T143732_T18GYT",
+      "20250104T142711_20250104T143732_T18GYU",
+      "20250104T142711_20250104T143732_T19GBP",
+      "20250104T142711_20250104T143732_T19GCP"
+    ]
+  },
+  "schema_version": 1,
+  "status": "completed",
+  "tile_naming": "grid-position-v1",
+  "validation_errors": []
+}

@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "event_id": "puerto-patriada-2026",
+  "run_id": "legacy-v1",
+  "origin": "imported",
+  "status": "completed",
+  "created_at": null,
+  "imported_at": "2026-09-20T21:33:32Z",
+  "completed_at": null,
+  "configuration_hash": "ddfa0b8fec3da9944ed9e29c312fef6e3674dead16241f15c61de731d81f1aef",
+  "configuration_reconstructed": true,
+  "configuration": {
+    "algorithm_version": "dnbr-s2-v1",
+    "bands": ["B2", "B3", "B4", "B8", "B11", "B12"],
+    "cloud_percentage_max": 20,
+    "event_description": "Cobertura histórica de tres ROIs de la Comarca Andina.",
+    "event_id": "puerto-patriada-2026",
+    "event_name": "Incendio Puerto Patriada, El Hoyo y Epuyén 2026",
+    "fire_start_date": "2026-01-05",
+    "grid": {
+      "scale_m": 20,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "dilation_pixels": 1,
+      "dnbr_threshold": 0.3,
+      "min_connected_pixels": 150,
+      "ndsi_snow_max": 0.25,
+      "post_nbr_max": 0.4,
+      "pre_nbr_min": 0.15,
+      "pre_ndwi_water_max": 0.05
+    },
+    "max_workers": 4,
+    "origin": "imported",
+    "purpose": "Importación histórica; representa cambio acumulado entre 2023 y 2026.",
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "rois": [
+      {
+        "bbox": [-72.014, -42.348, -71.774, -42.263],
+        "id": "roi-oeste",
+        "name": "ROI oeste"
+      },
+      {
+        "bbox": [-71.578, -42.416, -71.201, -42.079],
+        "id": "epuyen-el-hoyo",
+        "name": "Epuyén y El Hoyo"
+      },
+      {
+        "bbox": [-71.927, -42.818, -71.296, -42.457],
+        "id": "roi-sur",
+        "name": "ROI sur"
+      }
+    ],
+    "run_id": "legacy-v1",
+    "source": {
+      "collection": "COPERNICUS/S2_SR_HARMONIZED"
+    },
+    "tile_naming": "legacy-sequential",
+    "windows": {
+      "post": {
+        "end_inclusive": "2026-03-08",
+        "start": "2026-02-01"
+      },
+      "pre": {
+        "end_inclusive": "2023-12-31",
+        "start": "2023-11-01"
+      }
+    }
+  },
+  "tile_naming": "legacy-sequential",
+  "scenes": {
+    "pre": [],
+    "post": [],
+    "note": "Los IDs exactos de escenas no quedaron registrados en la ejecución original."
+  },
+  "environment": {
+    "git_commit": "13a6a7cd970fb81f51b126d1282365e2e19fe4ab",
+    "note": "Las versiones exactas usadas durante la generación original no quedaron registradas."
+  },
+  "counts": {
+    "expected": 196,
+    "ok": 196,
+    "warning": 0,
+    "error": 0
+  },
+  "metrics": {},
+  "validation_errors": [],
+  "errors": []
+}

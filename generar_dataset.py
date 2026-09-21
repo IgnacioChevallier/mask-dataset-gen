@@ -283,7 +283,11 @@ def _write_metadata(path: Path, rows: dict[str, dict[str, Any]]) -> None:
     fd, temp_name = tempfile.mkstemp(prefix=".metadata.", suffix=".csv", dir=path.parent)
     try:
         with os.fdopen(fd, "w", newline="", encoding="utf-8") as handle:
-            writer = csv.DictWriter(handle, fieldnames=METADATA_FIELDS)
+            writer = csv.DictWriter(
+                handle,
+                fieldnames=METADATA_FIELDS,
+                lineterminator="\n",
+            )
             writer.writeheader()
             ordered = sorted(
                 rows.values(),
