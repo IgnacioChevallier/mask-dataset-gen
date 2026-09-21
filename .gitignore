@@ -5,15 +5,15 @@ venv/
 .DS_Store
 dataset.zip
 
+# Configuración local de asistentes y skills.
+.agents/
+.claude/
+.kiro/
+skills-lock.json
+
 # Artefactos pesados de todos los runs, incluido legacy-v1.
 dataset/*/runs/*/imagenes_pre/
 dataset/*/runs/*/imagenes_post/
 dataset/*/runs/*/mascaras/
 dataset/*/runs/*/calidad/
 dataset/*/runs/*/visualizaciones/
-
-!dataset/puerto-patriada-2026/runs/legacy-v1/visualizaciones/
-!dataset/puerto-patriada-2026/runs/legacy-v1/visualizaciones/tiles/
-!dataset/puerto-patriada-2026/runs/legacy-v1/visualizaciones/tiles/*.png
-!dataset/puerto-patriada-2026/runs/legacy-v1/visualizaciones/diagnosticos/
-!dataset/puerto-patriada-2026/runs/legacy-v1/visualizaciones/diagnosticos/*.png

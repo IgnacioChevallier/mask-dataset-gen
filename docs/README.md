@@ -156,8 +156,8 @@ quemada y estado por tile.
 
 Los GeoTIFFs de todos los runs, incluido `legacy-v1`, se conservan localmente
 pero se ignoran en Git. Se versionan las configuraciones, los manifiestos, los
-metadatos y la documentación. Las visualizaciones históricas livianas de
-`legacy-v1` permanecen versionadas.
+metadatos y la documentación. Las visualizaciones generadas también son
+artefactos locales ignorados por Git.
 
 El plan y las decisiones de diseño están documentados en
 [`PLAN_MULTI_INCENDIOS.md`](PLAN_MULTI_INCENDIOS.md).

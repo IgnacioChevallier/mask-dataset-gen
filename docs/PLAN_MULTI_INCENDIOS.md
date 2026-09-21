@@ -130,9 +130,9 @@ dataset/
 Los GeoTIFFs de todos los runs, incluido `legacy-v1`, serán artefactos locales
 ignorados por Git. Se versionarán el código, las configuraciones, la
 documentación, los metadatos y los manifiestos livianos. Las visualizaciones
-históricas livianas de `legacy-v1` podrán permanecer versionadas. Si luego fuera
-necesario distribuir datasets completos mediante Git, se evaluará Git LFS o
-almacenamiento de objetos.
+generadas también permanecerán locales. Si luego fuera necesario distribuir
+datasets completos mediante Git, se evaluará Git LFS o almacenamiento de
+objetos.
 
 ## 5. Compatibilidad con el dataset existente
 
