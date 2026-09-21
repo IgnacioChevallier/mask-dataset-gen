@@ -1,0 +1,151 @@
+{
+  "completed_at": "2026-09-21T03:38:21+00:00",
+  "configuration": {
+    "algorithm_version": "dnbr-s2-v1",
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 20,
+    "event_description": "Incendio Gabriel Rodales / Población Rosales II, iniciado el 4 de febrero de 2023 en el Parque Nacional Los Alerces y jurisdicción provincial de Chubut.",
+    "event_id": "los-alerces-2023",
+    "event_name": "Incendio Población Rosales, Los Alerces 2023",
+    "fire_start_date": "2023-02-04",
+    "grid": {
+      "scale_m": 20,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "dilation_pixels": 1,
+      "dnbr_threshold": 0.3,
+      "min_connected_pixels": 150,
+      "ndsi_snow_max": 0.25,
+      "post_nbr_max": 0.4,
+      "pre_nbr_min": 0.15,
+      "pre_ndwi_water_max": 0.05
+    },
+    "max_workers": 4,
+    "purpose": "Primer resultado exploratorio para la cicatriz de Población Rosales 2023.",
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "reference": {
+      "alternate_burned_area_ha": 1390,
+      "area_note": "El informe mensual del SNMF registra 1.160 ha; un parte diario posterior informó 1.390 ha.",
+      "burned_area_ha": 1160,
+      "reported_location": {
+        "latitude": -42.8825,
+        "longitude": -71.576667
+      },
+      "sources": [
+        "https://www.argentina.gob.ar/sites/default/files/2022/08/informe_ocurrencia_mes_febrero_2023.pdf",
+        "https://www.argentina.gob.ar/sites/default/files/2022/08/reporte_diario_01-03-2023.pdf"
+      ]
+    },
+    "rois": [
+      {
+        "bbox": [
+          -71.72,
+          -43.0,
+          -71.43,
+          -42.76
+        ],
+        "id": "poblacion-rosales",
+        "name": "Población Rosales y Laguna Larga"
+      }
+    ],
+    "run_id": "baseline-001",
+    "source": {
+      "collection": "COPERNICUS/S2_SR_HARMONIZED",
+      "project": "ee-nachochevallier"
+    },
+    "windows": {
+      "post": {
+        "end_inclusive": "2023-03-31",
+        "start": "2023-02-20"
+      },
+      "pre": {
+        "end_inclusive": "2023-02-03",
+        "start": "2022-11-01"
+      }
+    }
+  },
+  "configuration_hash": "d5bae914905613315cbb4ce4cbd59a8445a39190d0ae7bab55dc6bcd416011d3",
+  "counts": {
+    "error": 0,
+    "expected": 42,
+    "ok": 39,
+    "warning": 3
+  },
+  "created_at": "2026-09-21T03:31:22+00:00",
+  "environment": {
+    "dependencies": {
+      "earthengine-api": "1.7.41",
+      "geedim": "2.0.0",
+      "geemap": "0.38.4",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.2",
+      "rasterio": "1.5.1"
+    },
+    "git_commit": "6baf91ef407d25a892ceead6a42c5375e82ee317",
+    "python": "3.14.7"
+  },
+  "errors": [],
+  "event_id": "los-alerces-2023",
+  "last_started_at": "2026-09-21T03:31:22+00:00",
+  "metrics": {
+    "by_roi": [
+      {
+        "burned_hectares": 1346.4041,
+        "burned_valid_pct": 2.1737,
+        "id": "poblacion-rosales",
+        "valid_coverage_pct": 98.1038
+      }
+    ],
+    "total": {
+      "burned_hectares": 1346.4041,
+      "burned_valid_pct": 2.1737,
+      "id": "total",
+      "valid_coverage_pct": 98.1038
+    }
+  },
+  "origin": "generated",
+  "run_id": "baseline-001",
+  "scenes": {
+    "post": [
+      "20230224T142711_20230224T144309_T19GCN",
+      "20230321T142719_20230321T143257_T18GYT",
+      "20230321T142719_20230321T143257_T19GCN",
+      "20230326T142711_20230326T143723_T18GYT",
+      "20230326T142711_20230326T143723_T19GCN"
+    ],
+    "pre": [
+      "20221101T142709_20221101T144223_T18GYT",
+      "20221101T142709_20221101T144223_T19GCN",
+      "20221121T142709_20221121T143609_T18GYT",
+      "20221121T142709_20221121T143609_T19GCN",
+      "20221126T142711_20221126T144032_T18GYT",
+      "20221126T142711_20221126T144032_T19GCN",
+      "20221201T142709_20221201T143618_T18GYT",
+      "20221216T142711_20221216T144151_T18GYT",
+      "20221216T142711_20221216T144151_T19GCN",
+      "20221226T142711_20221226T144219_T18GYT",
+      "20221226T142711_20221226T144219_T19GCN",
+      "20230105T142711_20230105T144137_T18GYT",
+      "20230105T142711_20230105T144137_T19GCN",
+      "20230115T142711_20230115T144040_T18GYT",
+      "20230115T142711_20230115T144040_T19GCN",
+      "20230130T142709_20230130T144439_T19GCN"
+    ]
+  },
+  "schema_version": 1,
+  "status": "completed",
+  "tile_naming": "grid-position-v1",
+  "validation_errors": []
+}
