@@ -1,0 +1,159 @@
+{
+  "event_id": "cholila-2015",
+  "name": "Incendio Las Horquetas, Cholila 2015",
+  "description": "Incendio Las Horquetas, iniciado el 15 de febrero de 2015 en el valle del Lago Cholila y detectado oficialmente el 16 de febrero.",
+  "fire_start_date": "2015-02-15",
+  "reference": {
+    "burned_area_ha": 28960.3,
+    "area_note": "Programa provincial de restauración de Chubut: 28.960,3 ha incluyendo islas sin quemar. Otras fuentes citan más de 41.000 ha, probablemente sumando incendios vecinos de la temporada.",
+    "alternate_burned_area_ha": 41000,
+    "reported_location": {
+      "latitude": -42.45,
+      "longitude": -71.733333
+    },
+    "sources": [
+      "https://bosques.chubut.gov.ar/wp-content/uploads/2023/08/Programa-de-restauracion-de-las-areas-afectadas-por-grandes-incendios-forestales-en-Chubut-en-2014-2015.pdf",
+      "https://es.wikipedia.org/wiki/Incendios_forestales_en_Chubut_de_2015",
+      "https://www.argentina.gob.ar/ciencia/conae/educacion-y-formacion-masiva/materiales-educativos/incendios-cholila-chubut-landsat-8-oli-3-de-marzo-de-2015"
+    ]
+  },
+  "source": {
+    "collection": "LANDSAT/LC08/C02/T1_L2",
+    "project": "ee-nachochevallier",
+    "note": "Sentinel-2A se lanzó en junio de 2015; se usa Landsat 8 OLI con bandas renombradas a sus equivalentes S2 y reflectancia en escala 0–10000."
+  },
+  "rois": [
+    {
+      "id": "cholila",
+      "name": "Lago Cholila, Las Horquetas y Río Turbio",
+      "bbox": [
+        -71.95,
+        -42.65,
+        -71.5,
+        -42.15
+      ]
+    }
+  ],
+  "defaults": {
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 20,
+    "grid": {
+      "scale_m": 30,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "dnbr_threshold": 0.3,
+      "pre_nbr_min": 0.15,
+      "post_nbr_max": 0.4,
+      "ndsi_snow_max": 0.25,
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "pre_ndwi_water_max": 0.05,
+      "min_connected_pixels": 67,
+      "dilation_pixels": 1
+    },
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "algorithm_version": "dnbr-l8-v1",
+    "max_workers": 4
+  },
+  "runs": {
+    "baseline-001": {
+      "purpose": "Primer resultado exploratorio con Landsat 8; min_connected_pixels ajustado a 30 m para conservar ~6 ha.",
+      "windows": {
+        "pre": {
+          "start": "2014-11-01",
+          "end_inclusive": "2015-02-14"
+        },
+        "post": {
+          "start": "2015-04-07",
+          "end_inclusive": "2015-05-31"
+        }
+      }
+    },
+    "baseline-002": {
+      "purpose": "Amplía el ROI hacia el oeste y el este porque baseline-001 cortaba la cicatriz en ambos bordes.",
+      "rois": [
+        {
+          "id": "cholila",
+          "name": "Lago Cholila, Las Horquetas y Río Turbio",
+          "bbox": [
+            -72.05,
+            -42.65,
+            -71.38,
+            -42.15
+          ]
+        }
+      ],
+      "windows": {
+        "pre": {
+          "start": "2014-11-01",
+          "end_inclusive": "2015-02-14"
+        },
+        "post": {
+          "start": "2015-04-07",
+          "end_inclusive": "2015-05-31"
+        }
+      }
+    },
+    "event-filter-001": {
+      "purpose": "Atribuir los componentes de cambio al incendio Las Horquetas y separar incendios vecinos como Cerro Plataforma.",
+      "origin": "derived",
+      "parent_run": "baseline-002",
+      "algorithm_version": "event-filter-v1-1",
+      "windows": {
+        "pre": {
+          "start": "2014-11-01",
+          "end_inclusive": "2015-02-14"
+        },
+        "post": {
+          "start": "2015-04-07",
+          "end_inclusive": "2015-05-31"
+        }
+      },
+      "event_filter": {
+        "ignition_point": {
+          "longitude": -71.733333,
+          "latitude": -42.45,
+          "note": "Coordenadas 42°27′S 71°44′O del valle del Lago Cholila; semilla aproximada para seleccionar el clúster térmico."
+        },
+        "closing_radius_m": 80,
+        "thermal_cluster_radius_m": 2000,
+        "component_hotspot_max_distance_m": 1500,
+        "component_link_max_distance_m": 1000,
+        "seed_max_distance_m": 3000,
+        "thermal": {
+          "collection": "NASA/VIIRS/002/VNP14A1",
+          "band": "FireMask",
+          "threshold": 7,
+          "scale_m": 1000,
+          "sampling_mode": "aggregate",
+          "reducer_version": "masked-sum-v1",
+          "start": "2015-02-15",
+          "end_inclusive": "2015-04-06",
+          "source_note": "VIIRS VNP14A1 histórico de 1 km; FireMask 7–9. Fin en el control oficial del 6 de abril."
+        }
+      },
+      "rois": [
+        {
+          "id": "cholila",
+          "name": "Lago Cholila, Las Horquetas y Río Turbio",
+          "bbox": [
+            -72.05,
+            -42.65,
+            -71.38,
+            -42.15
+          ]
+        }
+      ]
+    }
+  }
+}

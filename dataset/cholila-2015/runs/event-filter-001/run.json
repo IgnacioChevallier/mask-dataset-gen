@@ -1,0 +1,287 @@
+{
+  "comparison_to_parent": {
+    "candidate_local_hectares": 38016.7706,
+    "parent_reported_hectares": 37732.3037,
+    "removed_hectares": 11254.0001,
+    "retained_candidate_pct": 70.3973,
+    "target_hectares": 26762.7705
+  },
+  "completed_at": "2026-09-25T21:38:22+00:00",
+  "configuration": {
+    "algorithm_version": "event-filter-v1-1",
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 20,
+    "event_description": "Incendio Las Horquetas, iniciado el 15 de febrero de 2015 en el valle del Lago Cholila y detectado oficialmente el 16 de febrero.",
+    "event_filter": {
+      "closing_radius_m": 80,
+      "component_hotspot_max_distance_m": 1500,
+      "component_link_max_distance_m": 1000,
+      "ignition_point": {
+        "latitude": -42.45,
+        "longitude": -71.733333,
+        "note": "Coordenadas 42°27′S 71°44′O del valle del Lago Cholila; semilla aproximada para seleccionar el clúster térmico."
+      },
+      "seed_max_distance_m": 3000,
+      "thermal": {
+        "band": "FireMask",
+        "collection": "NASA/VIIRS/002/VNP14A1",
+        "end_inclusive": "2015-04-06",
+        "reducer_version": "masked-sum-v1",
+        "sampling_mode": "aggregate",
+        "scale_m": 1000,
+        "source_note": "VIIRS VNP14A1 histórico de 1 km; FireMask 7–9. Fin en el control oficial del 6 de abril.",
+        "start": "2015-02-15",
+        "threshold": 7
+      },
+      "thermal_cluster_radius_m": 2000
+    },
+    "event_id": "cholila-2015",
+    "event_name": "Incendio Las Horquetas, Cholila 2015",
+    "fire_start_date": "2015-02-15",
+    "grid": {
+      "scale_m": 30,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "dilation_pixels": 1,
+      "dnbr_threshold": 0.3,
+      "min_connected_pixels": 67,
+      "ndsi_snow_max": 0.25,
+      "post_nbr_max": 0.4,
+      "pre_nbr_min": 0.15,
+      "pre_ndwi_water_max": 0.05
+    },
+    "max_workers": 4,
+    "origin": "derived",
+    "parent_run": "baseline-002",
+    "purpose": "Atribuir los componentes de cambio al incendio Las Horquetas y separar incendios vecinos como Cerro Plataforma.",
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "reference": {
+      "alternate_burned_area_ha": 41000,
+      "area_note": "Programa provincial de restauración de Chubut: 28.960,3 ha incluyendo islas sin quemar. Otras fuentes citan más de 41.000 ha, probablemente sumando incendios vecinos de la temporada.",
+      "burned_area_ha": 28960.3,
+      "reported_location": {
+        "latitude": -42.45,
+        "longitude": -71.733333
+      },
+      "sources": [
+        "https://bosques.chubut.gov.ar/wp-content/uploads/2023/08/Programa-de-restauracion-de-las-areas-afectadas-por-grandes-incendios-forestales-en-Chubut-en-2014-2015.pdf",
+        "https://es.wikipedia.org/wiki/Incendios_forestales_en_Chubut_de_2015",
+        "https://www.argentina.gob.ar/ciencia/conae/educacion-y-formacion-masiva/materiales-educativos/incendios-cholila-chubut-landsat-8-oli-3-de-marzo-de-2015"
+      ]
+    },
+    "rois": [
+      {
+        "bbox": [
+          -72.05,
+          -42.65,
+          -71.38,
+          -42.15
+        ],
+        "id": "cholila",
+        "name": "Lago Cholila, Las Horquetas y Río Turbio"
+      }
+    ],
+    "run_id": "event-filter-001",
+    "source": {
+      "collection": "LANDSAT/LC08/C02/T1_L2",
+      "note": "Sentinel-2A se lanzó en junio de 2015; se usa Landsat 8 OLI con bandas renombradas a sus equivalentes S2 y reflectancia en escala 0–10000.",
+      "project": "ee-nachochevallier"
+    },
+    "windows": {
+      "post": {
+        "end_inclusive": "2015-05-31",
+        "start": "2015-04-07"
+      },
+      "pre": {
+        "end_inclusive": "2015-02-14",
+        "start": "2014-11-01"
+      }
+    }
+  },
+  "configuration_hash": "fbeb9322f7288ba52cda1b05c83b39c65f0f2c0d12806787716197963c5d03c6",
+  "counts": {
+    "error": 0,
+    "expected": 80,
+    "ok": 56,
+    "warning": 24
+  },
+  "created_at": "2026-09-25T21:37:25+00:00",
+  "environment": {
+    "dependencies": {
+      "earthengine-api": "1.7.41",
+      "geedim": "2.0.0",
+      "geemap": "0.38.4",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.2",
+      "rasterio": "1.5.1"
+    },
+    "git_commit": "80b3c63be557ef46314f2b36925ea58b39980969",
+    "python": "3.14.7"
+  },
+  "errors": [],
+  "event_id": "cholila-2015",
+  "metrics": {
+    "burned_hectares": 26762.7705,
+    "burned_valid_pct": 9.869,
+    "candidate_hectares": 38016.7706,
+    "other_fire_hectares": 9040.3886,
+    "unconfirmed_hectares": 2213.6115
+  },
+  "origin": "derived",
+  "parent_configuration_hash": "5e12d9b43a2682d97b5fd0bf884733c0f274e250129e16823066b75da64bf865",
+  "parent_run": "baseline-002",
+  "run_id": "event-filter-001",
+  "schema_version": 1,
+  "status": "completed",
+  "thermal_evidence": {
+    "cluster_count": 3,
+    "clusters": [
+      {
+        "dates": [
+          "2015-02-17",
+          "2015-02-18",
+          "2015-02-19",
+          "2015-02-20",
+          "2015-02-21",
+          "2015-02-22",
+          "2015-02-23",
+          "2015-02-24",
+          "2015-02-25",
+          "2015-02-26",
+          "2015-02-27",
+          "2015-02-28",
+          "2015-03-01",
+          "2015-03-02",
+          "2015-03-03",
+          "2015-03-04",
+          "2015-03-05",
+          "2015-03-06",
+          "2015-03-09",
+          "2015-03-10",
+          "2015-03-11",
+          "2015-03-12",
+          "2015-03-13",
+          "2015-03-14",
+          "2015-03-18",
+          "2015-03-24",
+          "2015-03-25",
+          "2015-03-28",
+          "2015-03-30"
+        ],
+        "detection_count": 453,
+        "id": "thermal-001",
+        "latitude": -42.44741,
+        "longitude": -71.741134
+      },
+      {
+        "dates": [
+          "2015-02-17",
+          "2015-02-18",
+          "2015-02-19",
+          "2015-02-20",
+          "2015-02-21",
+          "2015-02-22",
+          "2015-02-23",
+          "2015-02-24",
+          "2015-02-25",
+          "2015-02-26",
+          "2015-02-27",
+          "2015-02-28",
+          "2015-03-01",
+          "2015-03-03",
+          "2015-03-04",
+          "2015-03-05"
+        ],
+        "detection_count": 180,
+        "id": "thermal-002",
+        "latitude": -42.297325,
+        "longitude": -71.869814
+      },
+      {
+        "dates": [
+          "2015-03-24",
+          "2015-03-25",
+          "2015-03-26",
+          "2015-03-28",
+          "2015-03-29",
+          "2015-03-30"
+        ],
+        "detection_count": 46,
+        "id": "thermal-003",
+        "latitude": -42.197384,
+        "longitude": -71.560577
+      }
+    ],
+    "collection": "NASA/VIIRS/002/VNP14A1",
+    "detection_count": 1272,
+    "image_count": 51,
+    "images": [
+      "2015_02_15",
+      "2015_02_16",
+      "2015_02_17",
+      "2015_02_18",
+      "2015_02_19",
+      "2015_02_20",
+      "2015_02_21",
+      "2015_02_22",
+      "2015_02_23",
+      "2015_02_24",
+      "2015_02_25",
+      "2015_02_26",
+      "2015_02_27",
+      "2015_02_28",
+      "2015_03_01",
+      "2015_03_02",
+      "2015_03_03",
+      "2015_03_04",
+      "2015_03_05",
+      "2015_03_06",
+      "2015_03_07",
+      "2015_03_08",
+      "2015_03_09",
+      "2015_03_10",
+      "2015_03_11",
+      "2015_03_12",
+      "2015_03_13",
+      "2015_03_14",
+      "2015_03_15",
+      "2015_03_16",
+      "2015_03_17",
+      "2015_03_18",
+      "2015_03_19",
+      "2015_03_20",
+      "2015_03_21",
+      "2015_03_22",
+      "2015_03_23",
+      "2015_03_24",
+      "2015_03_25",
+      "2015_03_26",
+      "2015_03_27",
+      "2015_03_28",
+      "2015_03_29",
+      "2015_03_30",
+      "2015_03_31",
+      "2015_04_01",
+      "2015_04_02",
+      "2015_04_03",
+      "2015_04_04",
+      "2015_04_05",
+      "2015_04_06"
+    ],
+    "target_cluster_id": "thermal-001",
+    "unique_pixel_count": 679
+  },
+  "validation_errors": []
+}

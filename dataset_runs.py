@@ -23,7 +23,7 @@ DATASET_DIR = BASE_DIR / "dataset"
 DEFAULT_EVENT = "puerto-patriada-2026"
 DEFAULT_RUN = "legacy-v1"
 SAFE_ID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
-SUPPORTED_COLLECTION = "COPERNICUS/S2_SR_HARMONIZED"
+SUPPORTED_COLLECTIONS = ("COPERNICUS/S2_SR_HARMONIZED", "LANDSAT/LC08/C02/T1_L2")
 
 
 class ConfigError(ValueError):
@@ -160,9 +160,9 @@ def validate_config(config: dict[str, Any]) -> None:
 
     validate_id(config["event_id"], "event_id")
     validate_id(config["run_id"], "run_id")
-    if config["source"].get("collection") != SUPPORTED_COLLECTION:
+    if config["source"].get("collection") not in SUPPORTED_COLLECTIONS:
         raise ConfigError(
-            f"Sólo se soporta {SUPPORTED_COLLECTION}; se recibió "
+            f"Sólo se soporta {', '.join(SUPPORTED_COLLECTIONS)}; se recibió "
             f"{config['source'].get('collection')!r}."
         )
 

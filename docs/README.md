@@ -13,6 +13,8 @@ python generar_dataset.py --list-events
 
 Las configuraciones viven en `config/incendios/` y actualmente incluyen:
 
+- `cholila-2015`, con Landsat 8 (Sentinel-2 no existía antes del incendio):
+  `baseline-001`, `baseline-002` (ROI ampliado) y el derivado `event-filter-001`;
 - `epuyen-2025`, con `baseline-001` y el derivado `event-filter-001`;
 - `los-alerces-2023`, con `baseline-001`, el experimento `event-filter-001`
   y el derivado recomendado `event-filter-002`;

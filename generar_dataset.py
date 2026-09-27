@@ -1,4 +1,4 @@
-"""Genera datasets Sentinel-2 de áreas quemadas por evento y run."""
+"""Genera datasets Sentinel-2 o Landsat 8 de áreas quemadas por evento y run."""
 
 from __future__ import annotations
 
@@ -48,16 +48,40 @@ def _mask_clouds(image):
     )
 
 
+def _mask_clouds_landsat(image):
+    # QA_PIXEL: bits 1 nube dilatada, 2 cirro, 3 nube, 4 sombra, 5 nieve (equivalente a SCL).
+    return image.updateMask(image.select("QA_PIXEL").bitwiseAnd(0b111110).eq(0))
+
+
+def _landsat_as_s2(image):
+    """Renombra SR de Landsat 8 a bandas S2 equivalentes en escala 0–10000."""
+    optical = (
+        image.select(
+            ["SR_B2", "SR_B3", "SR_B4", "SR_B5", "SR_B6", "SR_B7"],
+            ["B2", "B3", "B4", "B8", "B11", "B12"],
+        )
+        .multiply(0.0000275)
+        .add(-0.2)
+        .multiply(10_000)
+    )
+    return image.addBands(optical)
+
+
 def _build_gee_assets(config: dict[str, Any]):
     import ee
 
     geometries = [ee.Geometry.Rectangle(roi["bbox"]) for roi in config["rois"]]
     region = reduce(lambda left, right: left.union(right), geometries)
+    landsat = config["source"]["collection"].startswith("LANDSAT/")
+    cloud_property = "CLOUD_COVER" if landsat else "CLOUDY_PIXEL_PERCENTAGE"
+    mask_clouds = _mask_clouds_landsat if landsat else _mask_clouds
     collection = (
         ee.ImageCollection(config["source"]["collection"])
         .filterBounds(region)
-        .filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE", config["cloud_percentage_max"]))
+        .filter(ee.Filter.lt(cloud_property, config["cloud_percentage_max"]))
     )
+    if landsat:
+        collection = collection.map(_landsat_as_s2)
     pre_window = config["windows"]["pre"]
     post_window = config["windows"]["post"]
     pre_collection = collection.filterDate(
@@ -67,8 +91,8 @@ def _build_gee_assets(config: dict[str, Any]):
         post_window["start"], end_exclusive(post_window["end_inclusive"])
     )
 
-    pre_masked = pre_collection.map(_mask_clouds).median()
-    post_masked = post_collection.map(_mask_clouds).median()
+    pre_masked = pre_collection.map(mask_clouds).median()
+    post_masked = post_collection.map(mask_clouds).median()
     pre_full = pre_collection.median()
     post_full = post_collection.median()
 
@@ -499,8 +523,8 @@ def _print_preflight(config: dict[str, Any], tiles: list[dict[str, Any]], scenes
     print(f"Destino: {root}")
     print(f"ROIs: {len(config['rois'])}")
     print(f"Tiles: {len(tiles)}")
-    print(f"Escenas Sentinel-2 PRE: {len(scenes['pre'])}")
-    print(f"Escenas Sentinel-2 POST: {len(scenes['post'])}")
+    print(f"Escenas PRE: {len(scenes['pre'])}")
+    print(f"Escenas POST: {len(scenes['post'])}")
     print(f"PRE: {config['windows']['pre']['start']} a {config['windows']['pre']['end_inclusive']} (inclusive)")
     print(f"POST: {config['windows']['post']['start']} a {config['windows']['post']['end_inclusive']} (inclusive)")
     for roi in config["rois"]:
@@ -574,7 +598,7 @@ def run_generation(
         raise RuntimeError(f"No se pudo consultar Google Earth Engine: {message}") from exc
     if not scenes["pre"] or not scenes["post"]:
         raise RuntimeError(
-            "No hay imágenes Sentinel-2 para una de las ventanas. "
+            "No hay imágenes para una de las ventanas. "
             "Ajustá las fechas o la nubosidad máxima."
         )
     tiles = build_tiles(config)
@@ -660,7 +684,7 @@ def run_generation(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Genera un dataset Sentinel-2 reproducible para un incendio y run."
+        description="Genera un dataset reproducible para un incendio y run."
     )
     parser.add_argument("--event", help="ID del incendio definido en config/incendios/.")
     parser.add_argument("--run", dest="run_id", help="ID inmutable de la ejecución.")
