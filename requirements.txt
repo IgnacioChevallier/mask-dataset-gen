@@ -1,7 +1,7 @@
-earthengine-api
-geemap
-geedim
-numpy
-rasterio
-matplotlib
-scipy
+earthengine-api==1.7.41
+geedim==2.0.0
+geemap==0.38.4
+matplotlib==3.11.1
+numpy==2.5.2
+rasterio==1.5.1
+scipy==1.18.1

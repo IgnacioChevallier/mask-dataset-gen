@@ -1,5 +1,9 @@
 # Plan de soporte multi-incendio y runs reproducibles
 
+> **Registro histórico de diseño (septiembre 2026).** Partes quedaron
+> desactualizadas (p. ej. hoy también se soporta Landsat 8 y Los Alerces ya se
+> ejecutó). El estado vigente está en `README.md`.
+
 ## 1. Objetivo
 
 Generalizar el pipeline actual para investigar múltiples incendios con imágenes

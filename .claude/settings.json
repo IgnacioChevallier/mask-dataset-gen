@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.venv/bin/python -m unittest *)",
+      "Bash(.venv/bin/python generar_dataset.py --list-events)",
+      "Bash(.venv/bin/python generar_dataset.py * --dry-run)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git show *)"
+    ],
+    "deny": [
+      "Bash(* --clear-incomplete*)",
+      "Bash(rm * dataset*)"
+    ]
+  }
+}

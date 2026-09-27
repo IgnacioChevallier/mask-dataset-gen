@@ -15,8 +15,8 @@ Las configuraciones viven en `config/incendios/` y actualmente incluyen:
 - `epuyen-2025`, con `baseline-001` y el derivado `event-filter-001`;
 - `los-alerces-2023`, con `baseline-001`, el experimento `event-filter-001`
 y el derivado recomendado `event-filter-002`;
-- `puerto-patriada-2026`, con `legacy-v1` (importación histórica, a retirar) y
-  `baseline-002`.
+- `puerto-cafe-2025`, incendio de Los Alerces–Rivadavia–Cholila iniciado en diciembre de 2025, con `baseline-001` y el derivado `event-filter-001`;
+- `puerto-patriada-2026`, con `baseline-002` y el derivado `event-filter-001`.
 
 
 
@@ -74,7 +74,7 @@ Ejecutar o reanudar el run:
   --run baseline-001
 ```
 
-Los baselines de Epuyén, Los Alerces y Cholila quedaron completados. Un preflight puede
+Los baselines de todos los eventos quedaron completados. Un preflight puede
 revisar escenas y grilla sin escribir datos:
 
 ```bash
@@ -96,13 +96,13 @@ Los runs `event-filter-*` se derivan de un baseline completo sin modificarlo:
   --run event-filter-001
 ```
 
-El filtro etiqueta componentes sobre el mosaico global, selecciona el clúster térmico más próximo a la semilla declarada y conserva capas separadas para el incendio objetivo, otros incendios probables y cambios no confirmados. Epuyén usa VIIRS S-NPP NRT de 375 m. Los Alerces y Cholila usan el producto histórico VNP14A1 de 1 km porque la colección NRT de 375 m disponible en Earth Engine comienza en septiembre de 2023.
+El filtro etiqueta componentes sobre el mosaico global, selecciona el clúster térmico más próximo a la semilla declarada y conserva capas separadas para el incendio objetivo, otros incendios probables y cambios no confirmados. Epuyén, Puerto Patriada y Puerto Café usan VIIRS S-NPP NRT de 375 m. Los Alerces y Cholila usan el producto histórico VNP14A1 de 1 km porque la colección NRT de 375 m disponible en Earth Engine comienza en septiembre de 2023.
 
 Las reglas y distancias efectivas quedan selladas en `run.json`; la decisión de cada objeto queda en `componentes.csv` y la evidencia en `hotspots.csv`.
 
 En Los Alerces no debe usarse `event-filter-001`: esa ejecución conservada para trazabilidad reveló una reducción incorrecta de máscaras VNP14A1 y quedó sin evidencia térmica. `event-filter-002` corrige la reducción y es el resultado recomendado. En Cholila, `event-filter-001` deriva de `baseline-002`; `baseline-001` se conserva para trazabilidad porque su ROI cortaba la cicatriz.
 
-Las cuentas actuales de Earth Engine requieren un proyecto Google Cloud con la API habilitada y registrado para uso de Earth Engine. Epuyén, Los Alerces y Cholila usan `ee-nachochevallier`; el proyecto efectivo se incluye en la configuración sellada de `run.json`. `--project` permite reemplazarlo explícitamente al crear otro run.
+Las cuentas actuales de Earth Engine requieren un proyecto Google Cloud con la API habilitada y registrado para uso de Earth Engine. Todos los eventos usan `ee-nachochevallier`; el proyecto efectivo se incluye en la configuración sellada de `run.json`. `--project` permite reemplazarlo explícitamente al crear otro run.
 
 Un run incompleto se puede eliminar explícitamente:
 

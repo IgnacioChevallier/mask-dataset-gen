@@ -1,0 +1,357 @@
+{
+  "comparison_to_parent": {
+    "candidate_local_hectares": 67059.5578,
+    "parent_reported_hectares": 66613.0061,
+    "removed_hectares": 42546.845,
+    "retained_candidate_pct": 36.5536,
+    "target_hectares": 24512.7128
+  },
+  "completed_at": "2026-09-27T18:07:35+00:00",
+  "configuration": {
+    "algorithm_version": "event-filter-v1-1",
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 20,
+    "event_description": "Cobertura histórica de tres ROIs de la Comarca Andina.",
+    "event_filter": {
+      "closing_radius_m": 80,
+      "component_hotspot_max_distance_m": 1500,
+      "component_link_max_distance_m": 1000,
+      "ignition_point": {
+        "latitude": -42.148083,
+        "longitude": -71.534694,
+        "note": "Puerto Patriada, costa norte del Lago Epuyén; las primeras detecciones VIIRS del 5 de enero están a ~2 km al norte."
+      },
+      "seed_max_distance_m": 3000,
+      "thermal": {
+        "band": "confidence",
+        "collection": "NASA/LANCE/SNPP_VIIRS/C2",
+        "end_inclusive": "2026-03-08",
+        "reducer_version": "masked-sum-v1",
+        "sampling_mode": "aggregate",
+        "scale_m": 375,
+        "source_note": "VIIRS S-NPP 375 m; se excluyen detecciones de confianza baja. Muestreo agregado por píxel: el muestreo por observación supera el límite de 5000 elementos de Earth Engine.",
+        "start": "2026-01-05",
+        "threshold": 1
+      },
+      "thermal_cluster_radius_m": 2000
+    },
+    "event_id": "puerto-patriada-2026",
+    "event_name": "Incendio Puerto Patriada, El Hoyo y Epuyén 2026",
+    "fire_start_date": "2026-01-05",
+    "grid": {
+      "scale_m": 20,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "dilation_pixels": 1,
+      "dnbr_threshold": 0.3,
+      "min_connected_pixels": 150,
+      "ndsi_snow_max": 0.25,
+      "post_nbr_max": 0.4,
+      "pre_nbr_min": 0.15,
+      "pre_ndwi_water_max": 0.05
+    },
+    "max_workers": 4,
+    "origin": "derived",
+    "parent_run": "baseline-002",
+    "purpose": "Atribuir los componentes de cambio al incendio de Puerto Patriada y separar Puerto Café (Los Alerces) y otros focos.",
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "reference": {
+      "alternate_burned_area_ha": 30000,
+      "area_note": "Superficie estimada al declararse contenido el 15 de enero de 2026; el fuego se reactivó y reportes posteriores superan 30.000 ha hasta su extinción a fines de marzo.",
+      "burned_area_ha": 14770,
+      "reported_location": {
+        "latitude": -42.148083,
+        "longitude": -71.534694
+      },
+      "sources": [
+        "https://www.infobae.com/sociedad/2026/01/16/incendios-en-chubut-los-brigadistas-contuvieron-la-totalidad-del-fuego-en-puerto-patriada-que-afecto-a-casi-15-mil-hectareas/",
+        "https://www.lanacion.com.ar/sociedad/tras-cuatro-meses-de-fuego-extinguen-el-incendio-en-los-alerces-epicentro-de-las-peores-temporadas-nid14042026/",
+        "https://es.wikipedia.org/wiki/Puerto_Patriada"
+      ]
+    },
+    "rois": [
+      {
+        "bbox": [
+          -72.014,
+          -42.348,
+          -71.774,
+          -42.263
+        ],
+        "id": "roi-oeste",
+        "name": "ROI oeste"
+      },
+      {
+        "bbox": [
+          -71.578,
+          -42.416,
+          -71.201,
+          -42.079
+        ],
+        "id": "epuyen-el-hoyo",
+        "name": "Epuyén y El Hoyo"
+      },
+      {
+        "bbox": [
+          -71.927,
+          -42.818,
+          -71.296,
+          -42.457
+        ],
+        "id": "roi-sur",
+        "name": "ROI sur"
+      }
+    ],
+    "run_id": "event-filter-001",
+    "source": {
+      "collection": "COPERNICUS/S2_SR_HARMONIZED",
+      "project": "ee-nachochevallier"
+    },
+    "windows": {
+      "post": {
+        "end_inclusive": "2026-03-08",
+        "start": "2026-02-01"
+      },
+      "pre": {
+        "end_inclusive": "2026-01-04",
+        "start": "2025-11-01"
+      }
+    }
+  },
+  "configuration_hash": "91dd168f432fe864dc5572d7bcf9165cba9ade478190fd38df934ba15d8885c9",
+  "counts": {
+    "error": 0,
+    "expected": 196,
+    "ok": 190,
+    "warning": 6
+  },
+  "created_at": "2026-09-27T18:02:33+00:00",
+  "environment": {
+    "dependencies": {
+      "earthengine-api": "1.7.41",
+      "geedim": "2.0.0",
+      "geemap": "0.38.4",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.2",
+      "rasterio": "1.5.1"
+    },
+    "git_commit": "5318c24b49a1e87b93270cd75f094c7f33d337ba",
+    "python": "3.14.7"
+  },
+  "errors": [],
+  "event_id": "puerto-patriada-2026",
+  "metrics": {
+    "burned_hectares": 24512.7128,
+    "burned_valid_pct": 7.172,
+    "candidate_hectares": 67059.5578,
+    "other_fire_hectares": 40744.0391,
+    "unconfirmed_hectares": 1802.8059
+  },
+  "origin": "derived",
+  "parent_configuration_hash": "39e2345419f0e446a6c8c30ae927a451542bbea3584c1851bddc7a2c00ca781b",
+  "parent_run": "baseline-002",
+  "run_id": "event-filter-001",
+  "schema_version": 1,
+  "status": "completed",
+  "thermal_evidence": {
+    "cluster_count": 5,
+    "clusters": [
+      {
+        "dates": [
+          "2026-01-06",
+          "2026-01-07",
+          "2026-01-08",
+          "2026-01-09",
+          "2026-01-10",
+          "2026-01-11",
+          "2026-01-12",
+          "2026-01-13",
+          "2026-01-14",
+          "2026-01-15",
+          "2026-01-16",
+          "2026-01-17",
+          "2026-01-18",
+          "2026-01-19",
+          "2026-01-20",
+          "2026-01-21",
+          "2026-01-22",
+          "2026-01-23",
+          "2026-01-24",
+          "2026-01-25",
+          "2026-01-26",
+          "2026-01-27",
+          "2026-01-29",
+          "2026-01-30",
+          "2026-01-31",
+          "2026-02-01",
+          "2026-02-02",
+          "2026-02-04",
+          "2026-02-05",
+          "2026-02-06",
+          "2026-02-07",
+          "2026-02-08",
+          "2026-02-09",
+          "2026-02-10",
+          "2026-02-25",
+          "2026-02-27"
+        ],
+        "detection_count": 6393,
+        "id": "thermal-001",
+        "latitude": -42.660395,
+        "longitude": -71.613771
+      },
+      {
+        "dates": [
+          "2026-02-05",
+          "2026-02-06",
+          "2026-02-08"
+        ],
+        "detection_count": 90,
+        "id": "thermal-002",
+        "latitude": -42.47055,
+        "longitude": -71.736614
+      },
+      {
+        "dates": [
+          "2026-01-10",
+          "2026-01-14"
+        ],
+        "detection_count": 45,
+        "id": "thermal-003",
+        "latitude": -42.332022,
+        "longitude": -71.808741
+      },
+      {
+        "dates": [
+          "2026-01-05",
+          "2026-01-06"
+        ],
+        "detection_count": 19,
+        "id": "thermal-004",
+        "latitude": -42.326164,
+        "longitude": -71.873763
+      },
+      {
+        "dates": [
+          "2026-01-05",
+          "2026-01-06",
+          "2026-01-07",
+          "2026-01-08",
+          "2026-01-09",
+          "2026-01-10",
+          "2026-01-11",
+          "2026-01-12",
+          "2026-01-13",
+          "2026-01-14",
+          "2026-01-15",
+          "2026-01-17",
+          "2026-01-18",
+          "2026-01-19",
+          "2026-01-20",
+          "2026-01-21",
+          "2026-01-22",
+          "2026-01-23",
+          "2026-01-24",
+          "2026-01-25",
+          "2026-01-26",
+          "2026-01-27",
+          "2026-01-29",
+          "2026-01-30",
+          "2026-01-31",
+          "2026-02-01",
+          "2026-02-02",
+          "2026-02-07",
+          "2026-02-08",
+          "2026-02-09",
+          "2026-02-10"
+        ],
+        "detection_count": 4555,
+        "id": "thermal-005",
+        "latitude": -42.228947,
+        "longitude": -71.447699
+      }
+    ],
+    "collection": "NASA/LANCE/SNPP_VIIRS/C2",
+    "detection_count": 26479,
+    "image_count": 63,
+    "images": [
+      "2026005",
+      "2026006",
+      "2026007",
+      "2026008",
+      "2026009",
+      "2026010",
+      "2026011",
+      "2026012",
+      "2026013",
+      "2026014",
+      "2026015",
+      "2026016",
+      "2026017",
+      "2026018",
+      "2026019",
+      "2026020",
+      "2026021",
+      "2026022",
+      "2026023",
+      "2026024",
+      "2026025",
+      "2026026",
+      "2026027",
+      "2026028",
+      "2026029",
+      "2026030",
+      "2026031",
+      "2026032",
+      "2026033",
+      "2026034",
+      "2026035",
+      "2026036",
+      "2026037",
+      "2026038",
+      "2026039",
+      "2026040",
+      "2026041",
+      "2026042",
+      "2026043",
+      "2026044",
+      "2026045",
+      "2026046",
+      "2026047",
+      "2026048",
+      "2026049",
+      "2026050",
+      "2026051",
+      "2026052",
+      "2026053",
+      "2026054",
+      "2026055",
+      "2026056",
+      "2026057",
+      "2026058",
+      "2026059",
+      "2026060",
+      "2026061",
+      "2026062",
+      "2026063",
+      "2026064",
+      "2026065",
+      "2026066",
+      "2026067"
+    ],
+    "target_cluster_id": "thermal-005",
+    "unique_pixel_count": 11102
+  },
+  "validation_errors": []
+}

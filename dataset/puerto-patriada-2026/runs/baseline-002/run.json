@@ -1,5 +1,5 @@
 {
-  "completed_at": null,
+  "completed_at": "2026-09-27T16:30:09+00:00",
   "configuration": {
     "algorithm_version": "dnbr-s2-v1",
     "bands": [
@@ -87,8 +87,8 @@
   "counts": {
     "error": 0,
     "expected": 196,
-    "ok": 92,
-    "warning": 2
+    "ok": 190,
+    "warning": 6
   },
   "created_at": "2026-09-27T15:52:09+00:00",
   "environment": {
@@ -106,7 +106,34 @@
   "errors": [],
   "event_id": "puerto-patriada-2026",
   "last_started_at": "2026-09-27T15:52:09+00:00",
-  "metrics": {},
+  "metrics": {
+    "by_roi": [
+      {
+        "burned_hectares": 1590.9904,
+        "burned_valid_pct": 8.9145,
+        "id": "roi-oeste",
+        "valid_coverage_pct": 95.5205
+      },
+      {
+        "burned_hectares": 24474.0026,
+        "burned_valid_pct": 21.0131,
+        "id": "epuyen-el-hoyo",
+        "valid_coverage_pct": 99.9991
+      },
+      {
+        "burned_hectares": 40548.0131,
+        "burned_valid_pct": 19.8857,
+        "id": "roi-sur",
+        "valid_coverage_pct": 98.2551
+      }
+    ],
+    "total": {
+      "burned_hectares": 66613.0061,
+      "burned_valid_pct": 19.6952,
+      "id": "total",
+      "valid_coverage_pct": 98.6969
+    }
+  },
   "origin": "generated",
   "run_id": "baseline-002",
   "scenes": {
@@ -147,7 +174,7 @@
     ]
   },
   "schema_version": 1,
-  "status": "running",
+  "status": "completed",
   "tile_naming": "grid-position-v1",
   "validation_errors": []
 }

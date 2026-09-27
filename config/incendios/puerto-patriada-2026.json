@@ -4,36 +4,59 @@
   "description": "Cobertura histórica de tres ROIs de la Comarca Andina.",
   "fire_start_date": "2026-01-05",
   "source": {
-    "collection": "COPERNICUS/S2_SR_HARMONIZED"
+    "collection": "COPERNICUS/S2_SR_HARMONIZED",
+    "project": "ee-nachochevallier"
   },
   "rois": [
     {
       "id": "roi-oeste",
       "name": "ROI oeste",
-      "bbox": [-72.014, -42.348, -71.774, -42.263]
+      "bbox": [
+        -72.014,
+        -42.348,
+        -71.774,
+        -42.263
+      ]
     },
     {
       "id": "epuyen-el-hoyo",
       "name": "Epuyén y El Hoyo",
-      "bbox": [-71.578, -42.416, -71.201, -42.079]
+      "bbox": [
+        -71.578,
+        -42.416,
+        -71.201,
+        -42.079
+      ]
     },
     {
       "id": "roi-sur",
       "name": "ROI sur",
-      "bbox": [-71.927, -42.818, -71.296, -42.457]
+      "bbox": [
+        -71.927,
+        -42.818,
+        -71.296,
+        -42.457
+      ]
     }
   ],
   "defaults": {
-    "bands": ["B2", "B3", "B4", "B8", "B11", "B12"],
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
     "cloud_percentage_max": 20,
     "grid": {
       "scale_m": 20,
       "tile_pixels": 256
     },
     "mask": {
-      "dnbr_threshold": 0.30,
+      "dnbr_threshold": 0.3,
       "pre_nbr_min": 0.15,
-      "post_nbr_max": 0.40,
+      "post_nbr_max": 0.4,
       "ndsi_snow_max": 0.25,
       "brightness_max": 3500,
       "chroma_min": 500,
@@ -48,21 +71,6 @@
     "max_workers": 4
   },
   "runs": {
-    "legacy-v1": {
-      "purpose": "Importación histórica; representa cambio acumulado entre 2023 y 2026.",
-      "origin": "imported",
-      "tile_naming": "legacy-sequential",
-      "windows": {
-        "pre": {
-          "start": "2023-11-01",
-          "end_inclusive": "2023-12-31"
-        },
-        "post": {
-          "start": "2026-02-01",
-          "end_inclusive": "2026-03-08"
-        }
-      }
-    },
     "baseline-002": {
       "purpose": "Aislar mejor los cambios asociados al incendio iniciado en enero de 2026.",
       "windows": {
@@ -73,6 +81,59 @@
         "post": {
           "start": "2026-02-01",
           "end_inclusive": "2026-03-08"
+        }
+      }
+    },
+    "event-filter-001": {
+      "purpose": "Atribuir los componentes de cambio al incendio de Puerto Patriada y separar Puerto Café (Los Alerces) y otros focos.",
+      "origin": "derived",
+      "parent_run": "baseline-002",
+      "algorithm_version": "event-filter-v1-1",
+      "reference": {
+        "burned_area_ha": 14770,
+        "area_note": "Superficie estimada al declararse contenido el 15 de enero de 2026; el fuego se reactivó y reportes posteriores superan 30.000 ha hasta su extinción a fines de marzo.",
+        "alternate_burned_area_ha": 30000,
+        "reported_location": {
+          "latitude": -42.148083,
+          "longitude": -71.534694
+        },
+        "sources": [
+          "https://www.infobae.com/sociedad/2026/01/16/incendios-en-chubut-los-brigadistas-contuvieron-la-totalidad-del-fuego-en-puerto-patriada-que-afecto-a-casi-15-mil-hectareas/",
+          "https://www.lanacion.com.ar/sociedad/tras-cuatro-meses-de-fuego-extinguen-el-incendio-en-los-alerces-epicentro-de-las-peores-temporadas-nid14042026/",
+          "https://es.wikipedia.org/wiki/Puerto_Patriada"
+        ]
+      },
+      "windows": {
+        "pre": {
+          "start": "2025-11-01",
+          "end_inclusive": "2026-01-04"
+        },
+        "post": {
+          "start": "2026-02-01",
+          "end_inclusive": "2026-03-08"
+        }
+      },
+      "event_filter": {
+        "ignition_point": {
+          "longitude": -71.534694,
+          "latitude": -42.148083,
+          "note": "Puerto Patriada, costa norte del Lago Epuyén; las primeras detecciones VIIRS del 5 de enero están a ~2 km al norte."
+        },
+        "closing_radius_m": 80,
+        "thermal_cluster_radius_m": 2000,
+        "component_hotspot_max_distance_m": 1500,
+        "component_link_max_distance_m": 1000,
+        "seed_max_distance_m": 3000,
+        "thermal": {
+          "collection": "NASA/LANCE/SNPP_VIIRS/C2",
+          "band": "confidence",
+          "threshold": 1,
+          "scale_m": 375,
+          "sampling_mode": "aggregate",
+          "reducer_version": "masked-sum-v1",
+          "start": "2026-01-05",
+          "end_inclusive": "2026-03-08",
+          "source_note": "VIIRS S-NPP 375 m; se excluyen detecciones de confianza baja. Muestreo agregado por píxel: el muestreo por observación supera el límite de 5000 elementos de Earth Engine."
         }
       }
     }

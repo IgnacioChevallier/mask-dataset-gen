@@ -7,7 +7,9 @@ dataset.zip
 
 # Configuración local de asistentes y skills.
 .agents/
-.claude/
+# .claude/settings.json se versiona; skills y ajustes locales no.
+.claude/settings.local.json
+.claude/skills/
 .kiro/
 skills-lock.json
 

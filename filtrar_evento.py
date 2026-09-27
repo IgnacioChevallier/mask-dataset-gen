@@ -186,6 +186,20 @@ def _active_image(image, band: str, threshold: float):
     return image.select(band).gte(threshold).rename("active").selfMask()
 
 
+def _fetch_features(collection) -> list[dict[str, Any]]:
+    """Descarga una FeatureCollection paginando; getInfo() aborta con más de 5000 elementos."""
+    import ee
+
+    features: list[dict[str, Any]] = []
+    params: dict[str, Any] = {"expression": collection, "pageSize": 5000}
+    while True:
+        page = ee.data.computeFeatures(params)
+        features.extend(page.get("features", []))
+        if not page.get("nextPageToken"):
+            return features
+        params["pageToken"] = page["nextPageToken"]
+
+
 def query_thermal_detections(config: dict[str, Any]) -> tuple[list[dict[str, Any]], list[str]]:
     """Consulta todos los píxeles térmicos activos del período en una sola petición."""
     import ee
@@ -250,9 +264,8 @@ def query_thermal_detections(config: dict[str, Any]) -> tuple[list[dict[str, Any
         )
     else:
         raise ConfigError(f"sampling_mode térmico no soportado: {sampling_mode!r}")
-    payload = feature_collection.getInfo()
     detections = []
-    for feature in payload.get("features", []):
+    for feature in _fetch_features(feature_collection):
         properties = feature.get("properties", {})
         if sampling_mode == "aggregate":
             first_offset = int(round(float(properties["first_day"]))) - 1

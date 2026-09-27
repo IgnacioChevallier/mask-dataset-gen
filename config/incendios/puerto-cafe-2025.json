@@ -1,0 +1,116 @@
+{
+  "event_id": "puerto-cafe-2025",
+  "name": "Incendio Puerto Café, Los Alerces 2025-2026",
+  "description": "Incendio iniciado por rayo el 9 de diciembre de 2025 en el Brazo Sur del Lago Menéndez; desde el 5 de enero avanzó hacia los lagos Verde y Rivadavia, Villa Lago Rivadavia y Cholila.",
+  "fire_start_date": "2025-12-09",
+  "reference": {
+    "burned_area_ha": 31000,
+    "area_note": "Más de 16.000 ha dentro del Parque Nacional Los Alerces y más de 15.000 ha en jurisdicción provincial (Villa Lago Rivadavia y Cholila) según La Nación; valor aproximado.",
+    "sources": [
+      "https://www.lanacion.com.ar/sociedad/tras-cuatro-meses-de-fuego-extinguen-el-incendio-en-los-alerces-epicentro-de-las-peores-temporadas-nid14042026/",
+      "https://www.red43.com.ar/nota/2025-12-9-17-42-35-incendio-activo-en-el-menendez-parte-oficial",
+      "https://www.red43.com.ar/nota/2026-3-27-9-6-0-controlaron-el-incendio-en-el-parque-nacional-los-alerces"
+    ]
+  },
+  "source": {
+    "collection": "COPERNICUS/S2_SR_HARMONIZED",
+    "project": "ee-nachochevallier"
+  },
+  "rois": [
+    {
+      "id": "los-alerces-rivadavia",
+      "name": "Lago Menéndez, Lago Rivadavia y Cholila",
+      "bbox": [
+        -72.02,
+        -42.92,
+        -71.28,
+        -42.4
+      ]
+    }
+  ],
+  "defaults": {
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 20,
+    "grid": {
+      "scale_m": 20,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "dnbr_threshold": 0.3,
+      "pre_nbr_min": 0.15,
+      "post_nbr_max": 0.4,
+      "ndsi_snow_max": 0.25,
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "pre_ndwi_water_max": 0.05,
+      "min_connected_pixels": 150,
+      "dilation_pixels": 1
+    },
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "algorithm_version": "dnbr-s2-v1",
+    "max_workers": 4
+  },
+  "runs": {
+    "baseline-001": {
+      "purpose": "Primer resultado con PRE anterior al rayo del 9 de diciembre y POST posterior al control del 26 de marzo.",
+      "windows": {
+        "pre": {
+          "start": "2025-11-01",
+          "end_inclusive": "2025-12-08"
+        },
+        "post": {
+          "start": "2026-03-27",
+          "end_inclusive": "2026-04-30"
+        }
+      }
+    },
+    "event-filter-001": {
+      "purpose": "Atribuir los componentes de cambio al incendio Puerto Café y separar Puerto Patriada y otros focos.",
+      "origin": "derived",
+      "parent_run": "baseline-001",
+      "algorithm_version": "event-filter-v1-1",
+      "windows": {
+        "pre": {
+          "start": "2025-11-01",
+          "end_inclusive": "2025-12-08"
+        },
+        "post": {
+          "start": "2026-03-27",
+          "end_inclusive": "2026-04-30"
+        }
+      },
+      "event_filter": {
+        "ignition_point": {
+          "longitude": -71.912,
+          "latitude": -42.724,
+          "note": "Centroide de las primeras detecciones VIIRS del 9 de diciembre de 2025 en el Brazo Sur del Lago Menéndez (Puerto Café)."
+        },
+        "closing_radius_m": 80,
+        "thermal_cluster_radius_m": 2000,
+        "component_hotspot_max_distance_m": 1500,
+        "component_link_max_distance_m": 1000,
+        "seed_max_distance_m": 3000,
+        "thermal": {
+          "collection": "NASA/LANCE/SNPP_VIIRS/C2",
+          "band": "confidence",
+          "threshold": 1,
+          "scale_m": 375,
+          "sampling_mode": "aggregate",
+          "reducer_version": "masked-sum-v1",
+          "start": "2025-12-09",
+          "end_inclusive": "2026-03-26",
+          "source_note": "VIIRS S-NPP 375 m; se excluyen detecciones de confianza baja. Fin en el control del 26 de marzo. Muestreo agregado por píxel: el muestreo por observación supera el límite de 5000 elementos de Earth Engine."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "completed_at": "2026-09-27T17:14:26+00:00",
+  "configuration": {
+    "algorithm_version": "dnbr-s2-v1",
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 20,
+    "event_description": "Incendio iniciado por rayo el 9 de diciembre de 2025 en el Brazo Sur del Lago Menéndez; desde el 5 de enero avanzó hacia los lagos Verde y Rivadavia, Villa Lago Rivadavia y Cholila.",
+    "event_id": "puerto-cafe-2025",
+    "event_name": "Incendio Puerto Café, Los Alerces 2025-2026",
+    "fire_start_date": "2025-12-09",
+    "grid": {
+      "scale_m": 20,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "dilation_pixels": 1,
+      "dnbr_threshold": 0.3,
+      "min_connected_pixels": 150,
+      "ndsi_snow_max": 0.25,
+      "post_nbr_max": 0.4,
+      "pre_nbr_min": 0.15,
+      "pre_ndwi_water_max": 0.05
+    },
+    "max_workers": 4,
+    "purpose": "Primer resultado con PRE anterior al rayo del 9 de diciembre y POST posterior al control del 26 de marzo.",
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "reference": {
+      "area_note": "Más de 16.000 ha dentro del Parque Nacional Los Alerces y más de 15.000 ha en jurisdicción provincial (Villa Lago Rivadavia y Cholila) según La Nación; valor aproximado.",
+      "burned_area_ha": 31000,
+      "sources": [
+        "https://www.lanacion.com.ar/sociedad/tras-cuatro-meses-de-fuego-extinguen-el-incendio-en-los-alerces-epicentro-de-las-peores-temporadas-nid14042026/",
+        "https://www.red43.com.ar/nota/2025-12-9-17-42-35-incendio-activo-en-el-menendez-parte-oficial",
+        "https://www.red43.com.ar/nota/2026-3-27-9-6-0-controlaron-el-incendio-en-el-parque-nacional-los-alerces"
+      ]
+    },
+    "rois": [
+      {
+        "bbox": [
+          -72.02,
+          -42.92,
+          -71.28,
+          -42.4
+        ],
+        "id": "los-alerces-rivadavia",
+        "name": "Lago Menéndez, Lago Rivadavia y Cholila"
+      }
+    ],
+    "run_id": "baseline-001",
+    "source": {
+      "collection": "COPERNICUS/S2_SR_HARMONIZED",
+      "project": "ee-nachochevallier"
+    },
+    "windows": {
+      "post": {
+        "end_inclusive": "2026-04-30",
+        "start": "2026-03-27"
+      },
+      "pre": {
+        "end_inclusive": "2025-12-08",
+        "start": "2025-11-01"
+      }
+    }
+  },
+  "configuration_hash": "2782fec5a4eb5780f95aed9e8f66f6ebaca06c489e605a1bc0e201ae07096ee7",
+  "counts": {
+    "error": 0,
+    "expected": 204,
+    "ok": 168,
+    "warning": 36
+  },
+  "created_at": "2026-09-27T16:45:18+00:00",
+  "environment": {
+    "dependencies": {
+      "earthengine-api": "1.7.41",
+      "geedim": "2.0.0",
+      "geemap": "0.38.4",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.2",
+      "rasterio": "1.5.1"
+    },
+    "git_commit": "5318c24b49a1e87b93270cd75f094c7f33d337ba",
+    "python": "3.14.7"
+  },
+  "errors": [],
+  "event_id": "puerto-cafe-2025",
+  "last_started_at": "2026-09-27T16:45:18+00:00",
+  "metrics": {
+    "by_roi": [
+      {
+        "burned_hectares": 39959.5447,
+        "burned_valid_pct": 12.03,
+        "id": "los-alerces-rivadavia",
+        "valid_coverage_pct": 94.7561
+      }
+    ],
+    "total": {
+      "burned_hectares": 39959.5447,
+      "burned_valid_pct": 12.03,
+      "id": "total",
+      "valid_coverage_pct": 94.7561
+    }
+  },
+  "origin": "generated",
+  "run_id": "baseline-001",
+  "scenes": {
+    "post": [
+      "20260330T142751_20260330T144410_T19GCN",
+      "20260404T142709_20260404T143641_T18GYT",
+      "20260404T142709_20260404T143641_T18GYU",
+      "20260404T142709_20260404T143641_T19GBP",
+      "20260404T142709_20260404T143641_T19GCN",
+      "20260404T142709_20260404T143641_T19GCP",
+      "20260414T142709_20260414T144103_T19GCP",
+      "20260419T142751_20260419T144020_T18GYT",
+      "20260419T142751_20260419T144020_T19GCN",
+      "20260429T142751_20260429T144026_T19GCN",
+      "20260429T142751_20260429T144026_T19GCP"
+    ],
+    "pre": [
+      "20251105T142709_20251105T143254_T18GYT",
+      "20251105T142709_20251105T143254_T18GYU",
+      "20251105T142709_20251105T143254_T19GBP",
+      "20251105T142709_20251105T143254_T19GCN",
+      "20251105T142709_20251105T143254_T19GCP",
+      "20251110T142801_20251110T143347_T19GCN",
+      "20251125T142709_20251125T143606_T18GYT",
+      "20251125T142709_20251125T143606_T18GYU",
+      "20251125T142709_20251125T143606_T19GBP",
+      "20251125T142709_20251125T143606_T19GCN",
+      "20251125T142709_20251125T143606_T19GCP",
+      "20251205T142709_20251205T143638_T19GCP"
+    ]
+  },
+  "schema_version": 1,
+  "status": "completed",
+  "tile_naming": "grid-position-v1",
+  "validation_errors": []
+}
