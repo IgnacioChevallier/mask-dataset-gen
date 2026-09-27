@@ -11,7 +11,7 @@ dataset.zip
 .kiro/
 skills-lock.json
 
-# Artefactos pesados de todos los runs, incluido legacy-v1.
+# Artefactos pesados de todos los runs.
 dataset/*/runs/*/imagenes_pre/
 dataset/*/runs/*/imagenes_post/
 dataset/*/runs/*/mascaras/

@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import rasterio
 
-from dataset_runs import DEFAULT_EVENT, DEFAULT_RUN, get_run_paths
+from dataset_runs import get_run_paths
 
 
 BANDA_R = 2
@@ -146,8 +146,8 @@ def explorar(tiles: list[Path], initial_index: int, paths) -> None:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Explora los tiles de un evento y run.")
     parser.add_argument("tile", nargs="?", help="Tile inicial, con o sin .tif.")
-    parser.add_argument("--event", default=DEFAULT_EVENT)
-    parser.add_argument("--run", dest="run_id", default=DEFAULT_RUN)
+    parser.add_argument("--event", required=True)
+    parser.add_argument("--run", dest="run_id", required=True)
     return parser.parse_args()
 
 

@@ -1,4 +1,4 @@
-"""Genera mosaicos de un run completo, con compatibilidad legacy."""
+"""Genera mosaicos de un run completo."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ import numpy as np
 import rasterio
 from rasterio.merge import merge
 
-from dataset_runs import DEFAULT_EVENT, DEFAULT_RUN, effective_config, get_run_paths
+from dataset_runs import effective_config, get_run_paths
 
 
 BANDA_R = 2
@@ -156,8 +156,8 @@ def _save_compat_view(paths, config: dict, use_pre: bool, no_mask: bool) -> Path
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Visualiza el ROI de un evento y run.")
-    parser.add_argument("--event", default=DEFAULT_EVENT)
-    parser.add_argument("--run", dest="run_id", default=DEFAULT_RUN)
+    parser.add_argument("--event", required=True)
+    parser.add_argument("--run", dest="run_id", required=True)
     parser.add_argument("--prev", action="store_true", help="Usar PRE en lugar de POST.")
     parser.add_argument("--nomask", action="store_true", help="No superponer la máscara.")
     parser.add_argument(

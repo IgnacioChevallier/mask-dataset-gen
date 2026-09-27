@@ -20,8 +20,6 @@ from typing import Any
 BASE_DIR = Path(__file__).resolve().parent
 CONFIG_DIR = BASE_DIR / "config" / "incendios"
 DATASET_DIR = BASE_DIR / "dataset"
-DEFAULT_EVENT = "puerto-patriada-2026"
-DEFAULT_RUN = "legacy-v1"
 SAFE_ID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 SUPPORTED_COLLECTIONS = ("COPERNICUS/S2_SR_HARMONIZED", "LANDSAT/LC08/C02/T1_L2")
 

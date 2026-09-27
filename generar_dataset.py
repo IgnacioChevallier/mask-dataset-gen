@@ -14,8 +14,6 @@ from pathlib import Path
 from typing import Any
 
 from dataset_runs import (
-    DEFAULT_EVENT,
-    DEFAULT_RUN,
     ConfigError,
     build_tiles,
     config_hash,
@@ -707,13 +705,11 @@ def main() -> int:
         for event in list_events():
             print(f"{event['event_id']}: {event['name']}")
         return 0
-    if bool(args.event) != bool(args.run_id):
-        raise ConfigError("--event y --run deben proporcionarse juntos.")
-    event_id = args.event or DEFAULT_EVENT
-    run_id = args.run_id or DEFAULT_RUN
+    if not (args.event and args.run_id):
+        raise ConfigError("--event y --run son obligatorios.")
     if args.clear_incomplete:
-        return _clear_incomplete(event_id, run_id)
-    return run_generation(event_id, run_id, dry_run=args.dry_run, project=args.project)
+        return _clear_incomplete(args.event, args.run_id)
+    return run_generation(args.event, args.run_id, dry_run=args.dry_run, project=args.project)
 
 
 if __name__ == "__main__":
