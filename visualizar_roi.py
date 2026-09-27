@@ -25,10 +25,11 @@ def _common_tile_names(paths) -> list[str]:
         {path.stem for path in paths.pre.glob("*.tif")},
         {path.stem for path in paths.post.glob("*.tif")},
         {path.stem for path in paths.masks.glob("*.tif")},
+        {path.stem for path in paths.valid.glob("*.tif")},
     ]
     common = sorted(set.intersection(*sets)) if all(sets) else []
     if not common:
-        raise FileNotFoundError(f"No hay tripletas PRE/POST/máscara en {paths.root}.")
+        raise FileNotFoundError(f"No hay tiles con PRE, POST, máscara y validez en {paths.root}.")
     return common
 
 
@@ -98,11 +99,7 @@ def generar_resumen_run(paths, config: dict) -> list[Path]:
     post_mosaic = _merge_rasters([paths.post / f"{name}.tif" for name in names])
     mask = np.squeeze(_merge_rasters([paths.masks / f"{name}.tif" for name in names]))
 
-    valid_files = [paths.valid / f"{name}.tif" for name in names]
-    if all(path.is_file() for path in valid_files):
-        valid = np.squeeze(_merge_rasters(valid_files))
-    else:
-        valid = np.ones(mask.shape, dtype=np.uint8)
+    valid = np.squeeze(_merge_rasters([paths.valid / f"{name}.tif" for name in names]))
 
     if pre_mosaic.shape[1:] != mask.shape or post_mosaic.shape[1:] != mask.shape:
         raise ValueError("Los mosaicos PRE, POST y máscara no tienen las mismas dimensiones.")
@@ -139,12 +136,7 @@ def _save_compat_view(paths, config: dict, use_pre: bool, no_mask: bool) -> Path
     epoch = "pre" if use_pre else "post"
     if not no_mask:
         mask = np.squeeze(_merge_rasters([paths.masks / f"{name}.tif" for name in names]))
-        valid_files = [paths.valid / f"{name}.tif" for name in names]
-        valid = (
-            np.squeeze(_merge_rasters(valid_files))
-            if all(path.is_file() for path in valid_files)
-            else np.ones(mask.shape, dtype=np.uint8)
-        )
+        valid = np.squeeze(_merge_rasters([paths.valid / f"{name}.tif" for name in names]))
         rgb = _overlay(rgb, mask, valid)
     paths.roi_summaries.mkdir(parents=True, exist_ok=True)
     suffix = "" if no_mask else "_mascara"

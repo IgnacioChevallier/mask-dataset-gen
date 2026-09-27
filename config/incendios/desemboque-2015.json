@@ -60,19 +60,6 @@
     "max_workers": 4
   },
   "runs": {
-    "baseline-001": {
-      "purpose": "Primer resultado; ROI derivado de la cicatriz MODIS MCD64A1 con margen.",
-      "windows": {
-        "pre": {
-          "start": "2014-11-01",
-          "end_inclusive": "2015-01-29"
-        },
-        "post": {
-          "start": "2015-02-15",
-          "end_inclusive": "2015-03-22"
-        }
-      }
-    },
     "baseline-002": {
       "purpose": "Recorta el borde sur: en baseline-001 la fila sur de tiles no tenía observaciones POST válidas y quedaba fuera de la cicatriz.",
       "rois": [

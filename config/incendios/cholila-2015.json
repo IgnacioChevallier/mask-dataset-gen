@@ -66,19 +66,6 @@
     "max_workers": 4
   },
   "runs": {
-    "baseline-001": {
-      "purpose": "Primer resultado exploratorio con Landsat 8; min_connected_pixels ajustado a 30 m para conservar ~6 ha.",
-      "windows": {
-        "pre": {
-          "start": "2014-11-01",
-          "end_inclusive": "2015-02-14"
-        },
-        "post": {
-          "start": "2015-04-07",
-          "end_inclusive": "2015-05-31"
-        }
-      }
-    },
     "baseline-002": {
       "purpose": "Amplía el ROI hacia el oeste y el este porque baseline-001 cortaba la cicatriz en ambos bordes.",
       "rois": [

@@ -35,16 +35,16 @@ valida todas las configs.
 - Landsat C2 L2: aplicar `*0.0000275 - 0.2` y llevar a 0–10000 (`_landsat_as_s2`) antes de usar umbrales S2.
 - NBR usa B8 y **B12** (SWIR2), no B11.
 - `.getInfo()` sólo para escalares o listas chicas; nada de `if`/`for` de Python sobre objetos `ee.*`.
+- FeatureCollections que pueden superar 5000 elementos se descargan paginando (`_fetch_features` en `filtrar_evento.py`); `getInfo()` aborta por encima de ese límite.
 - Un cambio de colección, máscara, reductor o escala es un run nuevo con otra `algorithm_version`.
 
 
 
 ## Runs vigentes
 
-- Usar: `epuyen-2025/event-filter-001`, `los-alerces-2023/event-filter-002`,  
-`cholila-2015/event-filter-001` (deriva de `baseline-002`).
-- No usar (sólo trazabilidad): `los-alerces-2023/event-filter-001` (reducción
-VNP14A1 incorrecta), `cholila-2015/baseline-001` (ROI corta la cicatriz).
+- El run a usar de cada evento está en la columna "Resultado" de la tabla de `README.md` (hoy siempre un `event-filter-*`); no duplicar esa lista acá.
+- El dataset alimenta un modelo físico, no uno de aprendizaje automático: no hay particiones train/test.
+- Resoluciones mezcladas a propósito: Landsat 8 (2015–2016) a 30 m, Sentinel-2 a 20 m, sin remuestreo.
 
 
 
@@ -55,5 +55,5 @@ VNP14A1 incorrecta), `cholila-2015/baseline-001` (ROI corta la cicatriz).
 - `filtrar_evento.py`: atribución de componentes al incendio con VIIRS.
 - `visualizar.py`, `visualizar_roi.py`: exploración y mosaicos resumen.
 - GeoTIFFs y visualizaciones están ignorados por Git; se versionan configs, `run.json`, CSVs y `resumen.md`.
-- `docs/PLAN_MULTI_INCENDIOS.md` es registro histórico de diseño; el estado vigente está en `README.md`.
+- Los `event-filter-*` enlazan (hardlink) PRE, POST y validez del run padre; no reemplazar por copias.
 

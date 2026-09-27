@@ -16,13 +16,13 @@ La columna "Resultado" indica el run que conviene usar.
 | --- | --- | --- | --- | --- |
 | `desemboque-2015` | 2015-01-30 | Landsat 8 | `baseline-002` | `event-filter-001` |
 | `cerro-plataforma-2015` | 2015-02-03 | Landsat 8 | `baseline-001` | `event-filter-001` |
-| `cholila-2015` | 2015-02-15 | Landsat 8 | `baseline-001`, `baseline-002` (ROI ampliado) | `event-filter-001` |
+| `cholila-2015` | 2015-02-15 | Landsat 8 | `baseline-002` | `event-filter-001` |
 | `los-alerces-2015` | 2015-03-22 | Landsat 8 | `baseline-001` | `event-filter-001` |
 | `currumahuida-2015` | 2015-03-23 | Landsat 8 | `baseline-001` | `event-filter-001` |
 | `los-alerces-2016` | 2016-01-21 | Landsat 8 | `baseline-001` | `event-filter-001` |
 | `epuyen-2019` | 2019-01-28 | Sentinel-2 | `baseline-001` | `event-filter-001` |
 | `las-golondrinas-2021` | 2021-03-09 | Sentinel-2 | `baseline-001` | `event-filter-001` |
-| `los-alerces-2023` | 2023-02-04 | Sentinel-2 | `baseline-001`, `event-filter-001` (descartado) | `event-filter-002` |
+| `los-alerces-2023` | 2023-02-04 | Sentinel-2 | `baseline-001` | `event-filter-002` |
 | `los-alerces-2024` | 2024-01-25 | Sentinel-2 | `baseline-001` | `event-filter-001` |
 | `epuyen-2025` | 2025-01-15 | Sentinel-2 | `baseline-001` | `event-filter-001` |
 | `el-turbio-2025` | 2025-12-01 | Sentinel-2 | `baseline-001` | `event-filter-001` |
@@ -87,7 +87,7 @@ Ejecutar o reanudar el run:
   --run baseline-001
 ```
 
-Todos los baselines están completos. `desemboque-2015/baseline-001` quedó incompleto (fila sur sin observaciones POST), se eliminó y fue reemplazado por `baseline-002`; su definición se conserva en la configuración. Un preflight puede
+Todos los baselines están completos. Un preflight puede
 revisar escenas y grilla sin escribir datos:
 
 ```bash
@@ -113,7 +113,7 @@ El filtro etiqueta componentes sobre el mosaico global, selecciona el clúster t
 
 Las reglas y distancias efectivas quedan selladas en `run.json`; la decisión de cada objeto queda en `componentes.csv` y la evidencia en `hotspots.csv`.
 
-En Los Alerces no debe usarse `event-filter-001`: esa ejecución conservada para trazabilidad reveló una reducción incorrecta de máscaras VNP14A1 y quedó sin evidencia térmica. `event-filter-002` corrige la reducción y es el resultado recomendado. En Cholila, `event-filter-001` deriva de `baseline-002`; `baseline-001` se conserva para trazabilidad porque su ROI cortaba la cicatriz.
+Los runs descartados (Cholila `baseline-001`, Desemboque `baseline-001` y Los Alerces 2023 `event-filter-001`) se eliminaron; su historia queda en Git. Por eso algunos eventos empiezan en `baseline-002` o `event-filter-002`.
 
 Las cuentas actuales de Earth Engine requieren un proyecto Google Cloud con la API habilitada y registrado para uso de Earth Engine. Todos los eventos usan `ee-nachochevallier`; el proyecto efectivo se incluye en la configuración sellada de `run.json`. `--project` permite reemplazarlo explícitamente al crear otro run.
 
@@ -160,13 +160,12 @@ dNBR = NBR_pre - NBR_post
 
 Con Landsat 8 (`LANDSAT/LC08/C02/T1_L2`), las bandas SR se renombran a sus equivalentes S2 (`SR_B2..SR_B4` → `B2..B4`, `SR_B5` → `B8`, `SR_B6` → `B11`, `SR_B7` → `B12`), la reflectancia se lleva a escala 0–10000 y las nubes, sombras y nieve se enmascaran con `QA_PIXEL`. Así los mismos umbrales aplican a ambos sensores; la grilla Landsat usa 30 m en lugar de 20 m.
 
+El dataset mezcla resoluciones a propósito: los eventos Landsat quedan a 30 m y los Sentinel-2 a 20 m, sin remuestreo. La escala efectiva de cada tile está en la columna `escala_m` de `metadata.csv` y en `grid.scale_m` de `run.json`; las hectáreas se calculan con el área real de cada píxel, así que son comparables entre eventos.
+
 Los umbrales exactos no se duplican en esta documentación: la fuente de verdad es la configuración JSON y su copia sellada dentro de `run.json`. Además de la máscara binaria, los runs nuevos exportan una capa que distingue los píxeles con observación válida simultánea en PRE y POST.
 
 ## Trazabilidad y almacenamiento
 
 `run.json` registra configuración, hash, escenas, entorno, estados, conteos y métricas. `metadata.csv` agrega posición de grilla, cobertura válida, área quemada y estado por tile.
 
-Los GeoTIFFs de todos los runs se conservan localmente dalepero se ignoran en Git. Se versionan las configuraciones, los manifiestos, los metadatos y la documentación. Las visualizaciones generadas también son artefactos locales ignorados por Git.
-
-El plan y las decisiones de diseño están documentados en
-`[PLAN_MULTI_INCENDIOS.md](docs/PLAN_MULTI_INCENDIOS.md)`.
+Los GeoTIFFs de todos los runs se conservan localmente pero se ignoran en Git. Los runs `event-filter-*` enlazan (hardlink) las imágenes PRE, POST y la capa de validez de su run padre en lugar de copiarlas. Se versionan las configuraciones, los manifiestos, los metadatos y la documentación. Las visualizaciones generadas también son artefactos locales ignorados por Git.

@@ -24,20 +24,32 @@
     {
       "id": "poblacion-rosales",
       "name": "Población Rosales y Laguna Larga",
-      "bbox": [-71.72, -43.0, -71.43, -42.76]
+      "bbox": [
+        -71.72,
+        -43.0,
+        -71.43,
+        -42.76
+      ]
     }
   ],
   "defaults": {
-    "bands": ["B2", "B3", "B4", "B8", "B11", "B12"],
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
     "cloud_percentage_max": 20,
     "grid": {
       "scale_m": 20,
       "tile_pixels": 256
     },
     "mask": {
-      "dnbr_threshold": 0.30,
+      "dnbr_threshold": 0.3,
       "pre_nbr_min": 0.15,
-      "post_nbr_max": 0.40,
+      "post_nbr_max": 0.4,
       "ndsi_snow_max": 0.25,
       "brightness_max": 3500,
       "chroma_min": 500,
@@ -62,44 +74,6 @@
         "post": {
           "start": "2023-02-20",
           "end_inclusive": "2023-03-31"
-        }
-      }
-    },
-    "event-filter-001": {
-      "purpose": "Atribuir los componentes de cambio al incendio Población Rosales mediante continuidad espacial y detecciones térmicas.",
-      "origin": "derived",
-      "parent_run": "baseline-001",
-      "algorithm_version": "event-filter-v1",
-      "windows": {
-        "pre": {
-          "start": "2022-11-01",
-          "end_inclusive": "2023-02-03"
-        },
-        "post": {
-          "start": "2023-02-20",
-          "end_inclusive": "2023-03-31"
-        }
-      },
-      "event_filter": {
-        "ignition_point": {
-          "longitude": -71.576667,
-          "latitude": -42.8825,
-          "note": "Ubicación reportada en los partes oficiales incluidos en reference.sources."
-        },
-        "closing_radius_m": 80,
-        "thermal_cluster_radius_m": 2000,
-        "component_hotspot_max_distance_m": 1500,
-        "component_link_max_distance_m": 1000,
-        "seed_max_distance_m": 2000,
-        "thermal": {
-          "collection": "NASA/VIIRS/002/VNP14A1",
-          "band": "FireMask",
-          "threshold": 7,
-          "scale_m": 1000,
-          "sampling_mode": "aggregate",
-          "start": "2023-02-04",
-          "end_inclusive": "2023-03-31",
-          "source_note": "VIIRS VNP14A1 histórico de 1 km; FireMask 7–9. El producto NRT de 375 m de Earth Engine comienza después de este incendio."
         }
       }
     },

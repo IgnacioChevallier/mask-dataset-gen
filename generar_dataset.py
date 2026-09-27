@@ -501,7 +501,6 @@ def _new_manifest(
         "completed_at": None,
         "configuration_hash": hash_value,
         "configuration": config,
-        "tile_naming": config.get("tile_naming", "grid-position-v1"),
         "scenes": scenes,
         "environment": {
             "git_commit": git_commit(),

@@ -47,14 +47,14 @@ def dibujar(fig, axes, tile_id: str, paths) -> None:
     post_path = paths.post / f"{tile_id}.tif"
     mask_path = paths.masks / f"{tile_id}.tif"
     valid_path = paths.valid / f"{tile_id}.tif"
-    if not all(path.exists() for path in (pre_path, post_path, mask_path)):
+    if not all(path.exists() for path in (pre_path, post_path, mask_path, valid_path)):
         print(f"Advertencia: faltan archivos para {tile_id}")
         return
 
     pre = cargar_rgb(pre_path)
     post = cargar_rgb(post_path)
     mask = cargar_banda(mask_path)
-    valid = cargar_banda(valid_path) if valid_path.exists() else np.ones(mask.shape, dtype=np.uint8)
+    valid = cargar_banda(valid_path)
     overlay = post.copy()
     burned = (mask == 1) & (valid == 1)
     overlay[burned, 0] = 1.0

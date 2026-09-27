@@ -519,6 +519,7 @@ def classify_components(
 
 
 def _copy_parent_inputs(parent, destination) -> None:
+    # Hardlinks: los runs completos son inmutables, así que compartir el archivo no ocupa disco extra.
     for source_dir, destination_dir in (
         (parent.pre, destination.pre),
         (parent.post, destination.post),
@@ -526,7 +527,7 @@ def _copy_parent_inputs(parent, destination) -> None:
     ):
         destination_dir.mkdir(parents=True, exist_ok=True)
         for source in sorted(source_dir.glob("*.tif")):
-            shutil.copy2(source, destination_dir / source.name)
+            os.link(source, destination_dir / source.name)
 
 
 def _write_mosaic_as_tiles(
