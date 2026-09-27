@@ -1,0 +1,141 @@
+{
+  "completed_at": "2026-09-27T19:09:43+00:00",
+  "configuration": {
+    "algorithm_version": "dnbr-s2-v1",
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 40,
+    "event_description": "Incendio detectado la noche del 25 de enero de 2024 en Bahía Rosales y el arroyo Centinela, Lago Futalaufquen.",
+    "event_id": "los-alerces-2024",
+    "event_name": "Incendio Los Alerces, Bahía Rosales 2024",
+    "fire_start_date": "2024-01-25",
+    "grid": {
+      "scale_m": 20,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "dilation_pixels": 1,
+      "dnbr_threshold": 0.3,
+      "min_connected_pixels": 150,
+      "ndsi_snow_max": 0.25,
+      "post_nbr_max": 0.4,
+      "pre_nbr_min": 0.15,
+      "pre_ndwi_water_max": 0.05
+    },
+    "max_workers": 4,
+    "purpose": "Primer resultado; ROI derivado de la cicatriz MODIS MCD64A1 con margen.",
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "reference": {
+      "area_note": "Superficie informada en febrero de 2024 dentro del parque.",
+      "burned_area_ha": 5971,
+      "modis_mcd64a1_ha": 6923,
+      "sources": [
+        "https://www.lanacion.com.ar/sociedad/incendios-controlados-se-conocio-la-cantidad-de-hectareas-arrasadas-por-el-fuego-en-el-parque-nid18022024/",
+        "https://www.infobae.com/sociedad/2024/02/05/parque-nacional-los-alerces-rafagas-de-viento-provocaron-el-avance-del-fuego-y-familias-tuvieron-que-ser-evacuadas/"
+      ]
+    },
+    "rois": [
+      {
+        "bbox": [
+          -71.664,
+          -42.984,
+          -71.397,
+          -42.733
+        ],
+        "id": "los-alerces",
+        "name": "Incendio Los Alerces, Bahía Rosales 2024"
+      }
+    ],
+    "run_id": "baseline-001",
+    "source": {
+      "collection": "COPERNICUS/S2_SR_HARMONIZED",
+      "project": "ee-nachochevallier"
+    },
+    "windows": {
+      "post": {
+        "end_inclusive": "2024-03-31",
+        "start": "2024-02-20"
+      },
+      "pre": {
+        "end_inclusive": "2024-01-24",
+        "start": "2023-11-01"
+      }
+    }
+  },
+  "configuration_hash": "a90e7924b3bcc512b6fbb1dbe2f93fae192747010e6ba4606e72224dbb09678c",
+  "counts": {
+    "error": 0,
+    "expected": 36,
+    "ok": 30,
+    "warning": 6
+  },
+  "created_at": "2026-09-27T19:01:41+00:00",
+  "environment": {
+    "dependencies": {
+      "earthengine-api": "1.7.41",
+      "geedim": "2.0.0",
+      "geemap": "0.38.4",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.2",
+      "rasterio": "1.5.1"
+    },
+    "git_commit": "979bec8f6aa5bb8965ff486a3fd748ac26d3efb0",
+    "python": "3.14.7"
+  },
+  "errors": [],
+  "event_id": "los-alerces-2024",
+  "last_started_at": "2026-09-27T19:01:41+00:00",
+  "metrics": {
+    "by_roi": [
+      {
+        "burned_hectares": 6074.4005,
+        "burned_valid_pct": 10.4235,
+        "id": "los-alerces",
+        "valid_coverage_pct": 95.7725
+      }
+    ],
+    "total": {
+      "burned_hectares": 6074.4005,
+      "burned_valid_pct": 10.4235,
+      "id": "total",
+      "valid_coverage_pct": 95.7725
+    }
+  },
+  "origin": "generated",
+  "run_id": "baseline-001",
+  "scenes": {
+    "post": [
+      "20240229T142711_20240229T144214_T18GYT",
+      "20240229T142711_20240229T144214_T19GCN",
+      "20240315T142709_20240315T144302_T19GCN",
+      "20240330T142711_20240330T144438_T19GCN"
+    ],
+    "pre": [
+      "20231121T142711_20231121T144431_T19GCN",
+      "20231206T142709_20231206T143639_T18GYT",
+      "20231206T142709_20231206T143639_T19GCN",
+      "20231221T142711_20231221T144214_T18GYT",
+      "20231221T142711_20231221T144214_T19GCN",
+      "20231226T142719_20231226T143701_T18GYT",
+      "20231226T142719_20231226T143701_T19GCN",
+      "20240110T142711_20240110T143727_T18GYT",
+      "20240110T142711_20240110T143727_T19GCN",
+      "20240120T142701_20240120T143652_T18GYT",
+      "20240120T142701_20240120T143652_T19GCN"
+    ]
+  },
+  "schema_version": 1,
+  "status": "completed",
+  "tile_naming": "grid-position-v1",
+  "validation_errors": []
+}

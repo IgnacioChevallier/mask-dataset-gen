@@ -1,0 +1,317 @@
+{
+  "comparison_to_parent": {
+    "candidate_local_hectares": 6615.932,
+    "parent_reported_hectares": 6561.95,
+    "removed_hectares": 324.0741,
+    "retained_candidate_pct": 95.1016,
+    "target_hectares": 6291.8579
+  },
+  "completed_at": "2026-09-27T19:13:48+00:00",
+  "configuration": {
+    "algorithm_version": "event-filter-v1-1",
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 40,
+    "event_description": "Incendio forestal Cerro Plataforma, detectado el 3 de febrero de 2015 en la zona de El Turbio.",
+    "event_filter": {
+      "closing_radius_m": 80,
+      "component_hotspot_max_distance_m": 1500,
+      "component_link_max_distance_m": 1000,
+      "ignition_point": {
+        "latitude": -42.294,
+        "longitude": -71.869,
+        "note": "Centroide de la cicatriz MODIS MCD64A1; no hay coordenadas oficiales del foco."
+      },
+      "seed_max_distance_m": 3000,
+      "thermal": {
+        "band": "FireMask",
+        "collection": "NASA/VIIRS/002/VNP14A1",
+        "end_inclusive": "2015-05-31",
+        "reducer_version": "masked-sum-v1",
+        "sampling_mode": "aggregate",
+        "scale_m": 1000,
+        "source_note": "VIIRS VNP14A1 histórico de 1 km; FireMask 7–9.",
+        "start": "2015-02-03",
+        "threshold": 7
+      },
+      "thermal_cluster_radius_m": 2000
+    },
+    "event_id": "cerro-plataforma-2015",
+    "event_name": "Incendio Cerro Plataforma, El Turbio 2015",
+    "fire_start_date": "2015-02-03",
+    "grid": {
+      "scale_m": 30,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "dilation_pixels": 1,
+      "dnbr_threshold": 0.3,
+      "min_connected_pixels": 67,
+      "ndsi_snow_max": 0.25,
+      "post_nbr_max": 0.4,
+      "pre_nbr_min": 0.15,
+      "pre_ndwi_water_max": 0.05
+    },
+    "max_workers": 4,
+    "origin": "derived",
+    "parent_run": "baseline-001",
+    "purpose": "Atribuir los componentes de cambio al incendio y separar incendios vecinos.",
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "reference": {
+      "area_note": "Programa provincial de restauración de Chubut; incluye islas sin quemar.",
+      "burned_area_ha": 7371.3,
+      "modis_mcd64a1_ha": 7620,
+      "sources": [
+        "https://bosques.chubut.gov.ar/wp-content/uploads/2023/08/Programa-de-restauracion-de-las-areas-afectadas-por-grandes-incendios-forestales-en-Chubut-en-2014-2015.pdf"
+      ]
+    },
+    "rois": [
+      {
+        "bbox": [
+          -72.061,
+          -42.382,
+          -71.695,
+          -42.211
+        ],
+        "id": "cerro-plataforma",
+        "name": "Incendio Cerro Plataforma, El Turbio 2015"
+      }
+    ],
+    "run_id": "event-filter-001",
+    "source": {
+      "collection": "LANDSAT/LC08/C02/T1_L2",
+      "note": "Sentinel-2A se lanzó en junio de 2015; se usa Landsat 8 OLI con bandas renombradas a sus equivalentes S2 y reflectancia en escala 0–10000.",
+      "project": "ee-nachochevallier"
+    },
+    "windows": {
+      "post": {
+        "end_inclusive": "2015-05-31",
+        "start": "2015-04-07"
+      },
+      "pre": {
+        "end_inclusive": "2015-02-02",
+        "start": "2014-11-01"
+      }
+    }
+  },
+  "configuration_hash": "1dfe71c5b8c30a5e70c362f036da2041b329e1260f790ab08004d664495e53f0",
+  "counts": {
+    "error": 0,
+    "expected": 18,
+    "ok": 9,
+    "warning": 9
+  },
+  "created_at": "2026-09-27T19:13:23+00:00",
+  "environment": {
+    "dependencies": {
+      "earthengine-api": "1.7.41",
+      "geedim": "2.0.0",
+      "geemap": "0.38.4",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.2",
+      "rasterio": "1.5.1"
+    },
+    "git_commit": "979bec8f6aa5bb8965ff486a3fd748ac26d3efb0",
+    "python": "3.14.7"
+  },
+  "errors": [],
+  "event_id": "cerro-plataforma-2015",
+  "metrics": {
+    "burned_hectares": 6291.8579,
+    "burned_valid_pct": 13.7096,
+    "candidate_hectares": 6615.932,
+    "other_fire_hectares": 237.0916,
+    "unconfirmed_hectares": 86.9825
+  },
+  "origin": "derived",
+  "parent_configuration_hash": "a06b2d2de1ddb50b0c84885f319a12d949deb12d22654869d3ac14b9bc8bade9",
+  "parent_run": "baseline-001",
+  "run_id": "event-filter-001",
+  "schema_version": 1,
+  "status": "completed",
+  "thermal_evidence": {
+    "cluster_count": 3,
+    "clusters": [
+      {
+        "dates": [
+          "2015-02-25"
+        ],
+        "detection_count": 2,
+        "id": "thermal-001",
+        "latitude": -42.378024,
+        "longitude": -71.820307
+      },
+      {
+        "dates": [
+          "2015-02-25",
+          "2015-02-26",
+          "2015-02-28"
+        ],
+        "detection_count": 3,
+        "id": "thermal-002",
+        "latitude": -42.372035,
+        "longitude": -71.702029
+      },
+      {
+        "dates": [
+          "2015-02-17",
+          "2015-02-18",
+          "2015-02-19",
+          "2015-02-20",
+          "2015-02-21",
+          "2015-02-22",
+          "2015-02-23",
+          "2015-02-24",
+          "2015-02-25",
+          "2015-02-26",
+          "2015-02-27",
+          "2015-02-28",
+          "2015-03-01",
+          "2015-03-03",
+          "2015-03-04",
+          "2015-03-05"
+        ],
+        "detection_count": 180,
+        "id": "thermal-003",
+        "latitude": -42.297325,
+        "longitude": -71.869814
+      }
+    ],
+    "collection": "NASA/VIIRS/002/VNP14A1",
+    "detection_count": 349,
+    "image_count": 118,
+    "images": [
+      "2015_02_03",
+      "2015_02_04",
+      "2015_02_05",
+      "2015_02_06",
+      "2015_02_07",
+      "2015_02_08",
+      "2015_02_09",
+      "2015_02_10",
+      "2015_02_11",
+      "2015_02_12",
+      "2015_02_13",
+      "2015_02_14",
+      "2015_02_15",
+      "2015_02_16",
+      "2015_02_17",
+      "2015_02_18",
+      "2015_02_19",
+      "2015_02_20",
+      "2015_02_21",
+      "2015_02_22",
+      "2015_02_23",
+      "2015_02_24",
+      "2015_02_25",
+      "2015_02_26",
+      "2015_02_27",
+      "2015_02_28",
+      "2015_03_01",
+      "2015_03_02",
+      "2015_03_03",
+      "2015_03_04",
+      "2015_03_05",
+      "2015_03_06",
+      "2015_03_07",
+      "2015_03_08",
+      "2015_03_09",
+      "2015_03_10",
+      "2015_03_11",
+      "2015_03_12",
+      "2015_03_13",
+      "2015_03_14",
+      "2015_03_15",
+      "2015_03_16",
+      "2015_03_17",
+      "2015_03_18",
+      "2015_03_19",
+      "2015_03_20",
+      "2015_03_21",
+      "2015_03_22",
+      "2015_03_23",
+      "2015_03_24",
+      "2015_03_25",
+      "2015_03_26",
+      "2015_03_27",
+      "2015_03_28",
+      "2015_03_29",
+      "2015_03_30",
+      "2015_03_31",
+      "2015_04_01",
+      "2015_04_02",
+      "2015_04_03",
+      "2015_04_04",
+      "2015_04_05",
+      "2015_04_06",
+      "2015_04_07",
+      "2015_04_08",
+      "2015_04_09",
+      "2015_04_10",
+      "2015_04_11",
+      "2015_04_12",
+      "2015_04_13",
+      "2015_04_14",
+      "2015_04_15",
+      "2015_04_16",
+      "2015_04_17",
+      "2015_04_18",
+      "2015_04_19",
+      "2015_04_20",
+      "2015_04_21",
+      "2015_04_22",
+      "2015_04_23",
+      "2015_04_24",
+      "2015_04_25",
+      "2015_04_26",
+      "2015_04_27",
+      "2015_04_28",
+      "2015_04_29",
+      "2015_04_30",
+      "2015_05_01",
+      "2015_05_02",
+      "2015_05_03",
+      "2015_05_04",
+      "2015_05_05",
+      "2015_05_06",
+      "2015_05_07",
+      "2015_05_08",
+      "2015_05_09",
+      "2015_05_10",
+      "2015_05_11",
+      "2015_05_12",
+      "2015_05_13",
+      "2015_05_14",
+      "2015_05_15",
+      "2015_05_16",
+      "2015_05_17",
+      "2015_05_18",
+      "2015_05_19",
+      "2015_05_20",
+      "2015_05_21",
+      "2015_05_22",
+      "2015_05_23",
+      "2015_05_24",
+      "2015_05_25",
+      "2015_05_26",
+      "2015_05_27",
+      "2015_05_28",
+      "2015_05_29",
+      "2015_05_30",
+      "2015_05_31"
+    ],
+    "target_cluster_id": "thermal-003",
+    "unique_pixel_count": 185
+  },
+  "validation_errors": []
+}

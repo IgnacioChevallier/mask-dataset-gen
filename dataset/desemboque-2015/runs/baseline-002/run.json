@@ -1,0 +1,130 @@
+{
+  "completed_at": "2026-09-27T19:17:57+00:00",
+  "configuration": {
+    "algorithm_version": "dnbr-l8-v1",
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 40,
+    "event_description": "Incendio forestal Desemboque, detectado el 30 de enero de 2015 en la zona Lago Puelo–Epuyén.",
+    "event_id": "desemboque-2015",
+    "event_name": "Incendio Desemboque, Lago Puelo–Epuyén 2015",
+    "fire_start_date": "2015-01-30",
+    "grid": {
+      "scale_m": 30,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "dilation_pixels": 1,
+      "dnbr_threshold": 0.3,
+      "min_connected_pixels": 67,
+      "ndsi_snow_max": 0.25,
+      "post_nbr_max": 0.4,
+      "pre_nbr_min": 0.15,
+      "pre_ndwi_water_max": 0.05
+    },
+    "max_workers": 4,
+    "purpose": "Recorta el borde sur: en baseline-001 la fila sur de tiles no tenía observaciones POST válidas y quedaba fuera de la cicatriz.",
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "reference": {
+      "area_note": "Programa provincial de restauración de Chubut; incluye islas sin quemar. POST cortado antes del incendio Currumahuida (23 de marzo).",
+      "burned_area_ha": 2306.8,
+      "modis_mcd64a1_ha": 1652,
+      "sources": [
+        "https://bosques.chubut.gov.ar/wp-content/uploads/2023/08/Programa-de-restauracion-de-las-areas-afectadas-por-grandes-incendios-forestales-en-Chubut-en-2014-2015.pdf"
+      ]
+    },
+    "rois": [
+      {
+        "bbox": [
+          -71.668,
+          -42.16,
+          -71.53,
+          -42.059
+        ],
+        "id": "desemboque",
+        "name": "Incendio Desemboque, Lago Puelo–Epuyén 2015"
+      }
+    ],
+    "run_id": "baseline-002",
+    "source": {
+      "collection": "LANDSAT/LC08/C02/T1_L2",
+      "note": "Sentinel-2A se lanzó en junio de 2015; se usa Landsat 8 OLI con bandas renombradas a sus equivalentes S2 y reflectancia en escala 0–10000.",
+      "project": "ee-nachochevallier"
+    },
+    "windows": {
+      "post": {
+        "end_inclusive": "2015-03-22",
+        "start": "2015-02-15"
+      },
+      "pre": {
+        "end_inclusive": "2015-01-29",
+        "start": "2014-11-01"
+      }
+    }
+  },
+  "configuration_hash": "bb1bcaab46b8f6cdbeb500fbda5f2b66f55f46d079b82ae4f1425498fc6282f3",
+  "counts": {
+    "error": 0,
+    "expected": 6,
+    "ok": 6,
+    "warning": 0
+  },
+  "created_at": "2026-09-27T19:17:01+00:00",
+  "environment": {
+    "dependencies": {
+      "earthengine-api": "1.7.41",
+      "geedim": "2.0.0",
+      "geemap": "0.38.4",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.2",
+      "rasterio": "1.5.1"
+    },
+    "git_commit": "979bec8f6aa5bb8965ff486a3fd748ac26d3efb0",
+    "python": "3.14.7"
+  },
+  "errors": [],
+  "event_id": "desemboque-2015",
+  "last_started_at": "2026-09-27T19:17:01+00:00",
+  "metrics": {
+    "by_roi": [
+      {
+        "burned_hectares": 558.9003,
+        "burned_valid_pct": 4.3653,
+        "id": "desemboque",
+        "valid_coverage_pct": 99.99
+      }
+    ],
+    "total": {
+      "burned_hectares": 558.9003,
+      "burned_valid_pct": 4.3653,
+      "id": "total",
+      "valid_coverage_pct": 99.99
+    }
+  },
+  "origin": "generated",
+  "run_id": "baseline-002",
+  "scenes": {
+    "post": [
+      "LC08_232089_20150222",
+      "LC08_232089_20150310"
+    ],
+    "pre": [
+      "LC08_232089_20141204",
+      "LC08_232089_20150121"
+    ]
+  },
+  "schema_version": 1,
+  "status": "completed",
+  "tile_naming": "grid-position-v1",
+  "validation_errors": []
+}

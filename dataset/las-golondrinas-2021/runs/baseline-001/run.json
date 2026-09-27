@@ -1,0 +1,148 @@
+{
+  "completed_at": "2026-09-27T19:13:04+00:00",
+  "configuration": {
+    "algorithm_version": "dnbr-s2-v1",
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 20,
+    "event_description": "Incendio iniciado la noche del 9 de marzo de 2021 en Las Golondrinas y Cerro Radal (Lago Puelo y El Hoyo).",
+    "event_id": "las-golondrinas-2021",
+    "event_name": "Incendio Las Golondrinas–Cerro Radal 2021",
+    "fire_start_date": "2021-03-09",
+    "grid": {
+      "scale_m": 20,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "dilation_pixels": 1,
+      "dnbr_threshold": 0.3,
+      "min_connected_pixels": 150,
+      "ndsi_snow_max": 0.25,
+      "post_nbr_max": 0.4,
+      "pre_nbr_min": 0.15,
+      "pre_ndwi_water_max": 0.05
+    },
+    "max_workers": 4,
+    "purpose": "Primer resultado; ROI derivado de la cicatriz MODIS MCD64A1 con margen.",
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "reference": {
+      "area_note": "12.901 ha en Las Golondrinas y Cerro Radal según el balance oficial. PRE desde febrero para dejar fuera el crecimiento de Cuesta del Ternero (enero de 2021).",
+      "burned_area_ha": 12901,
+      "modis_mcd64a1_ha": 12526,
+      "sources": [
+        "https://www.red43.com.ar/nota/2021-4-14-9-7-37-el-incendio-en-las-golondrinas-se-encuentra-extinguido",
+        "https://en.wikipedia.org/wiki/2021_Argentine_Patagonia_wildfires"
+      ]
+    },
+    "rois": [
+      {
+        "bbox": [
+          -71.593,
+          -42.197,
+          -71.143,
+          -41.967
+        ],
+        "id": "las-golondrinas",
+        "name": "Incendio Las Golondrinas–Cerro Radal 2021"
+      }
+    ],
+    "run_id": "baseline-001",
+    "source": {
+      "collection": "COPERNICUS/S2_SR_HARMONIZED",
+      "project": "ee-nachochevallier"
+    },
+    "windows": {
+      "post": {
+        "end_inclusive": "2021-04-30",
+        "start": "2021-03-20"
+      },
+      "pre": {
+        "end_inclusive": "2021-03-08",
+        "start": "2021-02-01"
+      }
+    }
+  },
+  "configuration_hash": "9e0269906a9989977bb88310fae018bc51073ee4b6c36d709fce55c7e4537d69",
+  "counts": {
+    "error": 0,
+    "expected": 60,
+    "ok": 60,
+    "warning": 0
+  },
+  "created_at": "2026-09-27T19:01:39+00:00",
+  "environment": {
+    "dependencies": {
+      "earthengine-api": "1.7.41",
+      "geedim": "2.0.0",
+      "geemap": "0.38.4",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.2",
+      "rasterio": "1.5.1"
+    },
+    "git_commit": "979bec8f6aa5bb8965ff486a3fd748ac26d3efb0",
+    "python": "3.14.7"
+  },
+  "errors": [],
+  "event_id": "las-golondrinas-2021",
+  "last_started_at": "2026-09-27T19:01:39+00:00",
+  "metrics": {
+    "by_roi": [
+      {
+        "burned_hectares": 14584.7111,
+        "burned_valid_pct": 15.3303,
+        "id": "las-golondrinas",
+        "valid_coverage_pct": 99.9719
+      }
+    ],
+    "total": {
+      "burned_hectares": 14584.7111,
+      "burned_valid_pct": 15.3303,
+      "id": "total",
+      "valid_coverage_pct": 99.9719
+    }
+  },
+  "origin": "generated",
+  "run_id": "baseline-001",
+  "scenes": {
+    "post": [
+      "20210321T142729_20210321T143758_T18GYU",
+      "20210321T142729_20210321T143758_T19GBP",
+      "20210321T142729_20210321T143758_T19GCP",
+      "20210326T142731_20210326T144126_T18GYU",
+      "20210326T142731_20210326T144126_T19GBP",
+      "20210410T142729_20210410T144323_T19GCP",
+      "20210415T142721_20210415T144139_T18GYU",
+      "20210415T142721_20210415T144139_T19GBP",
+      "20210415T142721_20210415T144139_T19GCP",
+      "20210425T142731_20210425T143929_T18GYU",
+      "20210425T142731_20210425T143929_T19GBP",
+      "20210425T142731_20210425T143929_T19GCP",
+      "20210425T142731_20210425T144428_T19GCP"
+    ],
+    "pre": [
+      "20210204T142731_20210204T143602_T18GYU",
+      "20210204T142731_20210204T143602_T19GBP",
+      "20210204T142731_20210204T143602_T19GCP",
+      "20210209T142729_20210209T143601_T18GYU",
+      "20210209T142729_20210209T143601_T19GBP",
+      "20210219T142729_20210219T143600_T19GCP",
+      "20210224T142731_20210224T143334_T18GYU",
+      "20210224T142731_20210224T143334_T19GBP",
+      "20210224T142731_20210224T143334_T19GCP"
+    ]
+  },
+  "schema_version": 1,
+  "status": "completed",
+  "tile_naming": "grid-position-v1",
+  "validation_errors": []
+}

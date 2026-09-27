@@ -1,0 +1,248 @@
+{
+  "comparison_to_parent": {
+    "candidate_local_hectares": 4244.9332,
+    "parent_reported_hectares": 4230.9391,
+    "removed_hectares": 8.4599,
+    "retained_candidate_pct": 99.8007,
+    "target_hectares": 4236.4733
+  },
+  "completed_at": "2026-09-27T19:15:48+00:00",
+  "configuration": {
+    "algorithm_version": "event-filter-v1-1",
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 40,
+    "event_description": "Incendio forestal Currumahuida – Lago Puelo, detectado el 23 de marzo de 2015.",
+    "event_filter": {
+      "closing_radius_m": 80,
+      "component_hotspot_max_distance_m": 1500,
+      "component_link_max_distance_m": 1000,
+      "ignition_point": {
+        "latitude": -42.185,
+        "longitude": -71.553,
+        "note": "Centroide de la cicatriz MODIS MCD64A1."
+      },
+      "seed_max_distance_m": 3000,
+      "thermal": {
+        "band": "FireMask",
+        "collection": "NASA/VIIRS/002/VNP14A1",
+        "end_inclusive": "2015-05-31",
+        "reducer_version": "masked-sum-v1",
+        "sampling_mode": "aggregate",
+        "scale_m": 1000,
+        "source_note": "VIIRS VNP14A1 histórico de 1 km; FireMask 7–9.",
+        "start": "2015-03-23",
+        "threshold": 7
+      },
+      "thermal_cluster_radius_m": 2000
+    },
+    "event_id": "currumahuida-2015",
+    "event_name": "Incendio Currumahuida–Lago Puelo 2015",
+    "fire_start_date": "2015-03-23",
+    "grid": {
+      "scale_m": 30,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "dilation_pixels": 1,
+      "dnbr_threshold": 0.3,
+      "min_connected_pixels": 67,
+      "ndsi_snow_max": 0.25,
+      "post_nbr_max": 0.4,
+      "pre_nbr_min": 0.15,
+      "pre_ndwi_water_max": 0.05
+    },
+    "max_workers": 4,
+    "origin": "derived",
+    "parent_run": "baseline-001",
+    "purpose": "Atribuir los componentes de cambio al incendio y separar incendios vecinos.",
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "reference": {
+      "area_note": "Programa provincial de restauración de Chubut; incluye islas sin quemar. PRE posterior a Desemboque para no atribuir su cicatriz.",
+      "burned_area_ha": 3150.8,
+      "modis_mcd64a1_ha": 3587,
+      "sources": [
+        "https://bosques.chubut.gov.ar/wp-content/uploads/2023/08/Programa-de-restauracion-de-las-areas-afectadas-por-grandes-incendios-forestales-en-Chubut-en-2014-2015.pdf"
+      ]
+    },
+    "rois": [
+      {
+        "bbox": [
+          -71.643,
+          -42.272,
+          -71.459,
+          -42.105
+        ],
+        "id": "currumahuida",
+        "name": "Incendio Currumahuida–Lago Puelo 2015"
+      }
+    ],
+    "run_id": "event-filter-001",
+    "source": {
+      "collection": "LANDSAT/LC08/C02/T1_L2",
+      "note": "Sentinel-2A se lanzó en junio de 2015; se usa Landsat 8 OLI con bandas renombradas a sus equivalentes S2 y reflectancia en escala 0–10000.",
+      "project": "ee-nachochevallier"
+    },
+    "windows": {
+      "post": {
+        "end_inclusive": "2015-05-31",
+        "start": "2015-04-07"
+      },
+      "pre": {
+        "end_inclusive": "2015-03-22",
+        "start": "2015-02-15"
+      }
+    }
+  },
+  "configuration_hash": "fde57581ebda3301062c3a4e7b31928a2dc66081c9f1c49c0e83c9bd349bc3b4",
+  "counts": {
+    "error": 0,
+    "expected": 9,
+    "ok": 8,
+    "warning": 1
+  },
+  "created_at": "2026-09-27T19:15:30+00:00",
+  "environment": {
+    "dependencies": {
+      "earthengine-api": "1.7.41",
+      "geedim": "2.0.0",
+      "geemap": "0.38.4",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.2",
+      "rasterio": "1.5.1"
+    },
+    "git_commit": "979bec8f6aa5bb8965ff486a3fd748ac26d3efb0",
+    "python": "3.14.7"
+  },
+  "errors": [],
+  "event_id": "currumahuida-2015",
+  "metrics": {
+    "burned_hectares": 4236.4733,
+    "burned_valid_pct": 15.999,
+    "candidate_hectares": 4244.9332,
+    "other_fire_hectares": 0.0,
+    "unconfirmed_hectares": 8.4599
+  },
+  "origin": "derived",
+  "parent_configuration_hash": "0d06a0702968004f6275844c71998d9d9cd46b3b2702884e7a88f7624a305625",
+  "parent_run": "baseline-001",
+  "run_id": "event-filter-001",
+  "schema_version": 1,
+  "status": "completed",
+  "thermal_evidence": {
+    "cluster_count": 2,
+    "clusters": [
+      {
+        "dates": [
+          "2015-03-24",
+          "2015-03-25",
+          "2015-03-26",
+          "2015-03-28",
+          "2015-03-29",
+          "2015-03-30"
+        ],
+        "detection_count": 62,
+        "id": "thermal-001",
+        "latitude": -42.1788,
+        "longitude": -71.569793
+      },
+      {
+        "dates": [
+          "2015-03-29"
+        ],
+        "detection_count": 2,
+        "id": "thermal-002",
+        "latitude": -42.144462,
+        "longitude": -71.541829
+      }
+    ],
+    "collection": "NASA/VIIRS/002/VNP14A1",
+    "detection_count": 85,
+    "image_count": 70,
+    "images": [
+      "2015_03_23",
+      "2015_03_24",
+      "2015_03_25",
+      "2015_03_26",
+      "2015_03_27",
+      "2015_03_28",
+      "2015_03_29",
+      "2015_03_30",
+      "2015_03_31",
+      "2015_04_01",
+      "2015_04_02",
+      "2015_04_03",
+      "2015_04_04",
+      "2015_04_05",
+      "2015_04_06",
+      "2015_04_07",
+      "2015_04_08",
+      "2015_04_09",
+      "2015_04_10",
+      "2015_04_11",
+      "2015_04_12",
+      "2015_04_13",
+      "2015_04_14",
+      "2015_04_15",
+      "2015_04_16",
+      "2015_04_17",
+      "2015_04_18",
+      "2015_04_19",
+      "2015_04_20",
+      "2015_04_21",
+      "2015_04_22",
+      "2015_04_23",
+      "2015_04_24",
+      "2015_04_25",
+      "2015_04_26",
+      "2015_04_27",
+      "2015_04_28",
+      "2015_04_29",
+      "2015_04_30",
+      "2015_05_01",
+      "2015_05_02",
+      "2015_05_03",
+      "2015_05_04",
+      "2015_05_05",
+      "2015_05_06",
+      "2015_05_07",
+      "2015_05_08",
+      "2015_05_09",
+      "2015_05_10",
+      "2015_05_11",
+      "2015_05_12",
+      "2015_05_13",
+      "2015_05_14",
+      "2015_05_15",
+      "2015_05_16",
+      "2015_05_17",
+      "2015_05_18",
+      "2015_05_19",
+      "2015_05_20",
+      "2015_05_21",
+      "2015_05_22",
+      "2015_05_23",
+      "2015_05_24",
+      "2015_05_25",
+      "2015_05_26",
+      "2015_05_27",
+      "2015_05_28",
+      "2015_05_29",
+      "2015_05_30",
+      "2015_05_31"
+    ],
+    "target_cluster_id": "thermal-001",
+    "unique_pixel_count": 64
+  },
+  "validation_errors": []
+}

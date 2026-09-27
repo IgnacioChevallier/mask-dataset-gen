@@ -1,0 +1,140 @@
+{
+  "completed_at": "2026-09-27T19:07:38+00:00",
+  "configuration": {
+    "algorithm_version": "dnbr-s2-v1",
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 20,
+    "event_description": "Incendio por rayo iniciado a comienzos de diciembre de 2025 en Loma de la Chancha, valle de El Turbio, junto al Parque Nacional Lago Puelo.",
+    "event_id": "el-turbio-2025",
+    "event_name": "Incendio El Turbio 2025",
+    "fire_start_date": "2025-12-01",
+    "grid": {
+      "scale_m": 20,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "dilation_pixels": 1,
+      "dnbr_threshold": 0.3,
+      "min_connected_pixels": 150,
+      "ndsi_snow_max": 0.25,
+      "post_nbr_max": 0.4,
+      "pre_nbr_min": 0.15,
+      "pre_ndwi_water_max": 0.05
+    },
+    "max_workers": 4,
+    "purpose": "Primer resultado; ROI derivado de la cicatriz MODIS MCD64A1 con margen.",
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "reference": {
+      "area_note": "Prensa: más de 3.000 ha a una semana del inicio; seguía activo a mediados de enero.",
+      "burned_area_ha": 3000,
+      "modis_mcd64a1_ha": 1663,
+      "sources": [
+        "https://www.argentina.gob.ar/noticias/incendio-en-el-valle-de-el-turbio",
+        "https://www.anbariloche.com.ar/noticias/2025/12/10/101303-mas-de-3-mil-hectareas-arrasadas-por-el-fuego-en-el-turbio"
+      ]
+    },
+    "rois": [
+      {
+        "bbox": [
+          -71.987,
+          -42.42,
+          -71.719,
+          -42.21
+        ],
+        "id": "el-turbio",
+        "name": "Incendio El Turbio 2025"
+      }
+    ],
+    "run_id": "baseline-001",
+    "source": {
+      "collection": "COPERNICUS/S2_SR_HARMONIZED",
+      "project": "ee-nachochevallier"
+    },
+    "windows": {
+      "post": {
+        "end_inclusive": "2026-03-31",
+        "start": "2026-02-15"
+      },
+      "pre": {
+        "end_inclusive": "2025-11-27",
+        "start": "2025-10-15"
+      }
+    }
+  },
+  "configuration_hash": "9657d42487def8e7b911d10e2646ce9e579815fb3c3c0a19ba56e879e1860bb5",
+  "counts": {
+    "error": 0,
+    "expected": 30,
+    "ok": 20,
+    "warning": 10
+  },
+  "created_at": "2026-09-27T19:01:39+00:00",
+  "environment": {
+    "dependencies": {
+      "earthengine-api": "1.7.41",
+      "geedim": "2.0.0",
+      "geemap": "0.38.4",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.2",
+      "rasterio": "1.5.1"
+    },
+    "git_commit": "979bec8f6aa5bb8965ff486a3fd748ac26d3efb0",
+    "python": "3.14.7"
+  },
+  "errors": [],
+  "event_id": "el-turbio-2025",
+  "last_started_at": "2026-09-27T19:01:39+00:00",
+  "metrics": {
+    "by_roi": [
+      {
+        "burned_hectares": 1957.6909,
+        "burned_valid_pct": 4.4325,
+        "id": "el-turbio",
+        "valid_coverage_pct": 85.6865
+      }
+    ],
+    "total": {
+      "burned_hectares": 1957.6909,
+      "burned_valid_pct": 4.4325,
+      "id": "total",
+      "valid_coverage_pct": 85.6865
+    }
+  },
+  "origin": "generated",
+  "run_id": "baseline-001",
+  "scenes": {
+    "post": [
+      "20260218T142711_20260218T144332_T18GYU",
+      "20260218T142711_20260218T144332_T19GBP",
+      "20260305T142749_20260305T144048_T18GYT",
+      "20260305T142749_20260305T144048_T18GYU",
+      "20260305T142749_20260305T144048_T19GBP",
+      "20260310T142751_20260310T144233_T18GYT",
+      "20260310T142751_20260310T144233_T18GYU",
+      "20260310T142751_20260310T144233_T19GBP"
+    ],
+    "pre": [
+      "20251105T142709_20251105T143254_T18GYT",
+      "20251105T142709_20251105T143254_T18GYU",
+      "20251105T142709_20251105T143254_T19GBP",
+      "20251125T142709_20251125T143606_T18GYT",
+      "20251125T142709_20251125T143606_T18GYU",
+      "20251125T142709_20251125T143606_T19GBP"
+    ]
+  },
+  "schema_version": 1,
+  "status": "completed",
+  "tile_naming": "grid-position-v1",
+  "validation_errors": []
+}

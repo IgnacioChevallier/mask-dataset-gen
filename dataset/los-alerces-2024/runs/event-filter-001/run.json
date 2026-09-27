@@ -1,0 +1,250 @@
+{
+  "comparison_to_parent": {
+    "candidate_local_hectares": 6095.4135,
+    "parent_reported_hectares": 6074.4005,
+    "removed_hectares": 88.0465,
+    "retained_candidate_pct": 98.5555,
+    "target_hectares": 6007.367
+  },
+  "completed_at": "2026-09-27T19:11:06+00:00",
+  "configuration": {
+    "algorithm_version": "event-filter-v1-1",
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 40,
+    "event_description": "Incendio detectado la noche del 25 de enero de 2024 en Bahía Rosales y el arroyo Centinela, Lago Futalaufquen.",
+    "event_filter": {
+      "closing_radius_m": 80,
+      "component_hotspot_max_distance_m": 1500,
+      "component_link_max_distance_m": 1000,
+      "ignition_point": {
+        "latitude": -42.8036,
+        "longitude": -71.5939,
+        "note": "Primera detección VIIRS 375 m (26 de enero de 2024)."
+      },
+      "seed_max_distance_m": 3000,
+      "thermal": {
+        "band": "confidence",
+        "collection": "NASA/LANCE/SNPP_VIIRS/C2",
+        "end_inclusive": "2024-03-31",
+        "reducer_version": "masked-sum-v1",
+        "sampling_mode": "aggregate",
+        "scale_m": 375,
+        "source_note": "VIIRS S-NPP 375 m; se excluyen detecciones de confianza baja; muestreo agregado por píxel.",
+        "start": "2024-01-25",
+        "threshold": 1
+      },
+      "thermal_cluster_radius_m": 2000
+    },
+    "event_id": "los-alerces-2024",
+    "event_name": "Incendio Los Alerces, Bahía Rosales 2024",
+    "fire_start_date": "2024-01-25",
+    "grid": {
+      "scale_m": 20,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "dilation_pixels": 1,
+      "dnbr_threshold": 0.3,
+      "min_connected_pixels": 150,
+      "ndsi_snow_max": 0.25,
+      "post_nbr_max": 0.4,
+      "pre_nbr_min": 0.15,
+      "pre_ndwi_water_max": 0.05
+    },
+    "max_workers": 4,
+    "origin": "derived",
+    "parent_run": "baseline-001",
+    "purpose": "Atribuir los componentes de cambio al incendio y separar incendios vecinos.",
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "reference": {
+      "area_note": "Superficie informada en febrero de 2024 dentro del parque.",
+      "burned_area_ha": 5971,
+      "modis_mcd64a1_ha": 6923,
+      "sources": [
+        "https://www.lanacion.com.ar/sociedad/incendios-controlados-se-conocio-la-cantidad-de-hectareas-arrasadas-por-el-fuego-en-el-parque-nid18022024/",
+        "https://www.infobae.com/sociedad/2024/02/05/parque-nacional-los-alerces-rafagas-de-viento-provocaron-el-avance-del-fuego-y-familias-tuvieron-que-ser-evacuadas/"
+      ]
+    },
+    "rois": [
+      {
+        "bbox": [
+          -71.664,
+          -42.984,
+          -71.397,
+          -42.733
+        ],
+        "id": "los-alerces",
+        "name": "Incendio Los Alerces, Bahía Rosales 2024"
+      }
+    ],
+    "run_id": "event-filter-001",
+    "source": {
+      "collection": "COPERNICUS/S2_SR_HARMONIZED",
+      "project": "ee-nachochevallier"
+    },
+    "windows": {
+      "post": {
+        "end_inclusive": "2024-03-31",
+        "start": "2024-02-20"
+      },
+      "pre": {
+        "end_inclusive": "2024-01-24",
+        "start": "2023-11-01"
+      }
+    }
+  },
+  "configuration_hash": "a284991349a1e281dae6fc0c63ba78ac1ed64969a43beff971d49abecb01acd0",
+  "counts": {
+    "error": 0,
+    "expected": 36,
+    "ok": 30,
+    "warning": 6
+  },
+  "created_at": "2026-09-27T19:09:53+00:00",
+  "environment": {
+    "dependencies": {
+      "earthengine-api": "1.7.41",
+      "geedim": "2.0.0",
+      "geemap": "0.38.4",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.2",
+      "rasterio": "1.5.1"
+    },
+    "git_commit": "979bec8f6aa5bb8965ff486a3fd748ac26d3efb0",
+    "python": "3.14.7"
+  },
+  "errors": [],
+  "event_id": "los-alerces-2024",
+  "metrics": {
+    "burned_hectares": 6007.367,
+    "burned_valid_pct": 10.2561,
+    "candidate_hectares": 6095.4135,
+    "other_fire_hectares": 0.0,
+    "unconfirmed_hectares": 88.0465
+  },
+  "origin": "derived",
+  "parent_configuration_hash": "a90e7924b3bcc512b6fbb1dbe2f93fae192747010e6ba4606e72224dbb09678c",
+  "parent_run": "baseline-001",
+  "run_id": "event-filter-001",
+  "schema_version": 1,
+  "status": "completed",
+  "thermal_evidence": {
+    "cluster_count": 1,
+    "clusters": [
+      {
+        "dates": [
+          "2024-01-26",
+          "2024-01-27",
+          "2024-01-28",
+          "2024-01-29",
+          "2024-01-30",
+          "2024-01-31",
+          "2024-02-01",
+          "2024-02-02",
+          "2024-02-03",
+          "2024-02-04",
+          "2024-02-05",
+          "2024-02-06",
+          "2024-02-07",
+          "2024-02-08",
+          "2024-02-10",
+          "2024-02-11",
+          "2024-02-12",
+          "2024-02-13",
+          "2024-02-14",
+          "2024-02-15"
+        ],
+        "detection_count": 1024,
+        "id": "thermal-001",
+        "latitude": -42.848675,
+        "longitude": -71.539233
+      }
+    ],
+    "collection": "NASA/LANCE/SNPP_VIIRS/C2",
+    "detection_count": 2551,
+    "image_count": 67,
+    "images": [
+      "2024025",
+      "2024026",
+      "2024027",
+      "2024028",
+      "2024029",
+      "2024030",
+      "2024031",
+      "2024032",
+      "2024033",
+      "2024034",
+      "2024035",
+      "2024036",
+      "2024037",
+      "2024038",
+      "2024039",
+      "2024040",
+      "2024041",
+      "2024042",
+      "2024043",
+      "2024044",
+      "2024045",
+      "2024046",
+      "2024047",
+      "2024048",
+      "2024049",
+      "2024050",
+      "2024051",
+      "2024052",
+      "2024053",
+      "2024054",
+      "2024055",
+      "2024056",
+      "2024057",
+      "2024058",
+      "2024059",
+      "2024060",
+      "2024061",
+      "2024062",
+      "2024063",
+      "2024064",
+      "2024065",
+      "2024066",
+      "2024067",
+      "2024068",
+      "2024069",
+      "2024070",
+      "2024071",
+      "2024072",
+      "2024073",
+      "2024074",
+      "2024075",
+      "2024076",
+      "2024077",
+      "2024078",
+      "2024079",
+      "2024080",
+      "2024081",
+      "2024082",
+      "2024083",
+      "2024084",
+      "2024085",
+      "2024086",
+      "2024087",
+      "2024088",
+      "2024089",
+      "2024090",
+      "2024091"
+    ],
+    "target_cluster_id": "thermal-001",
+    "unique_pixel_count": 1024
+  },
+  "validation_errors": []
+}

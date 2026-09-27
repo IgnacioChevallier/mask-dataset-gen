@@ -1,0 +1,135 @@
+{
+  "completed_at": "2026-09-27T19:15:28+00:00",
+  "configuration": {
+    "algorithm_version": "dnbr-l8-v1",
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 40,
+    "event_description": "Incendio forestal Currumahuida – Lago Puelo, detectado el 23 de marzo de 2015.",
+    "event_id": "currumahuida-2015",
+    "event_name": "Incendio Currumahuida–Lago Puelo 2015",
+    "fire_start_date": "2015-03-23",
+    "grid": {
+      "scale_m": 30,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "dilation_pixels": 1,
+      "dnbr_threshold": 0.3,
+      "min_connected_pixels": 67,
+      "ndsi_snow_max": 0.25,
+      "post_nbr_max": 0.4,
+      "pre_nbr_min": 0.15,
+      "pre_ndwi_water_max": 0.05
+    },
+    "max_workers": 4,
+    "purpose": "Primer resultado; ROI derivado de la cicatriz MODIS MCD64A1 con margen.",
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "reference": {
+      "area_note": "Programa provincial de restauración de Chubut; incluye islas sin quemar. PRE posterior a Desemboque para no atribuir su cicatriz.",
+      "burned_area_ha": 3150.8,
+      "modis_mcd64a1_ha": 3587,
+      "sources": [
+        "https://bosques.chubut.gov.ar/wp-content/uploads/2023/08/Programa-de-restauracion-de-las-areas-afectadas-por-grandes-incendios-forestales-en-Chubut-en-2014-2015.pdf"
+      ]
+    },
+    "rois": [
+      {
+        "bbox": [
+          -71.643,
+          -42.272,
+          -71.459,
+          -42.105
+        ],
+        "id": "currumahuida",
+        "name": "Incendio Currumahuida–Lago Puelo 2015"
+      }
+    ],
+    "run_id": "baseline-001",
+    "source": {
+      "collection": "LANDSAT/LC08/C02/T1_L2",
+      "note": "Sentinel-2A se lanzó en junio de 2015; se usa Landsat 8 OLI con bandas renombradas a sus equivalentes S2 y reflectancia en escala 0–10000.",
+      "project": "ee-nachochevallier"
+    },
+    "windows": {
+      "post": {
+        "end_inclusive": "2015-05-31",
+        "start": "2015-04-07"
+      },
+      "pre": {
+        "end_inclusive": "2015-03-22",
+        "start": "2015-02-15"
+      }
+    }
+  },
+  "configuration_hash": "0d06a0702968004f6275844c71998d9d9cd46b3b2702884e7a88f7624a305625",
+  "counts": {
+    "error": 0,
+    "expected": 9,
+    "ok": 8,
+    "warning": 1
+  },
+  "created_at": "2026-09-27T19:14:11+00:00",
+  "environment": {
+    "dependencies": {
+      "earthengine-api": "1.7.41",
+      "geedim": "2.0.0",
+      "geemap": "0.38.4",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.2",
+      "rasterio": "1.5.1"
+    },
+    "git_commit": "979bec8f6aa5bb8965ff486a3fd748ac26d3efb0",
+    "python": "3.14.7"
+  },
+  "errors": [],
+  "event_id": "currumahuida-2015",
+  "last_started_at": "2026-09-27T19:14:11+00:00",
+  "metrics": {
+    "by_roi": [
+      {
+        "burned_hectares": 4230.9391,
+        "burned_valid_pct": 16.1159,
+        "id": "currumahuida",
+        "valid_coverage_pct": 93.0685
+      }
+    ],
+    "total": {
+      "burned_hectares": 4230.9391,
+      "burned_valid_pct": 16.1159,
+      "id": "total",
+      "valid_coverage_pct": 93.0685
+    }
+  },
+  "origin": "generated",
+  "run_id": "baseline-001",
+  "scenes": {
+    "post": [
+      "LC08_231089_20150420",
+      "LC08_231089_20150522",
+      "LC08_231090_20150420",
+      "LC08_232089_20150411"
+    ],
+    "pre": [
+      "LC08_231089_20150215",
+      "LC08_231089_20150319",
+      "LC08_231090_20150215",
+      "LC08_232089_20150222",
+      "LC08_232089_20150310"
+    ]
+  },
+  "schema_version": 1,
+  "status": "completed",
+  "tile_naming": "grid-position-v1",
+  "validation_errors": []
+}

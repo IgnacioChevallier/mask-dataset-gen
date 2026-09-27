@@ -1,0 +1,221 @@
+{
+  "comparison_to_parent": {
+    "candidate_local_hectares": 558.036,
+    "parent_reported_hectares": 558.9003,
+    "removed_hectares": 0.0,
+    "retained_candidate_pct": 100.0,
+    "target_hectares": 558.036
+  },
+  "completed_at": "2026-09-27T19:18:13+00:00",
+  "configuration": {
+    "algorithm_version": "event-filter-v1-1",
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 40,
+    "event_description": "Incendio forestal Desemboque, detectado el 30 de enero de 2015 en la zona Lago Puelo–Epuyén.",
+    "event_filter": {
+      "closing_radius_m": 80,
+      "component_hotspot_max_distance_m": 1500,
+      "component_link_max_distance_m": 1000,
+      "ignition_point": {
+        "latitude": -42.1115,
+        "longitude": -71.5688,
+        "note": "Primera detección VNP14A1 (31 de enero de 2015)."
+      },
+      "seed_max_distance_m": 3000,
+      "thermal": {
+        "band": "FireMask",
+        "collection": "NASA/VIIRS/002/VNP14A1",
+        "end_inclusive": "2015-03-22",
+        "reducer_version": "masked-sum-v1",
+        "sampling_mode": "aggregate",
+        "scale_m": 1000,
+        "source_note": "VIIRS VNP14A1 histórico de 1 km; FireMask 7–9.",
+        "start": "2015-01-30",
+        "threshold": 7
+      },
+      "thermal_cluster_radius_m": 2000
+    },
+    "event_id": "desemboque-2015",
+    "event_name": "Incendio Desemboque, Lago Puelo–Epuyén 2015",
+    "fire_start_date": "2015-01-30",
+    "grid": {
+      "scale_m": 30,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "dilation_pixels": 1,
+      "dnbr_threshold": 0.3,
+      "min_connected_pixels": 67,
+      "ndsi_snow_max": 0.25,
+      "post_nbr_max": 0.4,
+      "pre_nbr_min": 0.15,
+      "pre_ndwi_water_max": 0.05
+    },
+    "max_workers": 4,
+    "origin": "derived",
+    "parent_run": "baseline-002",
+    "purpose": "Atribuir los componentes de cambio al incendio y separar incendios vecinos.",
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "reference": {
+      "area_note": "Programa provincial de restauración de Chubut; incluye islas sin quemar. POST cortado antes del incendio Currumahuida (23 de marzo).",
+      "burned_area_ha": 2306.8,
+      "modis_mcd64a1_ha": 1652,
+      "sources": [
+        "https://bosques.chubut.gov.ar/wp-content/uploads/2023/08/Programa-de-restauracion-de-las-areas-afectadas-por-grandes-incendios-forestales-en-Chubut-en-2014-2015.pdf"
+      ]
+    },
+    "rois": [
+      {
+        "bbox": [
+          -71.668,
+          -42.16,
+          -71.53,
+          -42.059
+        ],
+        "id": "desemboque",
+        "name": "Incendio Desemboque, Lago Puelo–Epuyén 2015"
+      }
+    ],
+    "run_id": "event-filter-001",
+    "source": {
+      "collection": "LANDSAT/LC08/C02/T1_L2",
+      "note": "Sentinel-2A se lanzó en junio de 2015; se usa Landsat 8 OLI con bandas renombradas a sus equivalentes S2 y reflectancia en escala 0–10000.",
+      "project": "ee-nachochevallier"
+    },
+    "windows": {
+      "post": {
+        "end_inclusive": "2015-03-22",
+        "start": "2015-02-15"
+      },
+      "pre": {
+        "end_inclusive": "2015-01-29",
+        "start": "2014-11-01"
+      }
+    }
+  },
+  "configuration_hash": "36cae1a281342f158da59a81f333ff0e7a1e5eb2a99ea784e08c3782065551ee",
+  "counts": {
+    "error": 0,
+    "expected": 6,
+    "ok": 6,
+    "warning": 0
+  },
+  "created_at": "2026-09-27T19:17:59+00:00",
+  "environment": {
+    "dependencies": {
+      "earthengine-api": "1.7.41",
+      "geedim": "2.0.0",
+      "geemap": "0.38.4",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.2",
+      "rasterio": "1.5.1"
+    },
+    "git_commit": "979bec8f6aa5bb8965ff486a3fd748ac26d3efb0",
+    "python": "3.14.7"
+  },
+  "errors": [],
+  "event_id": "desemboque-2015",
+  "metrics": {
+    "burned_hectares": 558.036,
+    "burned_valid_pct": 4.3376,
+    "candidate_hectares": 558.036,
+    "other_fire_hectares": 0.0,
+    "unconfirmed_hectares": 0.0
+  },
+  "origin": "derived",
+  "parent_configuration_hash": "bb1bcaab46b8f6cdbeb500fbda5f2b66f55f46d079b82ae4f1425498fc6282f3",
+  "parent_run": "baseline-002",
+  "run_id": "event-filter-001",
+  "schema_version": 1,
+  "status": "completed",
+  "thermal_evidence": {
+    "cluster_count": 1,
+    "clusters": [
+      {
+        "dates": [
+          "2015-01-31",
+          "2015-02-01",
+          "2015-02-02",
+          "2015-02-05",
+          "2015-02-28",
+          "2015-03-04"
+        ],
+        "detection_count": 23,
+        "id": "thermal-001",
+        "latitude": -42.100327,
+        "longitude": -71.578348
+      }
+    ],
+    "collection": "NASA/VIIRS/002/VNP14A1",
+    "detection_count": 36,
+    "image_count": 52,
+    "images": [
+      "2015_01_30",
+      "2015_01_31",
+      "2015_02_01",
+      "2015_02_02",
+      "2015_02_03",
+      "2015_02_04",
+      "2015_02_05",
+      "2015_02_06",
+      "2015_02_07",
+      "2015_02_08",
+      "2015_02_09",
+      "2015_02_10",
+      "2015_02_11",
+      "2015_02_12",
+      "2015_02_13",
+      "2015_02_14",
+      "2015_02_15",
+      "2015_02_16",
+      "2015_02_17",
+      "2015_02_18",
+      "2015_02_19",
+      "2015_02_20",
+      "2015_02_21",
+      "2015_02_22",
+      "2015_02_23",
+      "2015_02_24",
+      "2015_02_25",
+      "2015_02_26",
+      "2015_02_27",
+      "2015_02_28",
+      "2015_03_01",
+      "2015_03_02",
+      "2015_03_03",
+      "2015_03_04",
+      "2015_03_05",
+      "2015_03_06",
+      "2015_03_07",
+      "2015_03_08",
+      "2015_03_09",
+      "2015_03_10",
+      "2015_03_11",
+      "2015_03_12",
+      "2015_03_13",
+      "2015_03_14",
+      "2015_03_15",
+      "2015_03_16",
+      "2015_03_17",
+      "2015_03_18",
+      "2015_03_19",
+      "2015_03_20",
+      "2015_03_21",
+      "2015_03_22"
+    ],
+    "target_cluster_id": "thermal-001",
+    "unique_pixel_count": 23
+  },
+  "validation_errors": []
+}

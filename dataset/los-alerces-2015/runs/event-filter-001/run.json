@@ -1,0 +1,239 @@
+{
+  "comparison_to_parent": {
+    "candidate_local_hectares": 1202.3295,
+    "parent_reported_hectares": 1187.9979,
+    "removed_hectares": 0.0,
+    "retained_candidate_pct": 100.0,
+    "target_hectares": 1202.3295
+  },
+  "completed_at": "2026-09-27T19:16:24+00:00",
+  "configuration": {
+    "algorithm_version": "event-filter-v1-1",
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 40,
+    "event_description": "Incendio intencional iniciado el 22–23 de marzo de 2015 en el Parque Nacional Los Alerces, sobre el Lago Futalaufquen.",
+    "event_filter": {
+      "closing_radius_m": 80,
+      "component_hotspot_max_distance_m": 1500,
+      "component_link_max_distance_m": 1000,
+      "ignition_point": {
+        "latitude": -42.908,
+        "longitude": -71.6272,
+        "note": "Primera detección VNP14A1 (23 de marzo de 2015)."
+      },
+      "seed_max_distance_m": 3000,
+      "thermal": {
+        "band": "FireMask",
+        "collection": "NASA/VIIRS/002/VNP14A1",
+        "end_inclusive": "2015-05-31",
+        "reducer_version": "masked-sum-v1",
+        "sampling_mode": "aggregate",
+        "scale_m": 1000,
+        "source_note": "VIIRS VNP14A1 histórico de 1 km; FireMask 7–9.",
+        "start": "2015-03-22",
+        "threshold": 7
+      },
+      "thermal_cluster_radius_m": 2000
+    },
+    "event_id": "los-alerces-2015",
+    "event_name": "Incendio Los Alerces, cordón Situación 2015",
+    "fire_start_date": "2015-03-22",
+    "grid": {
+      "scale_m": 30,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "dilation_pixels": 1,
+      "dnbr_threshold": 0.3,
+      "min_connected_pixels": 67,
+      "ndsi_snow_max": 0.25,
+      "post_nbr_max": 0.4,
+      "pre_nbr_min": 0.15,
+      "pre_ndwi_water_max": 0.05
+    },
+    "max_workers": 4,
+    "origin": "derived",
+    "parent_run": "baseline-001",
+    "purpose": "Atribuir los componentes de cambio al incendio y separar incendios vecinos.",
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "reference": {
+      "area_note": "Prensa: más de 1.500 ha de bosque nativo en el cordón Situación; valor aproximado.",
+      "burned_area_ha": 1500,
+      "modis_mcd64a1_ha": 1460,
+      "sources": [
+        "https://www.infobae.com/2015/03/23/1717784-chubut-hay-un-nuevo-incendio-intencional-esta-vez-el-parque-nacional-los-alerces/",
+        "https://revistadigital.culturademontania.org.ar/articulo/646cc8cffc0d3efac6f6e68e"
+      ]
+    },
+    "rois": [
+      {
+        "bbox": [
+          -71.701,
+          -42.95,
+          -71.576,
+          -42.804
+        ],
+        "id": "los-alerces",
+        "name": "Incendio Los Alerces, cordón Situación 2015"
+      }
+    ],
+    "run_id": "event-filter-001",
+    "source": {
+      "collection": "LANDSAT/LC08/C02/T1_L2",
+      "note": "Sentinel-2A se lanzó en junio de 2015; se usa Landsat 8 OLI con bandas renombradas a sus equivalentes S2 y reflectancia en escala 0–10000.",
+      "project": "ee-nachochevallier"
+    },
+    "windows": {
+      "post": {
+        "end_inclusive": "2015-05-31",
+        "start": "2015-04-07"
+      },
+      "pre": {
+        "end_inclusive": "2015-03-21",
+        "start": "2014-11-01"
+      }
+    }
+  },
+  "configuration_hash": "fa6611a2f77c37f9666e45c35d4d21c70447c50307a5e61216bc573f9f5a8453",
+  "counts": {
+    "error": 0,
+    "expected": 6,
+    "ok": 6,
+    "warning": 0
+  },
+  "created_at": "2026-09-27T19:16:11+00:00",
+  "environment": {
+    "dependencies": {
+      "earthengine-api": "1.7.41",
+      "geedim": "2.0.0",
+      "geemap": "0.38.4",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.2",
+      "rasterio": "1.5.1"
+    },
+    "git_commit": "979bec8f6aa5bb8965ff486a3fd748ac26d3efb0",
+    "python": "3.14.7"
+  },
+  "errors": [],
+  "event_id": "los-alerces-2015",
+  "metrics": {
+    "burned_hectares": 1202.3295,
+    "burned_valid_pct": 7.2783,
+    "candidate_hectares": 1202.3295,
+    "other_fire_hectares": 0.0,
+    "unconfirmed_hectares": 0.0
+  },
+  "origin": "derived",
+  "parent_configuration_hash": "a13ef06dc82df3ad64577b7ede43a67431f3fd537228a43634959aa44d1e4fe8",
+  "parent_run": "baseline-001",
+  "run_id": "event-filter-001",
+  "schema_version": 1,
+  "status": "completed",
+  "thermal_evidence": {
+    "cluster_count": 1,
+    "clusters": [
+      {
+        "dates": [
+          "2015-03-23",
+          "2015-03-24",
+          "2015-03-25",
+          "2015-03-30"
+        ],
+        "detection_count": 24,
+        "id": "thermal-001",
+        "latitude": -42.88108,
+        "longitude": -71.633158
+      }
+    ],
+    "collection": "NASA/VIIRS/002/VNP14A1",
+    "detection_count": 30,
+    "image_count": 71,
+    "images": [
+      "2015_03_22",
+      "2015_03_23",
+      "2015_03_24",
+      "2015_03_25",
+      "2015_03_26",
+      "2015_03_27",
+      "2015_03_28",
+      "2015_03_29",
+      "2015_03_30",
+      "2015_03_31",
+      "2015_04_01",
+      "2015_04_02",
+      "2015_04_03",
+      "2015_04_04",
+      "2015_04_05",
+      "2015_04_06",
+      "2015_04_07",
+      "2015_04_08",
+      "2015_04_09",
+      "2015_04_10",
+      "2015_04_11",
+      "2015_04_12",
+      "2015_04_13",
+      "2015_04_14",
+      "2015_04_15",
+      "2015_04_16",
+      "2015_04_17",
+      "2015_04_18",
+      "2015_04_19",
+      "2015_04_20",
+      "2015_04_21",
+      "2015_04_22",
+      "2015_04_23",
+      "2015_04_24",
+      "2015_04_25",
+      "2015_04_26",
+      "2015_04_27",
+      "2015_04_28",
+      "2015_04_29",
+      "2015_04_30",
+      "2015_05_01",
+      "2015_05_02",
+      "2015_05_03",
+      "2015_05_04",
+      "2015_05_05",
+      "2015_05_06",
+      "2015_05_07",
+      "2015_05_08",
+      "2015_05_09",
+      "2015_05_10",
+      "2015_05_11",
+      "2015_05_12",
+      "2015_05_13",
+      "2015_05_14",
+      "2015_05_15",
+      "2015_05_16",
+      "2015_05_17",
+      "2015_05_18",
+      "2015_05_19",
+      "2015_05_20",
+      "2015_05_21",
+      "2015_05_22",
+      "2015_05_23",
+      "2015_05_24",
+      "2015_05_25",
+      "2015_05_26",
+      "2015_05_27",
+      "2015_05_28",
+      "2015_05_29",
+      "2015_05_30",
+      "2015_05_31"
+    ],
+    "target_cluster_id": "thermal-001",
+    "unique_pixel_count": 24
+  },
+  "validation_errors": []
+}

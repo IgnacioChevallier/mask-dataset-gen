@@ -1,0 +1,116 @@
+{
+  "event_id": "epuyen-2019",
+  "name": "Incendio de Epuyén 2019",
+  "description": "Incendio forestal de fines de enero de 2019 al este de Epuyén; en febrero se sumó un foco en El Maitén.",
+  "fire_start_date": "2019-01-28",
+  "reference": {
+    "burned_area_ha": 1553,
+    "area_note": "Prensa: 1.553 ha al 3 de febrero de 2019, sin contar el foco de El Maitén.",
+    "modis_mcd64a1_ha": 2045,
+    "sources": [
+      "https://diariodecuyo.com.ar/argentina/Un-incendio-en-Epuyen-esta-fuera-de-control-y-ya-afecta-a-mas-de-1-550-hectareas-20190203-0037.html",
+      "https://www.eldestapeweb.com/nota/se-reactivo-el-fuego-en-epuyen-y-se-inicio-otro-foco-en-el-maiten-2019-2-4-9-31-0"
+    ]
+  },
+  "source": {
+    "collection": "COPERNICUS/S2_SR_HARMONIZED",
+    "project": "ee-nachochevallier"
+  },
+  "rois": [
+    {
+      "id": "epuyen",
+      "name": "Incendio de Epuyén 2019",
+      "bbox": [
+        -71.412,
+        -42.344,
+        -71.224,
+        -42.186
+      ]
+    }
+  ],
+  "defaults": {
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 20,
+    "grid": {
+      "scale_m": 20,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "dnbr_threshold": 0.3,
+      "pre_nbr_min": 0.15,
+      "post_nbr_max": 0.4,
+      "ndsi_snow_max": 0.25,
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "pre_ndwi_water_max": 0.05,
+      "min_connected_pixels": 150,
+      "dilation_pixels": 1
+    },
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "algorithm_version": "dnbr-s2-v1",
+    "max_workers": 4
+  },
+  "runs": {
+    "baseline-001": {
+      "purpose": "Primer resultado; ROI derivado de la cicatriz MODIS MCD64A1 con margen.",
+      "windows": {
+        "pre": {
+          "start": "2018-11-01",
+          "end_inclusive": "2019-01-27"
+        },
+        "post": {
+          "start": "2019-02-20",
+          "end_inclusive": "2019-03-31"
+        }
+      }
+    },
+    "event-filter-001": {
+      "purpose": "Atribuir los componentes de cambio al incendio y separar incendios vecinos.",
+      "origin": "derived",
+      "parent_run": "baseline-001",
+      "algorithm_version": "event-filter-v1-1",
+      "windows": {
+        "pre": {
+          "start": "2018-11-01",
+          "end_inclusive": "2019-01-27"
+        },
+        "post": {
+          "start": "2019-02-20",
+          "end_inclusive": "2019-03-31"
+        }
+      },
+      "event_filter": {
+        "ignition_point": {
+          "longitude": -71.3243,
+          "latitude": -42.2516,
+          "note": "Primera detección VNP14A1 (30 de enero de 2019)."
+        },
+        "closing_radius_m": 80,
+        "thermal_cluster_radius_m": 2000,
+        "component_hotspot_max_distance_m": 1500,
+        "component_link_max_distance_m": 1000,
+        "seed_max_distance_m": 3000,
+        "thermal": {
+          "collection": "NASA/VIIRS/002/VNP14A1",
+          "band": "FireMask",
+          "threshold": 7,
+          "scale_m": 1000,
+          "sampling_mode": "aggregate",
+          "reducer_version": "masked-sum-v1",
+          "start": "2019-01-28",
+          "end_inclusive": "2019-03-31",
+          "source_note": "VIIRS VNP14A1 histórico de 1 km; FireMask 7–9."
+        }
+      }
+    }
+  }
+}

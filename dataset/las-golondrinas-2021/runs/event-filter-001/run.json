@@ -1,0 +1,275 @@
+{
+  "comparison_to_parent": {
+    "candidate_local_hectares": 14683.418,
+    "parent_reported_hectares": 14584.7111,
+    "removed_hectares": 4027.8176,
+    "retained_candidate_pct": 72.5689,
+    "target_hectares": 10655.6004
+  },
+  "completed_at": "2026-09-27T19:13:47+00:00",
+  "configuration": {
+    "algorithm_version": "event-filter-v1-1",
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 20,
+    "event_description": "Incendio iniciado la noche del 9 de marzo de 2021 en Las Golondrinas y Cerro Radal (Lago Puelo y El Hoyo).",
+    "event_filter": {
+      "closing_radius_m": 80,
+      "component_hotspot_max_distance_m": 1500,
+      "component_link_max_distance_m": 1000,
+      "ignition_point": {
+        "latitude": -42.084,
+        "longitude": -71.371,
+        "note": "Centroide de la cicatriz MODIS MCD64A1; el incendio tuvo dos focos (Las Golondrinas y Cerro Radal)."
+      },
+      "seed_max_distance_m": 3000,
+      "thermal": {
+        "band": "FireMask",
+        "collection": "NASA/VIIRS/002/VNP14A1",
+        "end_inclusive": "2021-04-30",
+        "reducer_version": "masked-sum-v1",
+        "sampling_mode": "aggregate",
+        "scale_m": 1000,
+        "source_note": "VIIRS VNP14A1 histórico de 1 km; FireMask 7–9.",
+        "start": "2021-03-09",
+        "threshold": 7
+      },
+      "thermal_cluster_radius_m": 2000
+    },
+    "event_id": "las-golondrinas-2021",
+    "event_name": "Incendio Las Golondrinas–Cerro Radal 2021",
+    "fire_start_date": "2021-03-09",
+    "grid": {
+      "scale_m": 20,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "dilation_pixels": 1,
+      "dnbr_threshold": 0.3,
+      "min_connected_pixels": 150,
+      "ndsi_snow_max": 0.25,
+      "post_nbr_max": 0.4,
+      "pre_nbr_min": 0.15,
+      "pre_ndwi_water_max": 0.05
+    },
+    "max_workers": 4,
+    "origin": "derived",
+    "parent_run": "baseline-001",
+    "purpose": "Atribuir los componentes de cambio al incendio y separar incendios vecinos.",
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "reference": {
+      "area_note": "12.901 ha en Las Golondrinas y Cerro Radal según el balance oficial. PRE desde febrero para dejar fuera el crecimiento de Cuesta del Ternero (enero de 2021).",
+      "burned_area_ha": 12901,
+      "modis_mcd64a1_ha": 12526,
+      "sources": [
+        "https://www.red43.com.ar/nota/2021-4-14-9-7-37-el-incendio-en-las-golondrinas-se-encuentra-extinguido",
+        "https://en.wikipedia.org/wiki/2021_Argentine_Patagonia_wildfires"
+      ]
+    },
+    "rois": [
+      {
+        "bbox": [
+          -71.593,
+          -42.197,
+          -71.143,
+          -41.967
+        ],
+        "id": "las-golondrinas",
+        "name": "Incendio Las Golondrinas–Cerro Radal 2021"
+      }
+    ],
+    "run_id": "event-filter-001",
+    "source": {
+      "collection": "COPERNICUS/S2_SR_HARMONIZED",
+      "project": "ee-nachochevallier"
+    },
+    "windows": {
+      "post": {
+        "end_inclusive": "2021-04-30",
+        "start": "2021-03-20"
+      },
+      "pre": {
+        "end_inclusive": "2021-03-08",
+        "start": "2021-02-01"
+      }
+    }
+  },
+  "configuration_hash": "6aa58b454bd4210778f2937c29a80bff86e9bc66fe112f43ade88bc1232fb30d",
+  "counts": {
+    "error": 0,
+    "expected": 60,
+    "ok": 60,
+    "warning": 0
+  },
+  "created_at": "2026-09-27T19:13:07+00:00",
+  "environment": {
+    "dependencies": {
+      "earthengine-api": "1.7.41",
+      "geedim": "2.0.0",
+      "geemap": "0.38.4",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.2",
+      "rasterio": "1.5.1"
+    },
+    "git_commit": "979bec8f6aa5bb8965ff486a3fd748ac26d3efb0",
+    "python": "3.14.7"
+  },
+  "errors": [],
+  "event_id": "las-golondrinas-2021",
+  "metrics": {
+    "burned_hectares": 10655.6004,
+    "burned_valid_pct": 11.1291,
+    "candidate_hectares": 14683.418,
+    "other_fire_hectares": 3983.084,
+    "unconfirmed_hectares": 44.7337
+  },
+  "origin": "derived",
+  "parent_configuration_hash": "9e0269906a9989977bb88310fae018bc51073ee4b6c36d709fce55c7e4537d69",
+  "parent_run": "baseline-001",
+  "run_id": "event-filter-001",
+  "schema_version": 1,
+  "status": "completed",
+  "thermal_evidence": {
+    "cluster_count": 7,
+    "clusters": [
+      {
+        "dates": [
+          "2021-03-10"
+        ],
+        "detection_count": 2,
+        "id": "thermal-001",
+        "latitude": -42.144462,
+        "longitude": -71.182503
+      },
+      {
+        "dates": [
+          "2021-03-10"
+        ],
+        "detection_count": 1,
+        "id": "thermal-002",
+        "latitude": -42.135478,
+        "longitude": -71.294793
+      },
+      {
+        "dates": [
+          "2021-03-10"
+        ],
+        "detection_count": 2,
+        "id": "thermal-003",
+        "latitude": -42.108529,
+        "longitude": -71.209453
+      },
+      {
+        "dates": [
+          "2021-03-14",
+          "2021-03-19",
+          "2021-03-20"
+        ],
+        "detection_count": 8,
+        "id": "thermal-004",
+        "latitude": -42.044524,
+        "longitude": -71.382378
+      },
+      {
+        "dates": [
+          "2021-03-28",
+          "2021-03-29"
+        ],
+        "detection_count": 7,
+        "id": "thermal-005",
+        "latitude": -42.013564,
+        "longitude": -71.426973
+      },
+      {
+        "dates": [
+          "2021-03-09"
+        ],
+        "detection_count": 8,
+        "id": "thermal-006",
+        "latitude": -42.007468,
+        "longitude": -71.50702
+      },
+      {
+        "dates": [
+          "2021-03-09",
+          "2021-03-10"
+        ],
+        "detection_count": 69,
+        "id": "thermal-007",
+        "latitude": -41.99344,
+        "longitude": -71.223839
+      }
+    ],
+    "collection": "NASA/VIIRS/002/VNP14A1",
+    "detection_count": 102,
+    "image_count": 53,
+    "images": [
+      "2021_03_09",
+      "2021_03_10",
+      "2021_03_11",
+      "2021_03_12",
+      "2021_03_13",
+      "2021_03_14",
+      "2021_03_15",
+      "2021_03_16",
+      "2021_03_17",
+      "2021_03_18",
+      "2021_03_19",
+      "2021_03_20",
+      "2021_03_21",
+      "2021_03_22",
+      "2021_03_23",
+      "2021_03_24",
+      "2021_03_25",
+      "2021_03_26",
+      "2021_03_27",
+      "2021_03_28",
+      "2021_03_29",
+      "2021_03_30",
+      "2021_03_31",
+      "2021_04_01",
+      "2021_04_02",
+      "2021_04_03",
+      "2021_04_04",
+      "2021_04_05",
+      "2021_04_06",
+      "2021_04_07",
+      "2021_04_08",
+      "2021_04_09",
+      "2021_04_10",
+      "2021_04_11",
+      "2021_04_12",
+      "2021_04_13",
+      "2021_04_14",
+      "2021_04_15",
+      "2021_04_16",
+      "2021_04_17",
+      "2021_04_18",
+      "2021_04_19",
+      "2021_04_20",
+      "2021_04_21",
+      "2021_04_22",
+      "2021_04_23",
+      "2021_04_24",
+      "2021_04_25",
+      "2021_04_26",
+      "2021_04_27",
+      "2021_04_28",
+      "2021_04_29",
+      "2021_04_30"
+    ],
+    "target_cluster_id": "thermal-004",
+    "unique_pixel_count": 97
+  },
+  "validation_errors": []
+}

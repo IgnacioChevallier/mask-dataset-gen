@@ -1,0 +1,116 @@
+{
+  "event_id": "las-golondrinas-2021",
+  "name": "Incendio Las Golondrinas–Cerro Radal 2021",
+  "description": "Incendio iniciado la noche del 9 de marzo de 2021 en Las Golondrinas y Cerro Radal (Lago Puelo y El Hoyo).",
+  "fire_start_date": "2021-03-09",
+  "reference": {
+    "burned_area_ha": 12901,
+    "area_note": "12.901 ha en Las Golondrinas y Cerro Radal según el balance oficial. PRE desde febrero para dejar fuera el crecimiento de Cuesta del Ternero (enero de 2021).",
+    "modis_mcd64a1_ha": 12526,
+    "sources": [
+      "https://www.red43.com.ar/nota/2021-4-14-9-7-37-el-incendio-en-las-golondrinas-se-encuentra-extinguido",
+      "https://en.wikipedia.org/wiki/2021_Argentine_Patagonia_wildfires"
+    ]
+  },
+  "source": {
+    "collection": "COPERNICUS/S2_SR_HARMONIZED",
+    "project": "ee-nachochevallier"
+  },
+  "rois": [
+    {
+      "id": "las-golondrinas",
+      "name": "Incendio Las Golondrinas–Cerro Radal 2021",
+      "bbox": [
+        -71.593,
+        -42.197,
+        -71.143,
+        -41.967
+      ]
+    }
+  ],
+  "defaults": {
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 20,
+    "grid": {
+      "scale_m": 20,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "dnbr_threshold": 0.3,
+      "pre_nbr_min": 0.15,
+      "post_nbr_max": 0.4,
+      "ndsi_snow_max": 0.25,
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "pre_ndwi_water_max": 0.05,
+      "min_connected_pixels": 150,
+      "dilation_pixels": 1
+    },
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "algorithm_version": "dnbr-s2-v1",
+    "max_workers": 4
+  },
+  "runs": {
+    "baseline-001": {
+      "purpose": "Primer resultado; ROI derivado de la cicatriz MODIS MCD64A1 con margen.",
+      "windows": {
+        "pre": {
+          "start": "2021-02-01",
+          "end_inclusive": "2021-03-08"
+        },
+        "post": {
+          "start": "2021-03-20",
+          "end_inclusive": "2021-04-30"
+        }
+      }
+    },
+    "event-filter-001": {
+      "purpose": "Atribuir los componentes de cambio al incendio y separar incendios vecinos.",
+      "origin": "derived",
+      "parent_run": "baseline-001",
+      "algorithm_version": "event-filter-v1-1",
+      "windows": {
+        "pre": {
+          "start": "2021-02-01",
+          "end_inclusive": "2021-03-08"
+        },
+        "post": {
+          "start": "2021-03-20",
+          "end_inclusive": "2021-04-30"
+        }
+      },
+      "event_filter": {
+        "ignition_point": {
+          "longitude": -71.371,
+          "latitude": -42.084,
+          "note": "Centroide de la cicatriz MODIS MCD64A1; el incendio tuvo dos focos (Las Golondrinas y Cerro Radal)."
+        },
+        "closing_radius_m": 80,
+        "thermal_cluster_radius_m": 2000,
+        "component_hotspot_max_distance_m": 1500,
+        "component_link_max_distance_m": 1000,
+        "seed_max_distance_m": 3000,
+        "thermal": {
+          "collection": "NASA/VIIRS/002/VNP14A1",
+          "band": "FireMask",
+          "threshold": 7,
+          "scale_m": 1000,
+          "sampling_mode": "aggregate",
+          "reducer_version": "masked-sum-v1",
+          "start": "2021-03-09",
+          "end_inclusive": "2021-04-30",
+          "source_note": "VIIRS VNP14A1 histórico de 1 km; FireMask 7–9."
+        }
+      }
+    }
+  }
+}

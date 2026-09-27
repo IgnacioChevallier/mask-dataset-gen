@@ -1,0 +1,117 @@
+{
+  "event_id": "los-alerces-2016",
+  "name": "Incendio Los Alerces, Futalaufquen 2016",
+  "description": "Incendio intencional de enero de 2016 en el Parque Nacional Los Alerces, cerca del Lago Futalaufquen.",
+  "fire_start_date": "2016-01-21",
+  "reference": {
+    "burned_area_ha": 1700,
+    "area_note": "Prensa: más de 1.700 ha; valor aproximado.",
+    "modis_mcd64a1_ha": 2132,
+    "sources": [
+      "https://www.elesquiu.com/sociedad/2016/1/24/incendio-parque-nacional-alerces-afecto-1600-hectareas-202921.html",
+      "https://www.laarena.com.ar/el-pais/2016-1-23-7-36-0-sigue-fuera-de-control"
+    ]
+  },
+  "source": {
+    "collection": "LANDSAT/LC08/C02/T1_L2",
+    "project": "ee-nachochevallier",
+    "note": "Sentinel-2A se lanzó en junio de 2015; se usa Landsat 8 OLI con bandas renombradas a sus equivalentes S2 y reflectancia en escala 0–10000."
+  },
+  "rois": [
+    {
+      "id": "los-alerces",
+      "name": "Incendio Los Alerces, Futalaufquen 2016",
+      "bbox": [
+        -71.693,
+        -43.021,
+        -71.551,
+        -42.874
+      ]
+    }
+  ],
+  "defaults": {
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 40,
+    "grid": {
+      "scale_m": 30,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "dnbr_threshold": 0.3,
+      "pre_nbr_min": 0.15,
+      "post_nbr_max": 0.4,
+      "ndsi_snow_max": 0.25,
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "pre_ndwi_water_max": 0.05,
+      "min_connected_pixels": 67,
+      "dilation_pixels": 1
+    },
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "algorithm_version": "dnbr-l8-v1",
+    "max_workers": 4
+  },
+  "runs": {
+    "baseline-001": {
+      "purpose": "Primer resultado; ROI derivado de la cicatriz MODIS MCD64A1 con margen.",
+      "windows": {
+        "pre": {
+          "start": "2015-11-01",
+          "end_inclusive": "2016-01-20"
+        },
+        "post": {
+          "start": "2016-02-15",
+          "end_inclusive": "2016-04-15"
+        }
+      }
+    },
+    "event-filter-001": {
+      "purpose": "Atribuir los componentes de cambio al incendio y separar incendios vecinos.",
+      "origin": "derived",
+      "parent_run": "baseline-001",
+      "algorithm_version": "event-filter-v1-1",
+      "windows": {
+        "pre": {
+          "start": "2015-11-01",
+          "end_inclusive": "2016-01-20"
+        },
+        "post": {
+          "start": "2016-02-15",
+          "end_inclusive": "2016-04-15"
+        }
+      },
+      "event_filter": {
+        "ignition_point": {
+          "longitude": -71.6092,
+          "latitude": -42.9215,
+          "note": "Primera detección VNP14A1 (21 de enero de 2016)."
+        },
+        "closing_radius_m": 80,
+        "thermal_cluster_radius_m": 2000,
+        "component_hotspot_max_distance_m": 1500,
+        "component_link_max_distance_m": 1000,
+        "seed_max_distance_m": 3000,
+        "thermal": {
+          "collection": "NASA/VIIRS/002/VNP14A1",
+          "band": "FireMask",
+          "threshold": 7,
+          "scale_m": 1000,
+          "sampling_mode": "aggregate",
+          "reducer_version": "masked-sum-v1",
+          "start": "2016-01-21",
+          "end_inclusive": "2016-04-15",
+          "source_note": "VIIRS VNP14A1 histórico de 1 km; FireMask 7–9."
+        }
+      }
+    }
+  }
+}

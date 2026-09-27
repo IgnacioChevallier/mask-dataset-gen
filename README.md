@@ -8,17 +8,30 @@ Generador reproducible de datasets de áreas quemadas a partir de Sentinel-2 o L
 python generar_dataset.py --list-events
 ```
 
-Las configuraciones viven en `config/incendios/` y actualmente incluyen:
+Las configuraciones viven en `config/incendios/`. Los incendios 2015–2016 usan
+Landsat 8 porque Sentinel-2 no cubre el período previo; el resto usa Sentinel-2.
+La columna "Resultado" indica el run que conviene usar.
 
-- `cholila-2015`, con Landsat 8 (Sentinel-2 no existía antes del incendio):
-`baseline-001`, `baseline-002` (ROI ampliado) y el derivado `event-filter-001`;
-- `epuyen-2025`, con `baseline-001` y el derivado `event-filter-001`;
-- `los-alerces-2023`, con `baseline-001`, el experimento `event-filter-001`
-y el derivado recomendado `event-filter-002`;
-- `puerto-cafe-2025`, incendio de Los Alerces–Rivadavia–Cholila iniciado en diciembre de 2025, con `baseline-001` y el derivado `event-filter-001`;
-- `puerto-patriada-2026`, con `baseline-002` y el derivado `event-filter-001`.
+| Evento | Inicio | Sensor | Runs | Resultado |
+| --- | --- | --- | --- | --- |
+| `desemboque-2015` | 2015-01-30 | Landsat 8 | `baseline-002` | `event-filter-001` |
+| `cerro-plataforma-2015` | 2015-02-03 | Landsat 8 | `baseline-001` | `event-filter-001` |
+| `cholila-2015` | 2015-02-15 | Landsat 8 | `baseline-001`, `baseline-002` (ROI ampliado) | `event-filter-001` |
+| `los-alerces-2015` | 2015-03-22 | Landsat 8 | `baseline-001` | `event-filter-001` |
+| `currumahuida-2015` | 2015-03-23 | Landsat 8 | `baseline-001` | `event-filter-001` |
+| `los-alerces-2016` | 2016-01-21 | Landsat 8 | `baseline-001` | `event-filter-001` |
+| `epuyen-2019` | 2019-01-28 | Sentinel-2 | `baseline-001` | `event-filter-001` |
+| `las-golondrinas-2021` | 2021-03-09 | Sentinel-2 | `baseline-001` | `event-filter-001` |
+| `los-alerces-2023` | 2023-02-04 | Sentinel-2 | `baseline-001`, `event-filter-001` (descartado) | `event-filter-002` |
+| `los-alerces-2024` | 2024-01-25 | Sentinel-2 | `baseline-001` | `event-filter-001` |
+| `epuyen-2025` | 2025-01-15 | Sentinel-2 | `baseline-001` | `event-filter-001` |
+| `el-turbio-2025` | 2025-12-01 | Sentinel-2 | `baseline-001` | `event-filter-001` |
+| `puerto-cafe-2025` | 2025-12-09 | Sentinel-2 | `baseline-001` | `event-filter-001` |
+| `puerto-patriada-2026` | 2026-01-05 | Sentinel-2 | `baseline-002` | `event-filter-001` |
 
-
+En los eventos que declaran `reference.modis_mcd64a1_ha`, el ROI se derivó de
+la cicatriz MODIS MCD64A1 con margen y la semilla, de la primera detección
+térmica (o del centroide MODIS cuando no había una confiable).
 
 ## Estructura
 
@@ -74,7 +87,7 @@ Ejecutar o reanudar el run:
   --run baseline-001
 ```
 
-Los baselines de todos los eventos quedaron completados. Un preflight puede
+Todos los baselines están completos. `desemboque-2015/baseline-001` quedó incompleto (fila sur sin observaciones POST), se eliminó y fue reemplazado por `baseline-002`; su definición se conserva en la configuración. Un preflight puede
 revisar escenas y grilla sin escribir datos:
 
 ```bash

@@ -1,0 +1,132 @@
+{
+  "completed_at": "2026-09-27T19:13:21+00:00",
+  "configuration": {
+    "algorithm_version": "dnbr-l8-v1",
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 40,
+    "event_description": "Incendio forestal Cerro Plataforma, detectado el 3 de febrero de 2015 en la zona de El Turbio.",
+    "event_id": "cerro-plataforma-2015",
+    "event_name": "Incendio Cerro Plataforma, El Turbio 2015",
+    "fire_start_date": "2015-02-03",
+    "grid": {
+      "scale_m": 30,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "dilation_pixels": 1,
+      "dnbr_threshold": 0.3,
+      "min_connected_pixels": 67,
+      "ndsi_snow_max": 0.25,
+      "post_nbr_max": 0.4,
+      "pre_nbr_min": 0.15,
+      "pre_ndwi_water_max": 0.05
+    },
+    "max_workers": 4,
+    "purpose": "Primer resultado; ROI derivado de la cicatriz MODIS MCD64A1 con margen.",
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "reference": {
+      "area_note": "Programa provincial de restauración de Chubut; incluye islas sin quemar.",
+      "burned_area_ha": 7371.3,
+      "modis_mcd64a1_ha": 7620,
+      "sources": [
+        "https://bosques.chubut.gov.ar/wp-content/uploads/2023/08/Programa-de-restauracion-de-las-areas-afectadas-por-grandes-incendios-forestales-en-Chubut-en-2014-2015.pdf"
+      ]
+    },
+    "rois": [
+      {
+        "bbox": [
+          -72.061,
+          -42.382,
+          -71.695,
+          -42.211
+        ],
+        "id": "cerro-plataforma",
+        "name": "Incendio Cerro Plataforma, El Turbio 2015"
+      }
+    ],
+    "run_id": "baseline-001",
+    "source": {
+      "collection": "LANDSAT/LC08/C02/T1_L2",
+      "note": "Sentinel-2A se lanzó en junio de 2015; se usa Landsat 8 OLI con bandas renombradas a sus equivalentes S2 y reflectancia en escala 0–10000.",
+      "project": "ee-nachochevallier"
+    },
+    "windows": {
+      "post": {
+        "end_inclusive": "2015-05-31",
+        "start": "2015-04-07"
+      },
+      "pre": {
+        "end_inclusive": "2015-02-02",
+        "start": "2014-11-01"
+      }
+    }
+  },
+  "configuration_hash": "a06b2d2de1ddb50b0c84885f319a12d949deb12d22654869d3ac14b9bc8bade9",
+  "counts": {
+    "error": 0,
+    "expected": 18,
+    "ok": 9,
+    "warning": 9
+  },
+  "created_at": "2026-09-27T19:11:15+00:00",
+  "environment": {
+    "dependencies": {
+      "earthengine-api": "1.7.41",
+      "geedim": "2.0.0",
+      "geemap": "0.38.4",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.2",
+      "rasterio": "1.5.1"
+    },
+    "git_commit": "979bec8f6aa5bb8965ff486a3fd748ac26d3efb0",
+    "python": "3.14.7"
+  },
+  "errors": [],
+  "event_id": "cerro-plataforma-2015",
+  "last_started_at": "2026-09-27T19:11:15+00:00",
+  "metrics": {
+    "by_roi": [
+      {
+        "burned_hectares": 6561.95,
+        "burned_valid_pct": 14.3938,
+        "id": "cerro-plataforma",
+        "valid_coverage_pct": 79.5261
+      }
+    ],
+    "total": {
+      "burned_hectares": 6561.95,
+      "burned_valid_pct": 14.3938,
+      "id": "total",
+      "valid_coverage_pct": 79.5261
+    }
+  },
+  "origin": "generated",
+  "run_id": "baseline-001",
+  "scenes": {
+    "post": [
+      "LC08_232089_20150411",
+      "LC08_232090_20150411"
+    ],
+    "pre": [
+      "LC08_232089_20141204",
+      "LC08_232089_20150121",
+      "LC08_232090_20141204",
+      "LC08_232090_20150121"
+    ]
+  },
+  "schema_version": 1,
+  "status": "completed",
+  "tile_naming": "grid-position-v1",
+  "validation_errors": []
+}

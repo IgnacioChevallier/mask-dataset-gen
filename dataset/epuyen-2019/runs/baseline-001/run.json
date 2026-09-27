@@ -1,0 +1,162 @@
+{
+  "completed_at": "2026-09-27T19:13:36+00:00",
+  "configuration": {
+    "algorithm_version": "dnbr-s2-v1",
+    "bands": [
+      "B2",
+      "B3",
+      "B4",
+      "B8",
+      "B11",
+      "B12"
+    ],
+    "cloud_percentage_max": 20,
+    "event_description": "Incendio forestal de fines de enero de 2019 al este de Epuyén; en febrero se sumó un foco en El Maitén.",
+    "event_id": "epuyen-2019",
+    "event_name": "Incendio de Epuyén 2019",
+    "fire_start_date": "2019-01-28",
+    "grid": {
+      "scale_m": 20,
+      "tile_pixels": 256
+    },
+    "mask": {
+      "brightness_max": 3500,
+      "chroma_min": 500,
+      "dilation_pixels": 1,
+      "dnbr_threshold": 0.3,
+      "min_connected_pixels": 150,
+      "ndsi_snow_max": 0.25,
+      "post_nbr_max": 0.4,
+      "pre_nbr_min": 0.15,
+      "pre_ndwi_water_max": 0.05
+    },
+    "max_workers": 4,
+    "purpose": "Primer resultado; ROI derivado de la cicatriz MODIS MCD64A1 con margen.",
+    "quality": {
+      "valid_coverage_warning_pct": 90
+    },
+    "reference": {
+      "area_note": "Prensa: 1.553 ha al 3 de febrero de 2019, sin contar el foco de El Maitén.",
+      "burned_area_ha": 1553,
+      "modis_mcd64a1_ha": 2045,
+      "sources": [
+        "https://diariodecuyo.com.ar/argentina/Un-incendio-en-Epuyen-esta-fuera-de-control-y-ya-afecta-a-mas-de-1-550-hectareas-20190203-0037.html",
+        "https://www.eldestapeweb.com/nota/se-reactivo-el-fuego-en-epuyen-y-se-inicio-otro-foco-en-el-maiten-2019-2-4-9-31-0"
+      ]
+    },
+    "rois": [
+      {
+        "bbox": [
+          -71.412,
+          -42.344,
+          -71.224,
+          -42.186
+        ],
+        "id": "epuyen",
+        "name": "Incendio de Epuyén 2019"
+      }
+    ],
+    "run_id": "baseline-001",
+    "source": {
+      "collection": "COPERNICUS/S2_SR_HARMONIZED",
+      "project": "ee-nachochevallier"
+    },
+    "windows": {
+      "post": {
+        "end_inclusive": "2019-03-31",
+        "start": "2019-02-20"
+      },
+      "pre": {
+        "end_inclusive": "2019-01-27",
+        "start": "2018-11-01"
+      }
+    }
+  },
+  "configuration_hash": "56f439bf98806b4a4342cec4933339c6ff8ca7e505c4122e88c10b173318bef8",
+  "counts": {
+    "error": 0,
+    "expected": 20,
+    "ok": 20,
+    "warning": 0
+  },
+  "created_at": "2026-09-27T19:08:44+00:00",
+  "environment": {
+    "dependencies": {
+      "earthengine-api": "1.7.41",
+      "geedim": "2.0.0",
+      "geemap": "0.38.4",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.2",
+      "rasterio": "1.5.1"
+    },
+    "git_commit": "979bec8f6aa5bb8965ff486a3fd748ac26d3efb0",
+    "python": "3.14.7"
+  },
+  "errors": [],
+  "event_id": "epuyen-2019",
+  "last_started_at": "2026-09-27T19:08:44+00:00",
+  "metrics": {
+    "by_roi": [
+      {
+        "burned_hectares": 1591.6339,
+        "burned_valid_pct": 5.8481,
+        "id": "epuyen",
+        "valid_coverage_pct": 99.9813
+      }
+    ],
+    "total": {
+      "burned_hectares": 1591.6339,
+      "burned_valid_pct": 5.8481,
+      "id": "total",
+      "valid_coverage_pct": 99.9813
+    }
+  },
+  "origin": "generated",
+  "run_id": "baseline-001",
+  "scenes": {
+    "post": [
+      "20190225T142751_20190225T143548_T18GYU",
+      "20190225T142751_20190225T143548_T19GBP",
+      "20190225T142751_20190225T143548_T19GCP",
+      "20190312T142849_20190312T144100_T18GYU",
+      "20190312T142849_20190312T144100_T19GBP",
+      "20190312T142849_20190312T144100_T19GCP",
+      "20190327T142751_20190327T143950_T18GYU",
+      "20190327T142751_20190327T143950_T19GBP",
+      "20190327T142751_20190327T143950_T19GCP"
+    ],
+    "pre": [
+      "20181107T142751_20181107T143548_T18GYU",
+      "20181107T142751_20181107T143548_T19GBP",
+      "20181122T142749_20181122T143353_T19GCP",
+      "20181127T142741_20181127T143656_T18GYU",
+      "20181127T142741_20181127T143656_T19GBP",
+      "20181127T142741_20181127T143656_T19GCP",
+      "20181202T142749_20181202T143725_T18GYU",
+      "20181202T142749_20181202T143725_T19GBP",
+      "20181202T142749_20181202T143725_T19GCP",
+      "20181207T142741_20181207T143718_T18GYU",
+      "20181207T142741_20181207T143718_T19GBP",
+      "20181207T142741_20181207T143718_T19GCP",
+      "20181212T142749_20181212T143730_T19GCP",
+      "20181217T142741_20181217T143739_T18GYU",
+      "20181217T142741_20181217T143739_T19GBP",
+      "20181217T142741_20181217T143739_T19GCP",
+      "20181222T142749_20181222T143754_T18GYU",
+      "20181222T142749_20181222T143754_T19GBP",
+      "20181222T142749_20181222T143754_T19GCP",
+      "20181227T142751_20181227T143741_T19GCP",
+      "20190101T142749_20190101T143756_T19GCP",
+      "20190106T142751_20190106T143742_T19GCP",
+      "20190121T142749_20190121T143657_T18GYU",
+      "20190121T142749_20190121T143657_T19GCP",
+      "20190126T142751_20190126T143621_T18GYU",
+      "20190126T142751_20190126T143621_T19GBP",
+      "20190126T142751_20190126T143621_T19GCP"
+    ]
+  },
+  "schema_version": 1,
+  "status": "completed",
+  "tile_naming": "grid-position-v1",
+  "validation_errors": []
+}
