@@ -33,6 +33,103 @@ En los eventos que declaran `reference.modis_mcd64a1_ha`, el ROI se derivó de
 la cicatriz MODIS MCD64A1 con margen y la semilla, de la primera detección
 térmica (o del centroide MODIS cuando no había una confiable).
 
+## Uso como referencia de propagación
+
+Los modelos de propagación se validan contra estas cicatrices, pero no modelan la
+supresión. En igniteinsights, los incendios combatidos con éxito cerca de poblados y
+rutas terminaron 4 a 14 veces más chicos que una propagación libre. Los de acceso
+difícil, en cambio, se parecen a una propagación libre.
+
+Cada `dataset/<evento>/README.md` documenta:
+
+- la ignición;
+- el combate y la supresión;
+- las particularidades;
+- el horizonte de crecimiento libre;
+- las fuentes.
+
+Lo que no se pudo verificar está marcado como **sin confirmar**.
+
+### Clasificación
+
+- **Combatido:** combatido cerca de poblados/rutas.
+- **Acceso difícil:** acceso difícil / poco combatido.
+- **Latente:** latente por rayo.
+- **Varios:** varios eventos en la ROI.
+
+Un incendio puede tener más de una.
+
+### Horizonte y cicatriz
+
+- **Horizonte de crecimiento libre:** momento en que el área FIRMS acumulada deja de crecer.
+  - El área FIRMS acumulada es la suma diaria de píxeles VIIRS SP (375 m) sobre la caja de diagnóstico de igniteinsights (`benchmarks/diagnosticos/<evento>.json`).
+  - Puede incluir incendios vecinos.
+- **Cicatriz en el horizonte:** la máscara del run vigente ∩ un píxel VIIRS alrededor de cada detección hasta el horizonte. Es la referencia truncada de igniteinsights (`RESULTADOS-CSS-BAP.md` §2.1).
+
+### Tabla resumen
+
+| Evento | Clasificación | Horizonte libre | Cicatriz en el horizonte | Run vigente |
+| --- | --- | --- | --- | --- |
+| [`desemboque-2015`](dataset/desemboque-2015/README.md) | Combatido; varios | hasta el 3-feb; no usar (máscara = 24 % de lo oficial) | — | `event-filter-001` |
+| [`cerro-plataforma-2015`](dataset/cerro-plataforma-2015/README.md) | Latente; varios | no definible (mezclado con Cholila) | — | `event-filter-001` |
+| [`cholila-2015`](dataset/cholila-2015/README.md) | Acceso difícil; latente (sin confirmar); varios | crece ~19 días; se usa 120 h | 26 % | `event-filter-001` |
+| [`los-alerces-2015`](dataset/los-alerces-2015/README.md) | Combatido | ~48–72 h | 95 % | `event-filter-001` |
+| [`currumahuida-2015`](dataset/currumahuida-2015/README.md) | Combatido; varios | no definible (varias fases) | — | `event-filter-001` |
+| [`los-alerces-2016`](dataset/los-alerces-2016/README.md) | Combatido | ~48 h (se usa 72 h) | 74 % | `event-filter-001` |
+| [`epuyen-2019`](dataset/epuyen-2019/README.md) | Combatido | hasta el 3-feb (se usa 120 h) | 87 % | `event-filter-001` |
+| [`las-golondrinas-2021`](dataset/las-golondrinas-2021/README.md) | Combatido; varios | primera noche (por cronología; VIIRS casi no lo vio) | ~100 % | `event-filter-001` |
+| [`los-alerces-2023`](dataset/los-alerces-2023/README.md) | Combatido | ~54 h (se usa 72 h) | 99 % | `event-filter-002` |
+| [`los-alerces-2024`](dataset/los-alerces-2024/README.md) | Combatido | no se detiene antes del 5-feb; se usa 120 h | 45 % | `event-filter-001` |
+| [`epuyen-2025`](dataset/epuyen-2025/README.md) | Combatido | días 1–2 (se usa 96 h) | 77 % | `event-filter-001` |
+| [`el-turbio-2025`](dataset/el-turbio-2025/README.md) | Latente; combatido (en parte) | crece bajo combate hasta el 11-dic; se usa 120 h | 56 % | `event-filter-001` |
+| [`puerto-cafe-2025`](dataset/puerto-cafe-2025/README.md) | Acceso difícil; latente; varios | 96 h desde el 5-ene (fase explosiva) | 23 % | `event-filter-001` |
+| [`puerto-patriada-2026`](dataset/puerto-patriada-2026/README.md) | Combatido; varios | 96 h, antes del salto del 10-ene | 23 % | `event-filter-001` |
+
+## Validación externa: MODIS MCD64A1
+
+Contraste de la máscara objetivo del run vigente con
+[MCD64A1 v061](https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MCD64A1)
+(celdas de ~463 m, `BurnDate` entre el fin del PRE y el inicio del POST).
+Es un chequeo de coherencia, no verdad de campo: MCD64A1 engorda los bordes y
+omite fuegos chicos o de baja severidad.
+
+```bash
+.venv/bin/python validar_mcd64a1.py epuyen-2019 los-alerces-2023:event-filter-002
+```
+
+- **MCD64A1 en ROI:** todo lo quemado en los ROIs en esa ventana, incluidos incendios vecinos.
+- **MCD64A1 del incendio:** celdas quemadas que contienen algún píxel de la máscara. Depende de la máscara, así que sirve para comparar áreas, no como prueba independiente.
+- **Máscara confirmada:** % de píxeles de la máscara que caen en una celda MODIS quemada. Es la medida independiente.
+
+| Evento | Oficial (ha) | Máscara (ha) | MCD64A1 del incendio (ha) | MCD64A1 en ROI (ha) | Máscara confirmada |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `desemboque-2015` | 2307 | 558 | 322 | 322 | 49 % |
+| `cerro-plataforma-2015` | 7371 | 6292 | 7492 | 7899 | 81 % |
+| `cholila-2015` | 28960 | 26763 | 30202 | 41880 | 90 % |
+| `los-alerces-2015` | 1500 | 1202 | 1395 | 1417 | 88 % |
+| `currumahuida-2015` | 3151 | 4236 | 4680 | 4937 | 84 % |
+| `los-alerces-2016` | 1700 | 1850 | 2147 | 2147 | 90 % |
+| `epuyen-2019` | 1553 | 1545 | 1975 | 1996 | 83 % |
+| `las-golondrinas-2021` | 12901 | 10656 | 11377 | 17838 | 89 % |
+| `los-alerces-2023` | 1160 | 1067 | 1395 | 1481 | 90 % |
+| `los-alerces-2024` | 5971 | 6007 | 6719 | 6740 | 88 % |
+| `epuyen-2025` | 3530 | 2995 | 3198 | 3198 | 85 % |
+| `el-turbio-2025` | 3000 | 1969 | 1696 | 1739 | 53 % |
+| `puerto-cafe-2025` | 31000 | 38236 | 40850 | 41300 | 84 % |
+| `puerto-patriada-2026` | 14770 | 24513 | 27777 | 64269 | 84 % |
+
+Lectura:
+
+- En 12 de 14 eventos, entre el 81 % y el 90 % de la máscara cae en celdas que MCD64A1 también marca quemadas. El resto se concentra en los bordes, donde una celda de 500 m queda parcialmente quemada.
+- Salvo en Desemboque y El Turbio, MCD64A1 del incendio supera a la máscara entre un 7 % y un 31 %. Es lo esperable: cada celda que toca la cicatriz cuenta entera, con islas sin quemar incluidas.
+- Donde la máscara supera la cifra oficial (Currumahuida, Puerto Café, Puerto Patriada), MCD64A1 también la supera: respalda el área de la máscara frente a la oficial.
+- La diferencia entre MCD64A1 en ROI y MCD64A1 del incendio coincide con los incendios vecinos que el filtro separa. En Puerto Patriada son ~36.500 ha contra las 40.700 ha de "otro incendio probable"; en Cholila, ~11.700 ha, con un total en ROI cercano a las 41.000 ha que citan otras fuentes.
+- Desemboque (49 %) y El Turbio (53 %) tienen baja confirmación. Desemboque ya está marcado como no usable; El Turbio queda para revisar.
+
+Los valores `reference.modis_mcd64a1_ha` de las configs se usaron para derivar
+los ROIs y no siguen este método. No se actualizan porque `reference` forma parte
+del hash de configuración de los runs.
+
 ## Estructura
 
 ```text
