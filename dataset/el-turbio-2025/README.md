@@ -47,6 +47,12 @@ Verificado contra las fuentes el 29-sep-2026.
 - **Máscara chica:** 1.969 ha contra 3.000 ha publicadas.
   - Hipótesis: sotobosque quemado bajo el umbral dNBR, **sin confirmar**.
   - El área FIRMS (6.346 ha) sobreestima por el píxel de 375 m.
+- **Baja confirmación MODIS MCD64A1 (53 %):** es fragmentación, no error de máscara.
+  - MCD64A1 marca como no quemado (QA válido) el lóbulo oeste: `component-001`, 302 ha, 206 detecciones VIIRS, 6 % confirmado.
+  - También los 9 componentes chicos del este (7–62 ha, 0 % confirmado).
+  - Su dNBR (mediana 0,42) es igual al del componente principal (0,43), que confirma un 71 %.
+  - La cicatriz es irregular: sólo el 30 % del área cae en celdas de 500 m quemadas en más de un 75 %, contra 66–68 % en Epuyén 2025 y Los Alerces 2024.
+  - A igual fracción de celda quemada, confirma algo menos que esos eventos: 88 % contra 96–98 % en celdas casi llenas. Ese resto queda **sin explicar**; podría deberse al humo o al rebrote de 2015.
 - **Fuente dudosa en la config:** la nota de argentina.gob.ar citada en `reference.sources` ("Incendio en el valle de El Turbio") habla de 380 ha en el cerro Cubridor. Parece ser el incendio "Del Morro" de 2015 (387,3 ha, programa provincial de restauración), no este: **sin confirmar**.
 
 ## Uso como referencia

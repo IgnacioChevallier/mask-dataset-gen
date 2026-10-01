@@ -124,7 +124,12 @@ Lectura:
 - Salvo en Desemboque y El Turbio, MCD64A1 del incendio supera a la máscara entre un 7 % y un 31 %. Es lo esperable: cada celda que toca la cicatriz cuenta entera, con islas sin quemar incluidas.
 - Donde la máscara supera la cifra oficial (Currumahuida, Puerto Café, Puerto Patriada), MCD64A1 también la supera: respalda el área de la máscara frente a la oficial.
 - La diferencia entre MCD64A1 en ROI y MCD64A1 del incendio coincide con los incendios vecinos que el filtro separa. En Puerto Patriada son ~36.500 ha contra las 40.700 ha de "otro incendio probable"; en Cholila, ~11.700 ha, con un total en ROI cercano a las 41.000 ha que citan otras fuentes.
-- Desemboque (49 %) y El Turbio (53 %) tienen baja confirmación. Desemboque ya está marcado como no usable; El Turbio queda para revisar.
+- Desemboque (49 %) y El Turbio (53 %) tienen baja confirmación. Desemboque ya está marcado como no usable.
+- El Turbio es una omisión de MCD64A1 por fragmentación, no un error de la máscara:
+  - Los 11 componentes tienen detecciones VIIRS a menos de 10 m.
+  - El dNBR de lo no confirmado es igual al del resto (mediana 0,42–0,43).
+  - Sólo el 30 % del área cae en celdas MODIS quemadas en más de un 75 %; en Epuyén 2025 y Los Alerces 2024 es el 66–68 %.
+  - En las celdas casi llenas confirma un 88 %, y por debajo de la mitad, un 9–27 %. Ver [su README](dataset/el-turbio-2025/README.md).
 
 Los valores `reference.modis_mcd64a1_ha` de las configs se usaron para derivar
 los ROIs y no siguen este método. No se actualizan porque `reference` forma parte
